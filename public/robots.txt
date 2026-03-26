@@ -1,0 +1,19 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://vivekparmar.dev/sitemap.xml
+
+# Specific crawling instructions
+Allow: /about
+Allow: /contact
+Allow: /java-expertise
+Allow: /blog
+
+# Block unnecessary paths
+Disallow: /api/
+Disallow: /_next/
+Disallow: /admin/
+
+# Crawl delay (optional)
+Crawl-delay: 1
