@@ -2,442 +2,347 @@ import { useEffect, useRef, useState } from 'react';
 import { motion, useAnimation } from 'framer-motion';
 import type { Variants } from 'framer-motion';
 import { FiDownload, FiMail } from 'react-icons/fi';
-import { 
-  CTAButton,
-  useResponsive,
-  useReducedMotion,
-  Typewriter
-} from '../../index';
+import { personal } from '../../data/personalData';
+import { useResponsive, useReducedMotion } from '../../hooks/useResponsive';
+import MagneticHover from '../MagneticHover/MagneticHover';
+
+const techBadges = [
+  { label: 'Java', color: '#E85D24', bg: 'rgba(232,93,36,0.12)' },
+  { label: 'React', color: '#61DAFB', bg: 'rgba(97,218,251,0.10)' },
+  { label: 'Spring Boot', color: '#6DB33F', bg: 'rgba(109,179,63,0.10)' },
+  { label: 'TypeScript', color: '#3B82F6', bg: 'rgba(59,130,246,0.10)' },
+];
+
+const stats = [
+  { value: '2+', label: 'Years Experience', color: '#3B82F6' },
+  { value: '15+', label: 'Projects Delivered', color: '#10B981' },
+  { value: '12+', label: 'Technologies', color: '#8B5CF6' },
+  { value: '100%', label: 'Dedication', color: '#F59E0B' },
+];
 
 const Hero = () => {
   const heroRef = useRef<HTMLDivElement>(null);
   const controls = useAnimation();
   const [isDownloading, setIsDownloading] = useState(false);
-  const [imageLoaded, setImageLoaded] = useState(false);
-  const [isReady, setIsReady] = useState(false);
   const { isMobile, isTouchDevice } = useResponsive();
   const prefersReducedMotion = useReducedMotion();
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
 
-  // Developer profile data
-  const developerData = {
-    name: "VIVEK PARMAR",
-    title: "Full Stack Developer",
-    currentCompany: "Techforce InfoTech PVT LTD",
-    yearsOfExperience: 1,
-    location: "Ahmedabad",
-    profileImage: "/profile-photo.jpg", // Local profile photo
-    bio: "Passionate Java developer specializing in Spring Boot and React.js with experience building scalable web applications and modern user interfaces."
-  };
-
-  // Preload profile image
+  // Subtle mouse-parallax for desktop
   useEffect(() => {
-    const img = new Image();
-    img.onload = () => setImageLoaded(true);
-    img.src = developerData.profileImage;
-  }, [developerData.profileImage]);
+    if (isMobile || isTouchDevice || prefersReducedMotion) return;
+    const handler = (e: MouseEvent) => {
+      setMousePos({
+        x: (e.clientX / window.innerWidth - 0.5) * 18,
+        y: (e.clientY / window.innerHeight - 0.5) * 18,
+      });
+    };
+    window.addEventListener('mousemove', handler);
+    return () => window.removeEventListener('mousemove', handler);
+  }, [isMobile, isTouchDevice, prefersReducedMotion]);
 
-  useEffect(() => {
-    // Small delay to ensure DOM is ready and prevent initial jank
-    const timer = setTimeout(() => {
-      setIsReady(true);
-      controls.start("visible");
-    }, 100);
-    
-    return () => clearTimeout(timer);
-  }, [controls]);
+  useEffect(() => { controls.start('visible'); }, [controls]);
 
-  // Button handlers
-  const handleDownloadCV = async () => {
+  // ✅ Real download
+  const handleDownloadCV = () => {
     setIsDownloading(true);
-    try {
-      // Create a link element and trigger download
-      const link = document.createElement('a');
-      link.href = '/Vivek_Parmar_Full_Stack_SDE.pdf';
-      link.download = 'Vivek_Parmar_Full_Stack_SDE.pdf';
-      link.target = '_blank';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      
-      // Small delay for UX
-      await new Promise(resolve => setTimeout(resolve, 1000));
-    } catch (error) {
-      console.error('Error downloading CV:', error);
-    } finally {
-      setIsDownloading(false);
-    }
+    const a = document.createElement('a');
+    a.href = personal.resumeUrl;
+    a.download = `${personal.name.replace(' ', '_')}_Resume.pdf`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(() => setIsDownloading(false), 1500);
   };
 
   const handleContactClick = () => {
-    // Scroll to contact section
-    const contactSection = document.getElementById('contact');
-    if (contactSection) {
-      contactSection.scrollIntoView({ behavior: 'smooth' });
-    }
+    const el = document.getElementById('contact');
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
   };
 
-  // Smoother animation variants with GPU acceleration
-  const containerVariants: Variants = {
+  const container: Variants = {
     hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0.2,
-        ease: [0.25, 0.46, 0.45, 0.94]
-      }
-    }
+    visible: { opacity: 1, transition: { staggerChildren: prefersReducedMotion ? 0.03 : 0.12, delayChildren: 0.05 } },
   };
-
-  const textVariants: Variants = {
-    hidden: { 
-      opacity: 0, 
-      y: 30,
-      filter: 'blur(10px)'
-    },
-    visible: {
-      opacity: 1,
-      y: 0,
-      filter: 'blur(0px)',
-      transition: {
-        duration: 0.6,
-        ease: [0.25, 0.46, 0.45, 0.94]
-      }
-    }
+  const item: Variants = {
+    hidden: { opacity: 0, y: 28 },
+    visible: { opacity: 1, y: 0, transition: { duration: prefersReducedMotion ? 0.15 : 0.65, ease: [0.25, 0.46, 0.45, 0.94] } },
   };
-
-  const imageVariants: Variants = {
-    hidden: { 
-      opacity: 0, 
-      scale: 0.9,
-      filter: 'blur(20px)'
-    },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      filter: 'blur(0px)',
-      transition: {
-        duration: 0.8,
-        ease: [0.25, 0.46, 0.45, 0.94]
-      }
-    }
+  const imgVariants: Variants = {
+    hidden: { opacity: 0, scale: 0.88, x: isMobile ? 0 : 55 },
+    visible: { opacity: 1, scale: 1, x: 0, transition: { duration: prefersReducedMotion ? 0.15 : 0.85, ease: [0.25, 0.46, 0.45, 0.94] } },
   };
-
-  // Generate random star particles with CSS variables for animation
-  const generateStars = (count: number) => {
-    return Array.from({ length: count }, (_, i) => ({
-      id: i,
-      style: {
-        left: `${Math.random() * 100}%`,
-        top: `${Math.random() * 100}%`,
-        width: `${Math.random() * 3 + 1}px`,
-        height: `${Math.random() * 3 + 1}px`,
-        animationDuration: `${Math.random() * 3 + 2}s`,
-        animationDelay: `${Math.random() * 2}s`
-      }
-    }));
-  };
-
-  const stars = generateStars(isMobile ? 30 : 50);
 
   return (
     <section
       ref={heroRef}
       id="hero"
-      className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900"
-      style={{ 
-        opacity: isReady ? 1 : 0,
-        transition: 'opacity 0.3s ease-out'
-      }}
+      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-slate-950"
+      style={{ fontFamily: "'Space Grotesk', sans-serif" }}
     >
-      {/* Animated Star Particles Background - CSS Animation */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        {stars.map((star) => (
-          <div
-            key={star.id}
-            className="absolute rounded-full bg-blue-400/60 animate-pulse"
-            style={star.style}
-          />
-        ))}
+      {/* ── Mesh gradient background ── */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              'radial-gradient(ellipse 80% 60% at 20% 40%, rgba(59,130,246,0.09) 0%, transparent 60%), radial-gradient(ellipse 60% 50% at 80% 70%, rgba(139,92,246,0.07) 0%, transparent 60%)',
+          }}
+        />
+        {/* subtle grid */}
+        <div
+          className="absolute inset-0 opacity-[0.02]"
+          style={{
+            backgroundImage:
+              'linear-gradient(rgba(255,255,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px)',
+            backgroundSize: '60px 60px',
+          }}
+        />
+        {!prefersReducedMotion && (
+          <>
+            <motion.div
+              className="absolute rounded-full"
+              style={{
+                width: isMobile ? 220 : 420,
+                height: isMobile ? 220 : 420,
+                top: '8%', left: '-12%',
+                background: 'radial-gradient(circle, rgba(59,130,246,0.07) 0%, transparent 70%)',
+                filter: 'blur(40px)',
+              }}
+              animate={{ x: mousePos.x * 0.45, y: mousePos.y * 0.45 }}
+              transition={{ type: 'spring', stiffness: 40, damping: 22 }}
+            />
+            <motion.div
+              className="absolute rounded-full"
+              style={{
+                width: isMobile ? 160 : 360,
+                height: isMobile ? 160 : 360,
+                bottom: '12%', right: '-6%',
+                background: 'radial-gradient(circle, rgba(139,92,246,0.07) 0%, transparent 70%)',
+                filter: 'blur(40px)',
+              }}
+              animate={{ x: mousePos.x * -0.28, y: mousePos.y * -0.28 }}
+              transition={{ type: 'spring', stiffness: 32, damping: 20 }}
+            />
+          </>
+        )}
       </div>
 
-      {/* Main Content */}
+      {/* ── Main content ── */}
       <motion.div
-        className="container mx-auto px-6 z-10 max-w-7xl w-full"
-        variants={containerVariants}
+        className="container mx-auto px-4 sm:px-6 lg:px-12 z-10 pt-20"
+        variants={container}
         initial="hidden"
         animate={controls}
-        style={{ willChange: 'opacity' }}
       >
-        <div className={`${isMobile ? 'flex flex-col space-y-8' : 'grid lg:grid-cols-2 gap-12'} items-center`}>
-          {/* Text Content */}
-          <motion.div
-            className={`text-center ${isMobile ? '' : 'lg:text-left'} ${isMobile ? 'order-2' : ''}`}
-            variants={textVariants}
-            style={{ willChange: 'opacity, transform, filter' }}
-          >
+        <div className={`flex ${isMobile ? 'flex-col-reverse gap-10 text-center' : 'flex-row gap-16 items-center'}`}>
+
+          {/* ── Text column ── */}
+          <div className={`flex-1 ${isMobile ? '' : 'max-w-xl'}`}>
+
+            {/* Status badge */}
+            <motion.div variants={item} className="mb-5">
+              <span
+                className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-sm font-medium"
+                style={{ background: 'rgba(16,185,129,0.08)', border: '1px solid rgba(16,185,129,0.2)', color: '#34d399', fontFamily: "'Fira Code', monospace" }}
+              >
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                Open to opportunities
+              </span>
+            </motion.div>
+
             {/* Greeting */}
-            <motion.p
-              className="text-blue-400 text-lg mb-4 font-medium"
-              variants={textVariants}
-            >
-              Hello, I'm
+            <motion.p variants={item} className="text-blue-400 font-medium text-sm mb-1 tracking-widest uppercase" style={{ fontFamily: "'Fira Code', monospace" }}>
+              Hi, I'm
             </motion.p>
 
-            {/* Name with Typewriter - Single Line */}
-            <motion.h1
-              className={`${isMobile ? 'text-4xl' : 'text-5xl lg:text-7xl'} font-extrabold mb-6 leading-tight tracking-tight whitespace-nowrap`}
-              variants={textVariants}
-              style={{
-                background: 'linear-gradient(135deg, #60a5fa 0%, #34d399 50%, #a78bfa 100%)',
-                backgroundSize: '200% auto',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text',
-                animation: 'gradient-shift 4s ease infinite'
-              }}
-            >
-              {prefersReducedMotion ? (
-                <span>{developerData.name}</span>
-              ) : (
-                <Typewriter text={developerData.name} delay={800} speed={80} />
-              )}
+            {/* Name */}
+            <motion.h1 variants={item} className="font-bold text-white leading-tight mb-4" style={{ fontSize: isMobile ? '2.4rem' : '4.5rem', letterSpacing: '-0.025em' }}>
+              {personal.name}
             </motion.h1>
 
-            {/* Static Title - Full Stack Developer */}
-            <motion.h2
-              className={`${isMobile ? 'text-xl' : 'text-2xl lg:text-3xl'} font-semibold mb-4`}
-              variants={textVariants}
-              style={{
-                background: 'linear-gradient(90deg, #e2e8f0 0%, #cbd5e1 100%)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text'
-              }}
-            >
-              {developerData.title}
+            {/* Title */}
+            <motion.h2 variants={item} className="font-semibold text-slate-300 mb-6" style={{ fontSize: isMobile ? '0.95rem' : '1.35rem', letterSpacing: '-0.01em', lineHeight: 1.4 }}>
+              {personal.title}
+              <span className="text-blue-400"> @ </span>
+              <span className="text-emerald-400">{personal.company}</span>
             </motion.h2>
 
-            {/* Company and Experience */}
-            <motion.p
-              className={`${isMobile ? 'text-base' : 'text-lg'} text-slate-300 mb-8 font-medium`}
-              variants={textVariants}
-            >
-              1 years at{' '}
-              <span 
-                className="font-bold text-emerald-400"
-              >
-                {developerData.currentCompany}
-              </span>
-            </motion.p>
-
             {/* Bio */}
-            <motion.p
-              className={`text-slate-400 ${isMobile ? 'text-base' : 'text-lg'} mb-8 max-w-2xl ${isMobile ? 'mx-auto' : ''} leading-relaxed font-light`}
-              variants={textVariants}
-            >
-              {developerData.bio}
+            <motion.p variants={item} className="text-slate-400 leading-relaxed mb-8"
+              style={{ fontSize: isMobile ? '0.875rem' : '1rem', maxWidth: '460px', margin: isMobile ? '0 auto 2rem' : '0 0 2rem' }}>
+              {personal.bio}
             </motion.p>
 
-            {/* Interactive CTA Buttons */}
-            <motion.div
-              className={`flex ${isMobile ? 'flex-col' : 'flex-col sm:flex-row'} gap-4 ${isMobile ? 'items-center' : 'justify-center lg:justify-start'}`}
-              variants={textVariants}
-            >
-              <CTAButton
-                variant="primary"
-                onClick={handleDownloadCV}
-                loading={isDownloading}
-                icon={<FiDownload />}
-                className={`${isMobile ? 'w-full max-w-xs' : 'min-w-[160px]'}`}
-              >
-                Download CV
-              </CTAButton>
-
-              <CTAButton
-                variant="secondary"
-                onClick={handleContactClick}
-                icon={<FiMail />}
-                className={`${isMobile ? 'w-full max-w-xs' : 'min-w-[160px]'}`}
-              >
-                Get In Touch
-              </CTAButton>
+            {/* Tech badges */}
+            <motion.div variants={item} className={`flex flex-wrap gap-2 mb-9 ${isMobile ? 'justify-center max-w-[300px] mx-auto' : ''}`}>
+              {techBadges.map((b) => (
+                <span key={b.label} className="px-2.5 py-1 rounded-md text-[10px] font-medium"
+                  style={{ color: b.color, background: b.bg, border: `1px solid ${b.color}28`, fontFamily: "'Fira Code', monospace" }}>
+                  {b.label}
+                </span>
+              ))}
             </motion.div>
-          </motion.div>
 
-          {/* Professional Photo with Floating Elements */}
+            {/* ── CTA buttons ── */}
+            <motion.div variants={item} className={`flex gap-3 ${isMobile ? 'flex-col items-center' : 'flex-row'}`}>
+              <MagneticHover strength={0.2} disabled={isTouchDevice || prefersReducedMotion}>
+                <button
+                  onClick={handleDownloadCV}
+                  disabled={isDownloading}
+                  className="flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-semibold text-white transition-all select-none text-sm"
+                  style={{
+                    background: isDownloading ? 'rgba(59,130,246,0.5)' : 'linear-gradient(135deg, #3B82F6 0%, #2563EB 100%)',
+                    boxShadow: '0 0 20px rgba(59,130,246,0.2)',
+                    width: isMobile ? '200px' : 'auto',
+                  }}
+                >
+                  <FiDownload size={16} className={isDownloading ? 'animate-bounce' : ''} />
+                  {isDownloading ? 'Wait...' : 'CV Download'}
+                </button>
+              </MagneticHover>
+
+              <MagneticHover strength={0.2} disabled={isTouchDevice || prefersReducedMotion}>
+                <button
+                  onClick={handleContactClick}
+                  className="flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-semibold text-slate-300 hover:text-white transition-all select-none text-sm"
+                  style={{
+                    background: 'rgba(255,255,255,0.04)',
+                    border: '1px solid rgba(255,255,255,0.10)',
+                    width: isMobile ? '200px' : 'auto',
+                  }}
+                >
+                  <FiMail size={16} />
+                  Message Me
+                </button>
+              </MagneticHover>
+            </motion.div>
+          </div>
+
+          {/* ── Photo column ── */}
           <motion.div
-            className={`relative flex justify-center ${isMobile ? 'order-1' : 'lg:justify-end'}`}
-            variants={imageVariants}
-            style={{ willChange: 'opacity, transform, filter' }}
+            className={`relative flex-shrink-0 ${isMobile ? 'flex justify-center mx-auto mb-10' : ''}`}
+            variants={imgVariants}
+            style={{
+              x: !isMobile && !prefersReducedMotion ? mousePos.x * 0.08 : 0,
+              width: isMobile ? 180 : 300,
+              height: isMobile ? 180 : 300
+            }}
           >
-            {/* Floating Elements around Photo */}
-            <div className="relative">
-              {/* Main Photo */}
-              <motion.div
-                className={`relative z-10 ${isMobile ? 'w-64 h-64' : 'w-80 h-80'} rounded-full overflow-hidden border-4 border-blue-400/30 shadow-2xl`}
-                whileHover={!isTouchDevice && !prefersReducedMotion ? { scale: 1.05 } : {}}
-                transition={{ duration: prefersReducedMotion ? 0.1 : 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
-              >
-                {/* Placeholder while image loads */}
-                {!imageLoaded && (
-                  <div className="absolute inset-0 bg-gradient-to-br from-slate-700 to-slate-800 animate-pulse" />
-                )}
-                <img
-                  src={developerData.profileImage}
-                  alt={developerData.name}
-                  className={`w-full h-full object-cover transition-opacity duration-500 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
-                  onLoad={() => setImageLoaded(true)}
-                />
-                {/* Overlay gradient */}
-                <div className="absolute inset-0 bg-gradient-to-t from-blue-900/20 to-transparent" />
-              </motion.div>
+            {/* Conic gradient ring */}
+            <div
+              className={`absolute inset-0 rounded-full ${isMobile ? 'scale-[1.08]' : 'scale-[1.05]'}`}
+              style={{
+                background: 'conic-gradient(from 0deg, #3B82F6, #8B5CF6, #10B981, #F59E0B, #3B82F6)',
+                filter: 'blur(2px)',
+                borderRadius: '50%',
+              }}
+            />
 
-              {/* Floating Tech Icons */}
-              {!isMobile && (
-                <>
-                  {/* Java Icon - Top Left */}
-                  <motion.div 
-                    className="absolute -top-4 -left-4 w-16 h-16 bg-white/95 backdrop-blur-sm rounded-lg flex items-center justify-center shadow-lg border border-slate-200/50 p-2 cursor-pointer"
-                    animate={{
-                      y: [0, -15, 0],
-                      rotate: [0, 5, 0]
-                    }}
-                    transition={{
-                      duration: 4,
-                      repeat: Infinity,
-                      ease: "easeInOut"
-                    }}
-                    whileHover={{ 
-                      scale: 1.2, 
-                      rotate: 10,
-                      boxShadow: "0 10px 30px rgba(239, 68, 68, 0.3)"
-                    }}
-                  >
-                    <img 
-                      src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" 
-                      alt="Java"
-                      className="w-full h-full object-contain"
-                      loading="eager"
-                    />
-                  </motion.div>
+            {/* Photo */}
+            <motion.div
+              className="relative rounded-full overflow-hidden"
+              style={{
+                width: isMobile ? 180 : 300,
+                height: isMobile ? 180 : 300,
+                border: '3px solid rgba(15,23,42,1)',
+                boxShadow: '0 0 40px rgba(59,130,246,0.15)',
+              }}
+              whileHover={!isTouchDevice ? { scale: 1.03 } : {}}
+              transition={{ duration: 0.3 }}
+            >
+              <img
+                src={personal.profileImage}
+                alt={`${personal.name}`}
+                className={`w-full h-full object-cover transition-transform duration-500 ${isMobile ? 'scale-[1.5]' : 'scale-110'}`}
+                onError={(e) => {
+                  const t = e.target as HTMLImageElement;
+                  t.style.display = 'none';
+                  const p = t.parentElement!;
+                  p.style.background = 'linear-gradient(135deg, #1E3A5F 0%, #0f172a 100%)';
+                  p.innerHTML = '<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:3rem">👨‍💻</div>';
+                }}
+              />
+            </motion.div>
 
-                  {/* Spring Boot Icon - Top Right */}
-                  <motion.div 
-                    className="absolute -top-8 -right-4 w-14 h-14 bg-white/95 backdrop-blur-sm rounded-lg flex items-center justify-center shadow-lg border border-slate-200/50 p-2 cursor-pointer"
-                    animate={{
-                      y: [0, -12, 0],
-                      rotate: [0, -5, 0]
-                    }}
-                    transition={{
-                      duration: 5,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                      delay: 1
-                    }}
-                    whileHover={{ 
-                      scale: 1.2, 
-                      rotate: -10,
-                      boxShadow: "0 10px 30px rgba(34, 197, 94, 0.3)"
-                    }}
-                  >
-                    <img 
-                      src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg" 
-                      alt="Spring Boot"
-                      className="w-full h-full object-contain"
-                      loading="eager"
-                    />
-                  </motion.div>
+            {/* Floating info badges */}
+            {!prefersReducedMotion && (
+              <>
+                <motion.div
+                  className="absolute"
+                  style={{
+                    bottom: isMobile ? -10 : -18,
+                    left: isMobile ? -5 : -24,
+                    background: 'rgba(8,12,24,0.98)',
+                    border: '1px solid rgba(59,130,246,0.22)',
+                    borderRadius: '10px',
+                    padding: isMobile ? '4px 10px' : '8px 14px',
+                    backdropFilter: 'blur(16px)',
+                    whiteSpace: 'nowrap',
+                    boxShadow: '0 4px 20px rgba(0,0,0,0.5)',
+                  }}
+                  animate={{ y: [0, -6, 0] }}
+                  transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+                >
+                  <div className="text-blue-400 text-[9px] font-mono mb-0.5">Experience</div>
+                  <div className="text-white font-bold text-[11px]">{personal.yearsOfExperience}+ Years</div>
+                </motion.div>
 
-                  {/* React Icon - Bottom Left */}
-                  <motion.div 
-                    className="absolute -bottom-6 -left-4 w-12 h-12 bg-white/95 backdrop-blur-sm rounded-lg flex items-center justify-center shadow-lg border border-slate-200/50 p-2 cursor-pointer"
-                    animate={{
-                      y: [0, -10, 0],
-                      rotate: [0, 8, 0]
-                    }}
-                    transition={{
-                      duration: 6,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                      delay: 2
-                    }}
-                    whileHover={{ 
-                      scale: 1.2, 
-                      rotate: 15,
-                      boxShadow: "0 10px 30px rgba(6, 182, 212, 0.3)"
-                    }}
-                  >
-                    <img 
-                      src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" 
-                      alt="React"
-                      className="w-full h-full object-contain"
-                      loading="eager"
-                    />
-                  </motion.div>
-
-                  {/* MySQL Icon - Bottom Right */}
-                  <motion.div 
-                    className="absolute -bottom-4 -right-2 w-10 h-10 bg-white/95 backdrop-blur-sm rounded-lg flex items-center justify-center shadow-lg border border-slate-200/50 p-1.5 cursor-pointer"
-                    animate={{
-                      y: [0, -8, 0],
-                      rotate: [0, -6, 0]
-                    }}
-                    transition={{
-                      duration: 3.5,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                      delay: 0.5
-                    }}
-                    whileHover={{ 
-                      scale: 1.2, 
-                      rotate: -12,
-                      boxShadow: "0 10px 30px rgba(37, 99, 235, 0.3)"
-                    }}
-                  >
-                    <img 
-                      src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" 
-                      alt="MySQL"
-                      className="w-full h-full object-contain"
-                      loading="eager"
-                    />
-                  </motion.div>
-                </>
-              )}
-
-              {/* Glow Effect */}
-              <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-400/20 to-purple-400/20 blur-xl scale-110 -z-10" />
-            </div>
+                <motion.div
+                  className="absolute"
+                  style={{
+                    top: isMobile ? -10 : 20,
+                    right: isMobile ? -5 : -24,
+                    background: 'rgba(8,12,24,0.98)',
+                    border: '1px solid rgba(16,185,129,0.22)',
+                    borderRadius: '10px',
+                    padding: isMobile ? '4px 10px' : '8px 14px',
+                    backdropFilter: 'blur(16px)',
+                    whiteSpace: 'nowrap',
+                    boxShadow: '0 4px 20px rgba(0,0,0,0.5)',
+                  }}
+                  animate={{ y: [0, 6, 0] }}
+                  transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut', delay: 0.8 }}
+                >
+                  <div className="text-emerald-400 text-[9px] font-mono mb-0.5">Main Stack</div>
+                  <div className="text-white font-bold text-[11px]">Java + React</div>
+                </motion.div>
+              </>
+            )}
           </motion.div>
         </div>
+
+        {/* ── Stats row ── */}
+        <motion.div variants={item} className="mt-12 pt-8 border-t border-slate-800/40">
+          <div className={`grid ${isMobile ? 'grid-cols-2 gap-4' : 'grid-cols-4 gap-6'}`}>
+            {stats.map((s) => (
+              <div key={s.label} className="text-center">
+                <div className={`${isMobile ? 'text-xl' : 'text-3xl'} font-bold mb-0.5`} style={{ color: s.color }}>{s.value}</div>
+                <div className="text-slate-500 text-[10px] uppercase tracking-wider">{s.label}</div>
+              </div>
+            ))}
+          </div>
+        </motion.div>
       </motion.div>
 
-      {/* Desktop Scroll Indicator */}
-      {!isMobile && (
-        <motion.button
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.5, duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
-          onClick={() => {
-            const aboutSection = document.getElementById('about');
-            if (aboutSection) {
-              aboutSection.scrollIntoView({ behavior: 'smooth' });
-            }
-          }}
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2 cursor-pointer hover:scale-110 transition-transform duration-300"
-          aria-label="Scroll to about section"
-        >
-          <div className="w-6 h-10 border-2 border-slate-400 rounded-full flex justify-center">
-            <motion.div 
-              className="w-1 h-3 bg-slate-400 rounded-full mt-2"
-              animate={{ y: [0, 8, 0] }}
-              transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-            />
-          </div>
-          <p className="text-slate-400 text-sm mt-2 text-center">Scroll Down</p>
-        </motion.button>
-      )}
-
+      {/* Scroll indicator */}
+      <motion.div
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 2.2, duration: 0.8 }}
+      >
+        <span className="text-slate-600 text-xs tracking-widest uppercase" style={{ fontFamily: "'Fira Code', monospace" }}>
+          Scroll
+        </span>
+        <div className="w-5 h-8 rounded-full border border-slate-700 flex justify-center pt-1.5">
+          <motion.div
+            className="w-1 h-2 rounded-full bg-blue-400"
+            animate={!prefersReducedMotion ? { y: [0, 12, 0], opacity: [1, 0, 1] } : {}}
+            transition={{ duration: 1.8, repeat: Infinity }}
+          />
+        </div>
+      </motion.div>
     </section>
   );
 };

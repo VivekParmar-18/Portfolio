@@ -1,52 +1,42 @@
 import type { ContactInfo, SocialLink } from '../types/types';
+import { personal } from './personalData';
 
 export const contactInfo: ContactInfo = {
-  email: 'vivek18parmar@gmail.com',
-  phone: '+918401278136',
-  location: 'Ahmedabad'
+  email: personal.email,
+  phone: personal.phone,
+  location: personal.location,
 };
 
 export const socialLinks: SocialLink[] = [
-  {
-    platform: 'LinkedIn',
-    url: 'https://linkedin.com/in/vivekparmar1812',
-    icon: 'linkedin'
-  },
-  {
-    platform: 'GitHub',
-    url: 'https://github.com/VivekParmar-18',
-    icon: 'github'
-  },
-  {
-    platform: 'Email',
-    url: 'mailto:vivek18parmar@gmail.com',
-    icon: 'mail'
-  }
+  { platform: 'LinkedIn', url: personal.linkedin, icon: 'linkedin' },
+  { platform: 'GitHub', url: personal.github, icon: 'github' },
+  { platform: 'Twitter', url: personal.twitter, icon: 'twitter' },
+  { platform: 'Email', url: `mailto:${personal.email}`, icon: 'mail' },
 ];
 
 export const contactMethods = [
   {
     title: 'Email Me',
     description: 'Get in touch via email',
-    value: contactInfo.email,
-    action: `mailto:${contactInfo.email}`,
+    value: personal.email,
+    action: `mailto:${personal.email}`,
     icon: 'mail',
-    color: 'blue'
+    color: 'blue',
   },
   {
-    title: 'LinkedIn',
-    description: 'Connect professionally',
-    value: 'vivekparmar1812',
-    action: 'https://linkedin.com/in/vivekparmar1812',
-    icon: 'linkedin',
-    color: 'emerald'
+    title: 'Call Me',
+    description: "Let's have a conversation",
+    value: personal.phone,
+    action: `tel:${personal.phone}`,
+    icon: 'phone',
+    color: 'emerald',
   },
   {
-    title: 'GitHub',
-    description: 'Check out my code',
-    value: 'VivekParmar-18',
-    action: 'https://github.com/VivekParmar-18',
-    icon: 'github',
-    color: 'purple'
-  }
+    title: 'Location',
+    description: 'Based in Ahmedabad, India',
+    value: personal.location,
+    action: '#',
+    icon: 'location',
+    color: 'purple',
+  },
 ];

@@ -1,6 +1,7 @@
 /**
- * SEO and Meta Tag Management Utilities
+ * SEO utilities — all values derived from personalData.ts
  */
+import { personal, seoKeywords } from '../data/personalData';
 
 export interface SEOData {
   title: string;
@@ -12,233 +13,137 @@ export interface SEOData {
   type?: 'website' | 'article' | 'profile';
   siteName?: string;
   locale?: string;
-  twitterCard?: 'summary' | 'summary_large_image' | 'app' | 'player';
-  twitterSite?: string;
+  twitterCard?: 'summary' | 'summary_large_image';
   twitterCreator?: string;
-  structuredData?: any;
+  structuredData?: object;
 }
 
-// Default SEO configuration
 export const defaultSEOConfig: SEOData = {
-  title: 'Vivek Parmar - Java Developer & Full Stack Engineer',
-  description: 'Experienced Java developer specializing in Spring Boot and React.js with professional experience at Techforce InfoTech PVT LTD. Building scalable web applications with modern technologies.',
-  keywords: [
-    'java developer',
-    'spring boot developer',
-    'react developer',
-    'full stack developer',
-    'javascript',
-    'typescript',
-    'web development',
-    'software engineer',
-    'techforce infotech',
-    'portfolio',
-    'vivek parmar'
-  ],
-  author: 'Vivek Parmar',
-  image: '/og-image.jpg', // We'll create this
-  url: 'https://vivekparmar.dev', // Replace with actual domain
+  title: `${personal.name} — Fullstack Java & React Developer`,
+  description: personal.bio,
+  keywords: seoKeywords,
+  author: personal.name,
+  image: `${personal.domain}${personal.ogImage}`,
+  url: personal.domain,
   type: 'profile',
-  siteName: 'Vivek Parmar Portfolio',
+  siteName: `${personal.name} Portfolio`,
   locale: 'en_US',
   twitterCard: 'summary_large_image',
-  twitterSite: '@vivekparmar1812',
-  twitterCreator: '@vivekparmar1812'
+  twitterCreator: personal.twitter,
+  structuredData: {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: personal.name,
+    jobTitle: personal.title,
+    description: personal.bio,
+    image: `${personal.domain}${personal.profileImage}`,
+    gender: 'Male',
+    nationality: 'Indian',
+    birthPlace: 'Ahmedabad, India',
+    alumniOf: {
+      '@type': 'CollegeOrUniversity',
+      name: 'Gujarat Technological University',
+    },
+    worksFor: { 
+      '@type': 'Organization', 
+      name: personal.company,
+      url: 'https://www.linkedin.com/company/java-enterprise-solutions' // Placeholder or actual
+    },
+    url: personal.domain,
+    email: personal.email,
+    sameAs: [personal.linkedin, personal.github, personal.twitter].filter(Boolean),
+    knowsAbout: [...seoKeywords, 'Java Microservices', 'Spring Boot', 'System Design', 'Cloud Architecture'],
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'Ahmedabad',
+      addressRegion: 'Gujarat',
+      postalCode: '380001',
+      addressCountry: 'IN',
+    },
+  },
 };
 
-// Page-specific SEO configurations
-export const pageSEOConfigs: Record<string, Partial<SEOData>> = {
-  '/': {
-    title: 'Vivek Parmar - Java Developer & Full Stack Engineer',
-    description: 'Welcome to my portfolio. I\'m a passionate Java developer with experience building scalable web applications using Spring Boot and React.js at Techforce InfoTech PVT LTD.',
-    structuredData: {
-      '@context': 'https://schema.org',
-      '@type': 'Person',
-      name: 'Vivek Parmar',
-      jobTitle: 'Associate Software Developer',
-      worksFor: {
-        '@type': 'Organization',
-        name: 'Techforce InfoTech PVT LTD'
-      },
-      url: 'https://vivekparmar.dev',
-      sameAs: [
-        'https://linkedin.com/in/vivekparmar1812',
-        'https://github.com/VivekParmar-18',
-        'mailto:vivek18parmar@gmail.com'
-      ],
-      knowsAbout: [
-        'Java',
-        'Spring Boot',
-        'React.js',
-        'JavaScript',
-        'TypeScript',
-        'Web Development',
-        'Software Engineering'
-      ]
-    }
-  },
-  '/about': {
-    title: 'About Vivek Parmar - My Journey & Experience',
-    description: 'Learn about my journey as a Java developer, my experience at Techforce InfoTech PVT LTD, and the technologies I work with including Spring Boot, React.js, and modern web development.',
-    type: 'article'
-  },
-  '/contact': {
-    title: 'Contact Vivek Parmar - Let\'s Work Together',
-    description: 'Get in touch with me for collaboration opportunities, job inquiries, or just to connect. I\'m always open to discussing new projects and opportunities.',
-    type: 'article'
-  }
+export const getSEODataForPage = (path: string): SEOData => {
+  const overrides: Record<string, Partial<SEOData>> = {
+    '/':        { title: `${personal.name} — Fullstack Java & React Developer` },
+    '/#about':  { title: `About ${personal.name} — Journey & Experience` },
+    '/#projects': { title: `${personal.name}'s Projects — Fullstack Portfolio` },
+    '/#contact':  { title: `Contact ${personal.name} — Let's Work Together` },
+  };
+  return { ...defaultSEOConfig, ...(overrides[path] ?? {}) };
 };
 
-// Update document meta tags
-export const updateMetaTags = (seoData: SEOData) => {
-  // Update title
-  document.title = seoData.title;
+export const updateMetaTags = (data: Partial<SEOData>) => {
+  const d = { ...defaultSEOConfig, ...data };
 
-  // Helper function to update or create meta tag
-  const updateMetaTag = (name: string, content: string, property = false) => {
-    const attribute = property ? 'property' : 'name';
-    let meta = document.querySelector(`meta[${attribute}="${name}"]`) as HTMLMetaElement;
-    
-    if (!meta) {
-      meta = document.createElement('meta');
-      meta.setAttribute(attribute, name);
-      document.head.appendChild(meta);
+  const setMeta = (sel: string, val: string | undefined) => {
+    if (!val) return;
+    let el = document.querySelector(sel) as HTMLMetaElement | null;
+    if (!el) {
+      el = document.createElement('meta');
+      const attr = sel.includes('[name') ? 'name' : 'property';
+      const key = sel.match(/"([^"]+)"/)?.[1] ?? '';
+      el.setAttribute(attr, key);
+      document.head.appendChild(el);
     }
-    
-    meta.setAttribute('content', content);
+    el.setAttribute('content', val);
   };
 
-  // Basic meta tags
-  updateMetaTag('description', seoData.description);
-  if (seoData.keywords) {
-    updateMetaTag('keywords', seoData.keywords.join(', '));
-  }
-  if (seoData.author) {
-    updateMetaTag('author', seoData.author);
-  }
+  const updateLink = (rel: string, href: string | undefined) => {
+    if (!href) return;
+    let el = document.querySelector(`link[rel="${rel}"]`) as HTMLLinkElement | null;
+    if (!el) {
+      el = document.createElement('link');
+      el.setAttribute('rel', rel);
+      document.head.appendChild(el);
+    }
+    el.setAttribute('href', href);
+  };
 
-  // Open Graph tags
-  updateMetaTag('og:title', seoData.title, true);
-  updateMetaTag('og:description', seoData.description, true);
-  updateMetaTag('og:type', seoData.type || 'website', true);
-  if (seoData.image) {
-    updateMetaTag('og:image', seoData.image, true);
-  }
-  if (seoData.url) {
-    updateMetaTag('og:url', seoData.url, true);
-  }
-  if (seoData.siteName) {
-    updateMetaTag('og:site_name', seoData.siteName, true);
-  }
-  if (seoData.locale) {
-    updateMetaTag('og:locale', seoData.locale, true);
-  }
-
-  // Twitter Card tags
-  if (seoData.twitterCard) {
-    updateMetaTag('twitter:card', seoData.twitterCard);
-  }
-  if (seoData.twitterSite) {
-    updateMetaTag('twitter:site', seoData.twitterSite);
-  }
-  if (seoData.twitterCreator) {
-    updateMetaTag('twitter:creator', seoData.twitterCreator);
-  }
-  updateMetaTag('twitter:title', seoData.title);
-  updateMetaTag('twitter:description', seoData.description);
-  if (seoData.image) {
-    updateMetaTag('twitter:image', seoData.image);
-  }
-
-  // Structured data
-  if (seoData.structuredData) {
-    updateStructuredData(seoData.structuredData);
-  }
-};
-
-// Update structured data (JSON-LD)
-export const updateStructuredData = (data: any) => {
-  // Remove existing structured data
-  const existingScript = document.querySelector('script[type="application/ld+json"]');
-  if (existingScript) {
-    existingScript.remove();
-  }
-
-  // Add new structured data
-  const script = document.createElement('script');
-  script.type = 'application/ld+json';
-  script.textContent = JSON.stringify(data);
-  document.head.appendChild(script);
-};
-
-// Get SEO data for current page
-export const getSEODataForPage = (pathname: string): SEOData => {
-  const pageConfig = pageSEOConfigs[pathname] || {};
-  return { ...defaultSEOConfig, ...pageConfig };
-};
-
-// Preload critical resources
-export const preloadCriticalResources = () => {
-  // Preload fonts
-  const fontPreloads = [
-    'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap'
-  ];
-
-  fontPreloads.forEach(href => {
-    const link = document.createElement('link');
-    link.rel = 'preload';
-    link.as = 'style';
-    link.href = href;
-    document.head.appendChild(link);
-    
-    // Also add the actual stylesheet
-    const styleLink = document.createElement('link');
-    styleLink.rel = 'stylesheet';
-    styleLink.href = href;
-    document.head.appendChild(styleLink);
-  });
-
-  // Preload critical images
-  const criticalImages = [
-    '/og-image.jpg',
-    '/profile-photo.jpg'
-  ];
-
-  criticalImages.forEach(src => {
-    const link = document.createElement('link');
-    link.rel = 'preload';
-    link.as = 'image';
-    link.href = src;
-    document.head.appendChild(link);
-  });
-};
-
-// Generate sitemap data
-export const generateSitemapData = () => {
-  const baseUrl = defaultSEOConfig.url || 'https://vivekparmar.dev';
-  const pages = [
-    { url: '/', priority: 1.0, changefreq: 'monthly' },
-    { url: '/about', priority: 0.8, changefreq: 'monthly' },
-    { url: '/contact', priority: 0.6, changefreq: 'monthly' }
-  ];
-
-  return pages.map(page => ({
-    ...page,
-    url: `${baseUrl}${page.url}`,
-    lastmod: new Date().toISOString().split('T')[0]
-  }));
-};
-
-// Generate robots.txt content
-export const generateRobotsTxt = () => {
-  const baseUrl = defaultSEOConfig.url || 'https://vivekparmar.dev';
+  if (d.title) document.title = d.title;
+  setMeta('[name="description"]', d.description);
+  setMeta('[name="keywords"]', d.keywords?.join(', '));
+  setMeta('[name="author"]', d.author);
+  setMeta('[name="robots"]', 'index, follow');
   
-  return `User-agent: *
-Allow: /
+  // Canonical
+  updateLink('canonical', d.url);
 
-# Sitemap
-Sitemap: ${baseUrl}/sitemap.xml
+  // Open Graph
+  setMeta('[property="og:title"]', d.title);
+  setMeta('[property="og:description"]', d.description);
+  setMeta('[property="og:image"]', d.image);
+  setMeta('[property="og:url"]', d.url);
+  setMeta('[property="og:type"]', d.type);
+  setMeta('[property="og:site_name"]', d.siteName);
 
-# Crawl-delay
-Crawl-delay: 1`;
+  // Twitter
+  setMeta('[property="twitter:card"]', d.twitterCard);
+  setMeta('[property="twitter:title"]', d.title);
+  setMeta('[property="twitter:description"]', d.description);
+  setMeta('[property="twitter:image"]', d.image);
+  setMeta('[property="twitter:creator"]', d.twitterCreator);
+
+  if (d.structuredData) {
+    let ld = document.querySelector('script[type="application/ld+json"]');
+    if (!ld) { 
+      ld = document.createElement('script'); 
+      ld.setAttribute('type', 'application/ld+json'); 
+      document.head.appendChild(ld); 
+    }
+    ld.textContent = JSON.stringify(d.structuredData);
+  }
+};
+
+export const preloadCriticalResources = () => {
+  const resources = [personal.profileImage, personal.ogImage].filter(Boolean);
+  resources.forEach((href) => {
+    if (!document.querySelector(`link[rel="preload"][href="${href}"]`)) {
+      const link = document.createElement('link');
+      link.rel = 'preload';
+      link.as = 'image';
+      link.href = href;
+      document.head.appendChild(link);
+    }
+  });
 };

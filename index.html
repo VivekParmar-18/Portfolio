@@ -1,190 +1,117 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    
-    <!-- Primary Meta Tags -->
-    <title>Vivek Parmar - Java Developer Portfolio</title>
-    <meta name="title" content="Vivek Parmar - Java Developer Portfolio" />
-    <meta name="description" content="Vivek Parmar - Experienced Java Developer and Associate Software Developer at Techforce InfoTech PVT LTD. Specializing in Java, Spring Boot, React, MySQL, and enterprise application development. Expert in Java backend development, REST APIs, and full-stack solutions." />
-    <meta name="keywords" content="Vivek Parmar, Java Developer, Spring Boot Developer, Java Programmer, Associate Software Developer, Techforce InfoTech, Java Spring Boot, React Developer, Full Stack Java Developer, Enterprise Java, Java Microservices, REST API Developer, MySQL Developer, Ahmedabad Java Developer, Java Backend Developer" />
-    <meta name="author" content="Vivek Parmar" />
-    <meta name="robots" content="index, follow" />
-    <meta name="language" content="English" />
-    <meta name="theme-color" content="#0F172A" />
-    
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="profile" />
-    <meta property="og:url" content="https://vivekparmar.dev/" />
-    <meta property="og:title" content="Vivek Parmar - Java Developer Portfolio" />
-    <meta property="og:description" content="Portfolio of Vivek Parmar, Associate Software Developer at Techforce InfoTech PVT LTD. Specializing in Java, Spring Boot, React, and full-stack development." />
-    <meta property="og:image" content="https://vivekparmar.dev/og-image.jpg" />
-    <meta property="og:site_name" content="Vivek Parmar Portfolio" />
-    <meta property="og:locale" content="en_US" />
-    
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content="https://vivekparmar.dev/" />
-    <meta property="twitter:title" content="Vivek Parmar - Java Developer Portfolio" />
-    <meta property="twitter:description" content="Portfolio of Vivek Parmar, Associate Software Developer at Techforce InfoTech PVT LTD. Specializing in Java, Spring Boot, React, and full-stack development." />
-    <meta property="twitter:image" content="https://vivekparmar.dev/og-image.jpg" />
-    <meta property="twitter:creator" content="@vivekparmar" />
-    <meta property="twitter:site" content="@vivekparmar" />
-    
-    <!-- Favicon and Icons -->
-    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
-    
-    <!-- Apple Touch Icons -->
-    <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png" />
-    <link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png" />
-    <link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png" />
-    <link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png" />
-    <link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png" />
-    <link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png" />
-    <link rel="apple-touch-icon" sizes="144x144" href="/apple-icon-144x144.png" />
-    <link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png" />
-    
-    <!-- Android Chrome Icons -->
-    <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png" />
-    <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png" />
-    
-    <!-- Microsoft Tiles -->
-    <meta name="msapplication-TileColor" content="#0F172A" />
-    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
-    <meta name="msapplication-config" content="/browserconfig.xml" />
-    <link rel="manifest" href="/site.webmanifest" />
-    
-    <!-- Preconnect to external domains for performance -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    
-    <!-- Google Fonts - Stylish and Modern -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
-    
-    <!-- DNS Prefetch for external resources -->
-    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
-    <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
-    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
-    
-    <!-- Preload critical assets -->
-    <link rel="preload" href="/profile-photo.jpg" as="image" />
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" as="image" type="image/svg+xml" crossorigin />
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg" as="image" type="image/svg+xml" crossorigin />
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" as="image" type="image/svg+xml" crossorigin />
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" as="image" type="image/svg+xml" crossorigin />
-    
-    <!-- Canonical URL -->
-    <link rel="canonical" href="https://vivekparmar.dev/" />
-    
-    <!-- Structured Data -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Person",
-      "name": "Vivek Parmar",
-      "jobTitle": "Java Developer",
-      "description": "Experienced Java Developer and Associate Software Developer specializing in Spring Boot, React, and enterprise application development",
-      "worksFor": {
-        "@type": "Organization",
-        "name": "Techforce InfoTech PVT LTD",
-        "address": {
-          "@type": "PostalAddress",
-          "addressLocality": "Ahmedabad",
-          "addressCountry": "IN"
-        }
-      },
-      "url": "https://vivekparmar.dev",
-      "sameAs": [
-        "https://linkedin.com/in/vivekparmar",
-        "https://github.com/vivekparmar"
-      ],
-      "knowsAbout": [
-        "Java Programming",
-        "Spring Boot Development",
-        "React.js",
-        "MySQL Database",
-        "REST API Development",
-        "Enterprise Java Applications",
-        "Full Stack Development",
-        "Java Microservices",
-        "Spring Framework",
-        "Backend Development"
-      ],
-      "hasOccupation": {
-        "@type": "Occupation",
-        "name": "Java Developer",
-        "occupationLocation": {
-          "@type": "City",
-          "name": "Ahmedabad"
-        },
-        "skills": [
-          "Java",
-          "Spring Boot",
-          "React.js",
-          "MySQL",
-          "REST APIs",
-          "Microservices",
-          "Enterprise Applications"
-        ]
-      },
-      "alumniOf": {
-        "@type": "Organization",
-        "name": "Vishwakarma Government Engineering College"
-      },
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Ahmedabad",
-        "addressCountry": "IN"
-      },
-      "expertise": [
-        "Java Backend Development",
-        "Spring Boot Applications",
-        "Enterprise Software Development",
-        "REST API Design",
-        "Database Design and Optimization",
-        "Full Stack Web Development"
-      ]
-    }
-    </script>
-  </head>
-  <body>
-    <div id="root"></div>
-    <!-- Initial loading screen to prevent flash of unstyled content -->
-    <style>
-      #initial-loader {
-        position: fixed;
-        inset: 0;
-        background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        z-index: 9999;
-        transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
-      }
-      #initial-loader.hidden {
-        opacity: 0;
-        visibility: hidden;
-      }
-      .loader-spinner {
-        width: 48px;
-        height: 48px;
-        border: 3px solid rgba(96, 165, 250, 0.2);
-        border-top-color: #60a5fa;
-        border-radius: 50%;
-        animation: spin 1s linear infinite;
-      }
-      @keyframes spin {
-        to { transform: rotate(360deg); }
-      }
-    </style>
-    <div id="initial-loader">
-      <div class="loader-spinner"></div>
-    </div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Primary Meta -->
+  <title>Vivek Parmar — Fullstack Java & React Developer</title>
+  <meta name="google-site-verification" content="mEjkjN1rUXc3J-Y1aTsAtbxl72GjZVSfMGO9cVWLiT0" />
+  <meta name="title" content="Vivek Parmar — Fullstack Java & React Developer" />
+  <meta name="description"
+    content="Fullstack developer specialising in Java Spring Boot and React.js with 2+ years of experience at Techforce Global. Building scalable, production-ready web applications." />
+  <meta name="keywords"
+    content="fullstack developer, java developer, react developer, spring boot, typescript, web development, software engineer, techforce global, ahmedabad, india, vivek parmar" />
+  <meta name="author" content="Vivek Parmar" />
+  <meta name="robots" content="index, follow" />
+  <meta name="theme-color" content="#020817" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="profile" />
+  <meta property="og:url" content="https://vivekparmar.dev/" />
+  <meta property="og:title" content="Vivek Parmar — Fullstack Java & React Developer" />
+  <meta property="og:description"
+    content="Fullstack developer specialising in Java Spring Boot and React.js with 2+ years of experience at Techforce Global." />
+  <meta property="og:image" content="https://vivekparmar.dev/og-image.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:site_name" content="Vivek Parmar Portfolio" />
+  <meta property="og:locale" content="en_US" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:url" content="https://vivekparmar.dev/" />
+  <meta name="twitter:title" content="Vivek Parmar — Fullstack Java & React Developer" />
+  <meta name="twitter:description"
+    content="Fullstack developer specialising in Java Spring Boot and React.js with 2+ years of experience at Techforce Global." />
+  <meta name="twitter:image" content="https://vivekparmar.dev/og-image.jpg" />
+  <meta name="twitter:creator" content="@vivekparmar18" />
+  <meta name="twitter:site" content="@vivekparmar18" />
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://vivekparmar.dev/" />
+
+  <!-- Icons -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+
+  <!-- Preconnect to font CDNs -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
+
+  <!-- Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap"
+    rel="stylesheet" />
+
+  <!-- Preload hero image so LCP is fast -->
+  <link rel="preload" as="image" href="/profile-photo.jpg" />
+
+  <!-- Structured Data (Person schema) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Vivek Parmar",
+    "givenName": "Vivek",
+    "familyName": "Parmar",
+    "jobTitle": "Associate Software Developer",
+    "description": "Fullstack developer specialising in Java Spring Boot and React.js",
+    "worksFor": {
+      "@type": "Organization",
+      "name": "Techforce Global"
+    },
+    "url": "https://vivekparmar.dev",
+    "email": "vivek18parmar@gmail.com",
+    "sameAs": [
+      "https://linkedin.com/in/vivek1812",
+      "https://github.com/VivekParmar-18",
+      "https://twitter.com/vivekparmar18"
+    ],
+    "knowsAbout": [
+      "Java", "Spring Boot", "React.js", "TypeScript",
+      "JavaScript", "Microservices", "REST APIs",
+      "MySQL", "PostgreSQL", "Docker", "AWS"
+    ],
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Ahmedabad",
+      "addressRegion": "Gujarat",
+      "addressCountry": "IN"
+    },
+    "image": "https://vivekparmar.dev/profile-photo.jpg"
+  }
+  </script>
+
+  <!-- WebSite schema for sitelinks searchbox eligibility -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "url": "https://vivekparmar.dev",
+    "name": "Vivek Parmar Portfolio",
+    "author": { "@type": "Person", "name": "Vivek Parmar" }
+  }
+  </script>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="module" src="/src/main.tsx"></script>
+</body>
+
 </html>

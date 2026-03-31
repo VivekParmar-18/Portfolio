@@ -1,21 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
-    <loc>https://vivekparmar.dev/</loc>
-    <lastmod>2025-01-11</lastmod>
-    <changefreq>monthly</changefreq>
+    <loc>https://vivekparmar.is-a.dev/</loc>
+    <lastmod>2026-03-27</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://vivekparmar.is-a.dev/profile-photo.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://vivekparmar.is-a.dev/og-image.jpg</image:loc>
+    </image:image>
   </url>
   <url>
-    <loc>https://vivekparmar.dev/about</loc>
-    <lastmod>2025-01-09</lastmod>
+    <loc>https://vivekparmar.is-a.dev/#about</loc>
+    <lastmod>2026-03-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://vivekparmar.dev/contact</loc>
-    <lastmod>2025-01-09</lastmod>
+    <loc>https://vivekparmar.is-a.dev/#experience</loc>
+    <lastmod>2026-03-27</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://vivekparmar.is-a.dev/#projects</loc>
+    <lastmod>2026-03-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://vivekparmar.is-a.dev/#contact</loc>
+    <lastmod>2026-03-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://vivekparmar.is-a.dev/#blog/java-spring-boot-best-practices</loc>
+    <lastmod>2026-03-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://vivekparmar.is-a.dev/#blog/java-microservices-architecture</loc>
+    <lastmod>2026-03-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://vivekparmar.is-a.dev/#blog/java-developer-career-path</loc>
+    <lastmod>2026-03-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://vivekparmar.is-a.dev/#blog/java-performance-optimization</loc>
+    <lastmod>2026-03-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
 </urlset>

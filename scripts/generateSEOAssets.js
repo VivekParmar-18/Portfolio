@@ -11,7 +11,7 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const baseUrl = 'https://vivekparmar.dev'; 
+const baseUrl = 'https://vivekparmar.is-a.dev'; 
 const buildDir = path.join(__dirname, '../dist');
 const publicDir = path.join(__dirname, '../public');
 
@@ -23,28 +23,45 @@ if (!fs.existsSync(buildDir)) {
 // Generate sitemap.xml
 const generateSitemap = () => {
   const pages = [
-    { url: '/', priority: 1.0, changefreq: 'monthly' },
-    { url: '/about', priority: 0.8, changefreq: 'monthly' },
-    { url: '/contact', priority: 0.6, changefreq: 'monthly' }
+    { url: '/', priority: '1.0', changefreq: 'weekly', images: ['/profile-photo.jpg', '/og-image.jpg'] },
+    { url: '/#about', priority: '0.8', changefreq: 'monthly' },
+    { url: '/#experience', priority: '0.8', changefreq: 'monthly' },
+    { url: '/#projects', priority: '0.9', changefreq: 'monthly' },
+    { url: '/#contact', priority: '0.7', changefreq: 'monthly' }
   ];
 
+  const blogPosts = [
+    'java-spring-boot-best-practices',
+    'java-microservices-architecture',
+    'java-developer-career-path',
+    'java-performance-optimization'
+  ];
+
+  const blogPages = blogPosts.map(id => ({
+    url: `/#blog/${id}`,
+    priority: '0.8',
+    changefreq: 'monthly'
+  }));
+
+  const allPages = [...pages, ...blogPages];
   const currentDate = new Date().toISOString().split('T')[0];
 
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${pages.map(page => `  <url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+${allPages.map(page => `  <url>
     <loc>${baseUrl}${page.url}</loc>
     <lastmod>${currentDate}</lastmod>
     <changefreq>${page.changefreq}</changefreq>
-    <priority>${page.priority}</priority>
+    <priority>${page.url === '/' ? '1.0' : page.priority}</priority>${page.images ? page.images.map(img => `
+    <image:image>
+      <image:loc>${baseUrl}${img}</image:loc>
+    </image:image>`).join('') : ''}
   </url>`).join('\n')}
 </urlset>`;
 
-  // Write to both public and dist directories
   fs.writeFileSync(path.join(publicDir, 'sitemap.xml'), sitemap);
   fs.writeFileSync(path.join(buildDir, 'sitemap.xml'), sitemap);
-  
-  console.log('✅ Generated sitemap.xml');
+  console.log('✅ Generated optimized crawler-ready sitemap.xml');
 };
 
 // Generate robots.txt
@@ -119,10 +136,8 @@ const main = () => {
   }
 };
 
-// Run if called directly
-if (import.meta.url === `file://${process.argv[1]}`) {
-  main();
-}
+// Run main execution
+main();
 
 export {
   generateSitemap,

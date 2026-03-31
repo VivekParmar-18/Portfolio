@@ -1,125 +1,160 @@
+import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { useRef } from 'react';
-import type { Technology } from '../../types/types';
 import { skillsData } from '../../data/skillsData';
-import { useResponsive, useReducedMotion } from '../../hooks/useResponsive';
-
-// Lighter easing function
-const lightEasing = 'ease-out';
+import type { Technology } from '../../types/types';
+import { useReducedMotion } from '../../hooks/useResponsive';
 
 const Skills = () => {
-    const sectionRef = useRef<HTMLElement>(null);
-    const [ref, inView] = useInView({
-        threshold: 0.1,
-        triggerOnce: true
-    });
-    const { isMobile } = useResponsive();
-    const prefersReducedMotion = useReducedMotion();
+  const [ref, inView] = useInView({ threshold: 0.05, triggerOnce: true });
+  const prefersReducedMotion = useReducedMotion();
 
-    return (
-        <section
-            ref={(node) => {
-                ref(node);
-                if (sectionRef.current !== node) {
-                    (sectionRef as any).current = node;
-                }
-            }}
-            className={`${isMobile ? 'py-12' : 'py-20'} bg-slate-900 relative overflow-hidden`}
-            style={{ transform: 'translateZ(0)' }} // GPU acceleration
+  return (
+    <section
+      id="skills"
+      className="py-28 bg-slate-950 relative overflow-hidden"
+      ref={ref}
+    >
+      {/* BG glows */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            'radial-gradient(ellipse 60% 40% at 20% 50%, rgba(59,130,246,0.06) 0%, transparent 60%), radial-gradient(ellipse 50% 40% at 80% 50%, rgba(16,185,129,0.05) 0%, transparent 60%)',
+        }}
+      />
+
+      <div className="max-w-6xl mx-auto px-6 relative z-10">
+        {/* Heading */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-20"
         >
-            {/* Simple Background Elements */}
-            {!prefersReducedMotion && (
-                <div className="absolute inset-0">
-                    <div 
-                        className={`absolute ${isMobile ? 'top-10 left-4 w-16 h-16' : 'top-20 left-10 w-32 h-32'} bg-blue-500 rounded-full blur-3xl opacity-20`}
-                        style={{ transform: 'translateZ(0)' }}
-                    />
-                    <div 
-                        className={`absolute ${isMobile ? 'bottom-10 right-4 w-20 h-20' : 'bottom-20 right-10 w-40 h-40'} bg-emerald-500 rounded-full blur-3xl opacity-20`}
-                        style={{ transform: 'translateZ(0)' }}
-                    />
-                </div>
-            )}
+          <span
+            className="inline-block text-xs font-semibold tracking-[0.2em] uppercase mb-4 px-3 py-1 rounded-full"
+            style={{
+              color: '#34d399',
+              background: 'rgba(16,185,129,0.08)',
+              border: '1px solid rgba(16,185,129,0.2)',
+              fontFamily: "'Fira Code', monospace",
+            }}
+          >
+            Toolkit
+          </span>
+          <h2
+            className="text-4xl md:text-5xl font-bold text-white mb-4"
+            style={{ letterSpacing: '-0.02em' }}
+          >
+            Skills &{' '}
+            <span
+              style={{
+                background: 'linear-gradient(135deg,#60a5fa,#34d399)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+              }}
+            >
+              Tech Stack
+            </span>
+          </h2>
+          <p className="text-slate-400 text-lg max-w-xl mx-auto">
+            The technologies I use to build fast, scalable fullstack applications.
+          </p>
+        </motion.div>
 
-            <div className={`container mx-auto ${isMobile ? 'px-4' : 'px-6'} relative z-10`}>
-                {/* Section Header */}
+        {/* Staggered grid */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-4">
+          {skillsData.map((tech: Technology, i: number) => (
+            <motion.div
+              key={tech.name}
+              initial={{ opacity: 0, y: 30, scale: 0.9 }}
+              animate={inView ? { opacity: 1, y: 0, scale: 1 } : {}}
+              transition={{
+                duration: prefersReducedMotion ? 0.1 : 0.4,
+                delay: prefersReducedMotion ? 0 : i * 0.04,
+                ease: [0.25, 0.46, 0.45, 0.94],
+              }}
+              whileHover={
+                !prefersReducedMotion
+                  ? { y: -8, scale: 1.08, transition: { duration: 0.2 } }
+                  : {}
+              }
+              className="group cursor-default"
+            >
+              <div
+                className="relative rounded-2xl p-5 text-center overflow-hidden h-full flex flex-col items-center justify-center gap-3"
+                style={{
+                  background: 'rgba(255,255,255,0.03)',
+                  border: '1px solid rgba(255,255,255,0.07)',
+                  transition: 'border-color 0.25s, background 0.25s, box-shadow 0.25s',
+                }}
+                onMouseEnter={(e) => {
+                  (e.currentTarget as HTMLDivElement).style.borderColor = 'rgba(59,130,246,0.35)';
+                  (e.currentTarget as HTMLDivElement).style.background = 'rgba(59,130,246,0.06)';
+                  (e.currentTarget as HTMLDivElement).style.boxShadow = '0 8px 32px rgba(59,130,246,0.12)';
+                }}
+                onMouseLeave={(e) => {
+                  (e.currentTarget as HTMLDivElement).style.borderColor = 'rgba(255,255,255,0.07)';
+                  (e.currentTarget as HTMLDivElement).style.background = 'rgba(255,255,255,0.03)';
+                  (e.currentTarget as HTMLDivElement).style.boxShadow = 'none';
+                }}
+              >
+                {/* Shimmer on hover */}
                 <div
-                    className={`text-center ${isMobile ? 'mb-8' : 'mb-16'}`}
+                  className="absolute inset-0 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-300"
+                  style={{
+                    background:
+                      'linear-gradient(135deg, rgba(255,255,255,0.04) 0%, transparent 50%)',
+                  }}
+                />
+
+                {/* Icon */}
+                <div className="w-12 h-12 flex items-center justify-center">
+                  <img
+                    src={tech.icon}
+                    alt={`${tech.name} logo`}
+                    className="w-10 h-10 object-contain"
                     style={{
-                        opacity: inView ? 1 : 0,
-                        transform: inView ? 'translate3d(0, 0, 0)' : 'translate3d(0, -15px, 0)',
-                        transition: `opacity 0.4s ${lightEasing}, transform 0.4s ${lightEasing}`,
-                        willChange: inView ? 'auto' : 'opacity, transform'
+                      transition: 'transform 0.3s ease',
+                      filter: 'drop-shadow(0 2px 8px rgba(0,0,0,0.3))',
                     }}
+                    loading="lazy"
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).style.display = 'none';
+                    }}
+                  />
+                </div>
+
+                {/* Name */}
+                <span
+                  className="text-slate-300 text-xs font-semibold group-hover:text-white transition-colors leading-tight text-center"
+                  style={{ fontFamily: "'Space Grotesk', sans-serif" }}
                 >
-                    <h2 
-                        className={`${isMobile ? 'text-4xl' : 'text-6xl'} font-extrabold mb-4 tracking-tight`}
-                        style={{
-                            background: 'linear-gradient(135deg, #60a5fa 0%, #34d399 50%, #a78bfa 100%)',
-                            backgroundSize: '200% auto',
-                            WebkitBackgroundClip: 'text',
-                            WebkitTextFillColor: 'transparent',
-                            backgroundClip: 'text',
-                            animation: 'gradient-shift 4s ease infinite'
-                        }}
-                    >
-                        Skills & Tech Stack
-                    </h2>
-                    <p className={`${isMobile ? 'text-lg' : 'text-xl'} text-slate-400 max-w-2xl mx-auto font-light`}>
-                        Java development expertise with modern technologies and frameworks
-                    </p>
-                </div>
+                  {tech.name}
+                </span>
+              </div>
+            </motion.div>
+          ))}
+        </div>
 
-                {/* Technology Grid - Clean Logo Display */}
-                <div className={`grid ${isMobile ? 'grid-cols-2 gap-4' : 'grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-6'} max-w-6xl mx-auto`}>
-                    {skillsData.map((technology: Technology, index: number) => (
-                        <div
-                            key={technology.name}
-                            className="group cursor-pointer"
-                            style={{
-                                opacity: inView ? 1 : 0,
-                                transform: inView ? 'translate3d(0, 0, 0)' : 'translate3d(0, 20px, 0)',
-                                transition: `opacity 0.3s ${lightEasing} ${index * 0.03}s, transform 0.3s ${lightEasing} ${index * 0.03}s`, // Reduced stagger
-                                willChange: inView ? 'auto' : 'opacity, transform'
-                            }}
-                        >
-                            <div 
-                                className={`bg-slate-800/50 backdrop-blur-sm rounded-xl ${isMobile ? 'p-4' : 'p-6'} border border-slate-700/50 hover:border-blue-400/50 text-center`}
-                                style={{
-                                    transition: `all 0.3s ${lightEasing}`,
-                                    transform: 'translateZ(0)' // GPU acceleration
-                                }}
-                            >
-                                {/* Technology Icon */}
-                                <div
-                                    className={`flex items-center justify-center ${isMobile ? 'w-12 h-12' : 'w-16 h-16'} mx-auto ${isMobile ? 'mb-3' : 'mb-4'}`}
-                                >
-                                    <img 
-                                        src={technology.icon} 
-                                        alt={`${technology.name} logo`}
-                                        className={`${isMobile ? 'w-10 h-10' : 'w-12 h-12'} object-contain group-hover:scale-110`}
-                                        style={{ 
-                                            transition: `transform 0.3s ${lightEasing}`,
-                                            transform: 'translateZ(0)'
-                                        }}
-                                        loading="lazy"
-                                    />
-                                </div>
-
-                                {/* Technology Name */}
-                                <h4 
-                                    className={`${isMobile ? 'text-sm' : 'text-base'} font-semibold text-white group-hover:text-blue-400`}
-                                    style={{ transition: `color 0.2s ${lightEasing}` }}
-                                >
-                                    {technology.name}
-                                </h4>
-                            </div>
-                        </div>
-                    ))}
-                </div>
-            </div>
-        </section>
-    );
+        {/* Bottom fade-in note */}
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={inView ? { opacity: 1 } : {}}
+          transition={{ duration: 0.6, delay: skillsData.length * 0.04 + 0.2 }}
+          className="text-center text-slate-600 text-sm mt-12"
+          style={{ fontFamily: "'Fira Code', monospace" }}
+        >
+          +{' '}
+          <span className="text-slate-500">
+            Maven · Gradle · IntelliJ · Postman · Linux
+          </span>{' '}
+          & more
+        </motion.p>
+      </div>
+    </section>
+  );
 };
 
 export default Skills;

@@ -2,7 +2,7 @@ import type { WorkExperience } from '../types/types';
 
 export const experienceData: WorkExperience[] = [
   {
-    company: "Techforce InfoTech PVT LTD",
+    company: "Techforce Global",
     position: "Associate Software Developer",
     duration: "August 2024 - Present",
     description: "Building scalable Spring Boot applications and modern React interfaces. Working with cross-functional teams to deliver high-quality software solutions and exploring CI/CD and AWS technologies.",

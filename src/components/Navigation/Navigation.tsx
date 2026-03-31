@@ -3,309 +3,190 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { HiMenu, HiX } from 'react-icons/hi';
 import { useResponsive, useReducedMotion } from '../../hooks/useResponsive';
 import { useSwipeGesture } from '../../hooks/useSwipeGesture';
+import { personal } from '../../data/personalData';
 
-interface NavigationProps {
-  className?: string;
-}
-
-const navigationItems = [
-  { id: 'hero', label: 'Home', href: '#hero' },
-  { id: 'about', label: 'About', href: '#about' },
-  { id: 'java-expertise', label: 'Java Skills', href: '#java-expertise' },
-  { id: 'skills', label: 'Skills', href: '#skills' },
-  { id: 'experience', label: 'Experience', href: '#experience' },
-  { id: 'projects', label: 'Projects', href: '#projects' },
-  { id: 'blog', label: 'Blog', href: '#blog' },
-  { id: 'contact', label: 'Contact', href: '#contact' },
+const navItems = [
+  { id: 'hero',          label: 'Home' },
+  { id: 'about',         label: 'About' },
+  { id: 'java-expertise',label: 'Java' },
+  { id: 'skills',        label: 'Skills' },
+  { id: 'experience',    label: 'Experience' },
+  { id: 'projects',      label: 'Projects' },
+  { id: 'blog',          label: 'Blog' },
+  { id: 'contact',       label: 'Contact' },
 ];
 
-// Smooth easing curve - using string format for framer-motion
-const smoothEasing = "easeOut";
+const scrollTo = (id: string) => {
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+};
 
-const Navigation: React.FC<NavigationProps> = ({ className = '' }) => {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [activeSection, setActiveSection] = useState('hero');
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isReady, setIsReady] = useState(false);
+const Navigation = ({ className = '' }: { className?: string }) => {
+  const [isScrolled,        setIsScrolled]        = useState(false);
+  const [activeSection,     setActiveSection]      = useState('hero');
+  const [isMobileMenuOpen,  setIsMobileMenuOpen]   = useState(false);
+  const [isReady,           setIsReady]            = useState(false);
   const { isMobile, isTablet, isTouchDevice } = useResponsive();
   const prefersReducedMotion = useReducedMotion();
   const mobileMenuRef = useRef<HTMLDivElement>(null);
+  const isSmall = isMobile || isTablet;
 
-  // Delay initial animation to prevent jank
   useEffect(() => {
-    const timer = setTimeout(() => setIsReady(true), 200);
-    return () => clearTimeout(timer);
+    const t = setTimeout(() => setIsReady(true), 150);
+    return () => clearTimeout(t);
   }, []);
 
-  // Swipe gesture for closing mobile menu
   const { attachSwipeListeners } = useSwipeGesture({
-    onSwipeRight: () => {
-      if (isMobileMenuOpen) {
-        setIsMobileMenuOpen(false);
-      }
-    },
-    threshold: 100
+    onSwipeRight: () => isMobileMenuOpen && setIsMobileMenuOpen(false),
+    threshold: 80,
   });
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-      
-      // Update active section based on scroll position
-      const sections = navigationItems.map(item => document.getElementById(item.id)).filter(Boolean);
-      const scrollPosition = window.scrollY + 100; // Offset for better detection
-      
-      for (let i = sections.length - 1; i >= 0; i--) {
-        const section = sections[i];
-        if (section && section.offsetTop <= scrollPosition) {
-          setActiveSection(navigationItems[i].id);
-          break;
-        }
-      }
-    };
-
-    const handleSectionChange = (event: CustomEvent) => {
-      setActiveSection(event.detail.sectionId);
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    window.addEventListener('sectionChange', handleSectionChange as EventListener);
-    
-    // Initial check
-    handleScroll();
-    
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('sectionChange', handleSectionChange as EventListener);
-    };
-  }, []);
-
-  // Attach swipe listeners to mobile menu
   useEffect(() => {
     if (mobileMenuRef.current && isTouchDevice) {
       return attachSwipeListeners(mobileMenuRef.current);
     }
   }, [attachSwipeListeners, isTouchDevice, isMobileMenuOpen]);
 
-  const handleNavigation = (item: typeof navigationItems[0]) => {
-    const element = document.getElementById(item.id);
-    if (element) {
-      element.scrollIntoView({ 
-        behavior: 'smooth',
-        block: 'start'
-      });
-      setActiveSection(item.id);
-      setIsMobileMenuOpen(false);
-      
-      // Dispatch custom event for section change
-      const event = new CustomEvent('sectionChange', {
-        detail: { sectionId: item.id }
-      });
-      window.dispatchEvent(event);
-    }
-  };
+  // Scroll-based active section
+  useEffect(() => {
+    const onScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+      const scrollY = window.scrollY + window.innerHeight * 0.35;
+      let active = 'hero';
+      for (const item of navItems) {
+        const el = document.getElementById(item.id);
+        if (el && el.offsetTop <= scrollY) active = item.id;
+      }
+      setActiveSection(active);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   if (!isReady) return null;
 
   return (
     <>
-      {/* Desktop Navigation */}
-      <motion.nav
-        initial={{ y: -100, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ 
-          duration: prefersReducedMotion ? 0.1 : 0.6, 
-          ease: smoothEasing
-        }}
-        className={`fixed top-4 left-1/2 transform -translate-x-1/2 z-50 ${className} ${
-          isMobile || isTablet ? 'hidden' : 'block'
-        }`}
-        style={{ willChange: 'transform, opacity' }}
-      >
-        <motion.div
-          animate={{
-            backgroundColor: isScrolled 
-              ? 'rgba(15, 23, 42, 0.9)' 
-              : 'rgba(15, 23, 42, 0.7)',
-            backdropFilter: 'blur(16px)',
-          }}
-          transition={{ duration: prefersReducedMotion ? 0.1 : 0.4, ease: smoothEasing }}
-          className="px-6 py-3 rounded-full border border-slate-700/50 shadow-2xl"
+      {/* ── Desktop pill nav ── */}
+      {!isSmall && (
+        <motion.nav
+          initial={{ y: -80, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: prefersReducedMotion ? 0.1 : 0.5, ease: 'easeOut' }}
+          className={`fixed top-4 left-1/2 -translate-x-1/2 z-50 ${className}`}
         >
-          <ul className="flex items-center space-x-6 lg:space-x-8">
-            {navigationItems.map((item, index) => (
-              <motion.li
+          <div
+            className="flex items-center gap-1 px-4 py-2 rounded-full"
+            style={{
+              background: isScrolled ? 'rgba(10,15,30,0.92)' : 'rgba(10,15,30,0.75)',
+              backdropFilter: 'blur(20px)',
+              border: '1px solid rgba(255,255,255,0.08)',
+              boxShadow: isScrolled ? '0 8px 32px rgba(0,0,0,0.4)' : '0 4px 16px rgba(0,0,0,0.2)',
+              transition: 'background 0.3s, box-shadow 0.3s',
+            }}
+          >
+            {/* Logo removed as requested */}
+
+            {navItems.map((item) => (
+              <motion.button
                 key={item.id}
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ 
-                  delay: prefersReducedMotion ? 0 : index * 0.08, 
-                  duration: prefersReducedMotion ? 0.1 : 0.5,
-                  ease: smoothEasing
-                }}
+                onClick={() => scrollTo(item.id)}
+                className="relative px-3 py-1.5 rounded-full text-sm font-medium transition-colors"
+                style={{ color: activeSection === item.id ? '#fff' : 'rgba(148,163,184,0.9)' }}
+                whileHover={!prefersReducedMotion ? { scale: 1.05 } : {}}
+                whileTap={{ scale: 0.95 }}
               >
-                <button
-                  onClick={() => handleNavigation(item)}
-                  className="relative group touch-manipulation"
-                >
-                  <motion.span
-                    className={`text-sm lg:text-base font-medium transition-colors duration-300 ${
-                      activeSection === item.id
-                        ? 'text-blue-400'
-                        : 'text-slate-300 hover:text-white'
-                    }`}
-                    whileHover={!prefersReducedMotion ? { scale: 1.05 } : {}}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    {item.label}
-                  </motion.span>
-                  
-                  {/* Hover glow effect - disabled on touch devices */}
-                  {!isTouchDevice && (
-                    <motion.div
-                      className="absolute -inset-2 bg-blue-500/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-sm"
-                      initial={false}
-                      animate={{ scale: activeSection === item.id ? 1 : 0 }}
-                    />
-                  )}
-                  
-                  {/* Active indicator */}
-                  {activeSection === item.id && (
-                    <motion.div
-                      layoutId="activeIndicator"
-                      className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-blue-400 rounded-full"
-                      transition={{ 
-                        type: 'spring', 
-                        stiffness: 300, 
-                        damping: 30,
-                        duration: prefersReducedMotion ? 0.1 : undefined
-                      }}
-                    />
-                  )}
-                </button>
-              </motion.li>
+                {activeSection === item.id && (
+                  <motion.div
+                    layoutId="navPill"
+                    className="absolute inset-0 rounded-full"
+                    style={{ background: 'rgba(59,130,246,0.2)', border: '1px solid rgba(59,130,246,0.35)' }}
+                    transition={{ type: 'spring', stiffness: 400, damping: 35 }}
+                  />
+                )}
+                <span className="relative z-10">{item.label}</span>
+              </motion.button>
             ))}
-          </ul>
-        </motion.div>
-      </motion.nav>
+          </div>
+        </motion.nav>
+      )}
 
-      {/* Mobile Navigation Button */}
-      <motion.button
-        initial={{ opacity: 0, scale: 0 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ 
-          delay: prefersReducedMotion ? 0 : 0.3, 
-          duration: prefersReducedMotion ? 0.1 : 0.5,
-          ease: smoothEasing
-        }}
-        onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-        className={`fixed top-4 right-4 z-50 p-4 rounded-full bg-slate-900/90 backdrop-blur-md border border-slate-700/50 shadow-lg touch-manipulation ${
-          isMobile || isTablet ? 'block' : 'hidden'
-        }`}
-        whileHover={!prefersReducedMotion && !isTouchDevice ? { scale: 1.1 } : {}}
-        whileTap={{ scale: 0.9 }}
-        style={{ minHeight: '56px', minWidth: '56px' }} // Touch-friendly size
-      >
-        <motion.div
-          animate={{ rotate: isMobileMenuOpen ? 180 : 0 }}
-          transition={{ duration: prefersReducedMotion ? 0.1 : 0.4, ease: smoothEasing }}
+      {/* ── Mobile hamburger ── */}
+      {isSmall && (
+        <motion.button
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.2, duration: prefersReducedMotion ? 0.1 : 0.3 }}
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          className="fixed top-4 right-4 z-50 flex items-center justify-center rounded-full touch-manipulation"
+          style={{
+            width: 52, height: 52,
+            background: 'rgba(10,15,30,0.92)',
+            backdropFilter: 'blur(16px)',
+            border: '1px solid rgba(255,255,255,0.1)',
+            boxShadow: '0 4px 24px rgba(0,0,0,0.4)',
+          }}
+          whileTap={{ scale: 0.9 }}
         >
-          {isMobileMenuOpen ? (
-            <HiX className="w-6 h-6 text-white" />
-          ) : (
-            <HiMenu className="w-6 h-6 text-white" />
-          )}
-        </motion.div>
-      </motion.button>
+          <motion.div animate={{ rotate: isMobileMenuOpen ? 180 : 0 }} transition={{ duration: 0.25 }}>
+            {isMobileMenuOpen ? <HiX className="w-5 h-5 text-white" /> : <HiMenu className="w-5 h-5 text-white" />}
+          </motion.div>
+        </motion.button>
+      )}
 
-      {/* Mobile Menu */}
+      {/* ── Mobile menu drawer ── */}
       <AnimatePresence>
-        {isMobileMenuOpen && (isMobile || isTablet) && (
+        {isMobileMenuOpen && isSmall && (
           <>
-            {/* Backdrop */}
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3, ease: smoothEasing }}
+              initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
               onClick={() => setIsMobileMenuOpen(false)}
-              className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40"
+              className="fixed inset-0 bg-black/70 backdrop-blur-sm z-40"
             />
-            
-            {/* Menu */}
             <motion.div
               ref={mobileMenuRef}
-              initial={{ x: '100%', opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              exit={{ x: '100%', opacity: 0 }}
-              transition={{ 
-                type: prefersReducedMotion ? 'tween' : 'spring', 
-                stiffness: 300, 
-                damping: 30,
-                duration: prefersReducedMotion ? 0.2 : undefined
-              }}
-              className={`fixed top-0 right-0 h-full bg-slate-900/95 backdrop-blur-md border-l border-slate-700/50 z-50 ${
-                isMobile ? 'w-full' : 'w-80'
-              }`}
+              initial={{ x: '100%' }} animate={{ x: 0 }} exit={{ x: '100%' }}
+              transition={{ type: 'spring', stiffness: 320, damping: 35 }}
+              className="fixed top-0 right-0 h-full w-72 z-50 flex flex-col"
+              style={{ background: 'rgba(8,12,24,0.97)', backdropFilter: 'blur(24px)', borderLeft: '1px solid rgba(255,255,255,0.07)' }}
             >
-              <div className="pt-20 px-6 h-full overflow-y-auto">
-                <ul className="space-y-4">
-                  {navigationItems.map((item, index) => (
-                    <motion.li
-                      key={item.id}
-                      initial={{ x: 50, opacity: 0 }}
-                      animate={{ x: 0, opacity: 1 }}
-                      transition={{ 
-                        delay: prefersReducedMotion ? 0 : index * 0.08, 
-                        duration: prefersReducedMotion ? 0.1 : 0.5,
-                        ease: smoothEasing
-                      }}
+              {/* Header */}
+              <div className="flex items-center justify-between px-6 pt-6 pb-4 border-b border-white/[0.06]">
+                <span className="text-white font-bold" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>{personal.name}</span>
+                <button onClick={() => setIsMobileMenuOpen(false)} className="p-1.5 rounded-lg text-slate-400 hover:text-white" style={{ background: 'rgba(255,255,255,0.05)' }}>
+                  <HiX className="w-5 h-5" />
+                </button>
+              </div>
+
+              {/* Nav items */}
+              <nav className="flex-1 overflow-y-auto px-4 py-4">
+                <ul className="space-y-1">
+                  {navItems.map((item, i) => (
+                    <motion.li key={item.id}
+                      initial={{ opacity: 0, x: 20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: i * 0.04, duration: 0.3 }}
                     >
                       <button
-                        onClick={() => handleNavigation(item)}
-                        className="block w-full text-left group touch-manipulation"
-                        style={{ minHeight: '60px' }} // Touch-friendly height
+                        onClick={() => { scrollTo(item.id); setIsMobileMenuOpen(false); }}
+                        className="w-full text-left px-4 py-3 rounded-xl font-medium transition-all"
+                        style={{
+                          color: activeSection === item.id ? '#60a5fa' : 'rgba(148,163,184,0.9)',
+                          background: activeSection === item.id ? 'rgba(59,130,246,0.1)' : 'transparent',
+                          border: `1px solid ${activeSection === item.id ? 'rgba(59,130,246,0.2)' : 'transparent'}`,
+                          fontSize: '0.95rem',
+                        }}
                       >
-                        <motion.div
-                          className={`p-4 rounded-xl transition-all duration-300 ${
-                            activeSection === item.id
-                              ? 'bg-blue-500/20 text-blue-400 border border-blue-500/30'
-                              : 'text-slate-300 hover:bg-slate-800/50 hover:text-white border border-transparent'
-                          }`}
-                          whileHover={!prefersReducedMotion ? { x: 10, scale: 1.02 } : {}}
-                          whileTap={{ scale: 0.98 }}
-                        >
-                          <span className="text-xl font-medium">{item.label}</span>
-                          {activeSection === item.id && (
-                            <motion.div
-                              initial={{ width: 0 }}
-                              animate={{ width: '100%' }}
-                              transition={{ 
-                                duration: prefersReducedMotion ? 0.1 : 0.5,
-                                ease: smoothEasing
-                              }}
-                              className="h-0.5 bg-blue-400 mt-3 rounded-full"
-                            />
-                          )}
-                        </motion.div>
+                        {item.label}
                       </button>
                     </motion.li>
                   ))}
                 </ul>
+              </nav>
 
-                {/* Mobile Menu Footer */}
-                <div className="mt-8 pt-8 border-t border-slate-700/50">
-                  <div className="flex items-center justify-center space-x-2 text-slate-400 text-sm">
-                    <motion.div
-                      animate={{ x: [0, 10, 0] }}
-                      transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                      className="text-lg"
-                    >
-                      👉
-                    </motion.div>
-                    <p>Swipe right to close menu</p>
-                  </div>
-                </div>
+              <div className="px-6 py-4 border-t border-white/[0.06]">
+                <p className="text-slate-600 text-xs text-center" style={{ fontFamily: "'Fira Code', monospace" }}>Swipe right to close</p>
               </div>
             </motion.div>
           </>

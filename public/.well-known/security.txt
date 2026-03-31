@@ -1,0 +1,4 @@
+Contact: mailto:security@johndeveloper.dev
+Expires: 2027-03-27T11:10:42.859Z
+Preferred-Languages: en
+Canonical: https://vivekparmar.is-a.dev/.well-known/security.txt
