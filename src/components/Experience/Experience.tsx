@@ -7,8 +7,8 @@ const Experience = () => {
   const [ref, inView] = useInView({ threshold: 0.05, triggerOnce: true });
 
   return (
-    <section id="experience" className="py-28 bg-slate-950 relative overflow-hidden" ref={ref}>
-      <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse 50% 60% at 80% 50%, rgba(16,185,129,0.05) 0%, transparent 65%)' }} />
+    <section id="experience" className="py-32 relative overflow-hidden" ref={ref}>
+      <div className="glow-mesh" />
 
       <div className="max-w-5xl mx-auto px-6 relative z-10">
         {/* Heading */}
@@ -17,69 +17,69 @@ const Experience = () => {
             style={{ color: '#34d399', background: 'rgba(16,185,129,0.08)', border: '1px solid rgba(16,185,129,0.2)', fontFamily: "'Fira Code', monospace" }}>
             Career
           </span>
-          <h2 className="text-4xl md:text-5xl font-bold text-white" style={{ letterSpacing: '-0.02em' }}>
-            Work <span style={{ background: 'linear-gradient(135deg,#34d399,#60a5fa)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>Experience</span>
+          <h2 className="text-4xl md:text-6xl font-extrabold text-white" style={{ letterSpacing: '-0.04em' }}>
+            Work <span className="premium-gradient-text">Experience</span>
           </h2>
         </motion.div>
 
         {/* Timeline */}
         <div className="relative">
           {/* Vertical line */}
-          <div className="absolute left-8 top-0 bottom-0 w-px hidden md:block" style={{ background: 'linear-gradient(to bottom, rgba(59,130,246,0.4), rgba(16,185,129,0.4), transparent)' }} />
+          <div className="absolute left-8 top-0 bottom-0 w-px hidden md:block" aria-hidden="true" style={{ background: 'linear-gradient(to bottom, rgba(59,130,246,0.4), rgba(16,185,129,0.4), transparent)' }} />
 
-          <div className="space-y-8">
+          <div className="space-y-12" role="list" aria-label="Professional career timeline">
             {experienceData.map((exp, index) => (
               <motion.div
-                key={index}
+                key={`${exp.company}-${exp.position}`}
                 initial={{ opacity: 0, x: -40 }}
                 animate={inView ? { opacity: 1, x: 0 } : {}}
                 transition={{ duration: 0.55, delay: index * 0.15 }}
-                className="relative md:pl-20"
+                className="relative md:pl-24"
+                role="listitem"
               >
                 {/* Timeline dot */}
-                <div className="absolute left-6 top-8 w-5 h-5 rounded-full hidden md:flex items-center justify-center"
-                  style={{ background: index === 0 ? '#3B82F6' : '#10B981', boxShadow: `0 0 12px ${index === 0 ? 'rgba(59,130,246,0.5)' : 'rgba(16,185,129,0.5)'}` }}>
-                  <FiBriefcase size={10} className="text-white" />
+                <div className="absolute left-6 top-8 w-6 h-6 rounded-xl hidden md:flex items-center justify-center rotate-45 border border-white/10"
+                  aria-hidden="true"
+                  style={{ background: index === 0 ? 'var(--accent-primary)' : 'rgba(255,255,255,0.05)', boxShadow: index === 0 ? '0 0 20px rgba(59,130,246,0.3)' : 'none' }}>
+                  <FiBriefcase size={12} className="text-white -rotate-45" />
                 </div>
 
-                <motion.div
-                  className="p-6 md:p-8 rounded-2xl relative overflow-hidden group"
-                  style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.07)' }}
-                  whileHover={{ background: 'rgba(255,255,255,0.05)', borderColor: index === 0 ? 'rgba(59,130,246,0.25)' : 'rgba(16,185,129,0.25)', transition: { duration: 0.2 } }}
+                <motion.article
+                  className="glass-card p-8 md:p-12 relative overflow-hidden group border-white/5 hover:border-white/10 transition-all duration-500"
+                  whileHover={{ y: -8, boxShadow: '0 30px 60px rgba(0,0,0,0.5)' }}
+                  aria-labelledby={`exp-title-${index}`}
                 >
-                  <div className="absolute top-0 left-0 w-full h-0.5" style={{ background: `linear-gradient(90deg, ${index === 0 ? '#3B82F6' : '#10B981'}60, transparent)` }} />
+                  <div className="absolute top-0 left-0 w-full h-1" aria-hidden="true" style={{ background: index === 0 ? 'linear-gradient(90deg, var(--accent-primary), transparent)' : 'rgba(255,255,255,0.05)' }} />
 
-                  <div className="flex flex-wrap items-start justify-between gap-4 mb-5">
+                  <div className="flex flex-wrap items-end justify-between gap-6 mb-8">
                     <div>
-                      <h3 className="text-xl font-bold text-white mb-1">{exp.position}</h3>
-                      <p className="font-medium" style={{ color: index === 0 ? '#60a5fa' : '#34d399' }}>{exp.company}</p>
+                      <h3 id={`exp-title-${index}`} className="text-2xl font-bold text-white mb-2" style={{ fontFamily: 'var(--font-display)' }}>{exp.position}</h3>
+                      <p className="text-lg font-medium opacity-80" style={{ color: index === 0 ? 'var(--accent-primary)' : 'inherit' }}>{exp.company}</p>
                     </div>
-                    <span className="text-xs px-3 py-1.5 rounded-full text-slate-400 flex items-center gap-1.5"
-                      style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)', fontFamily: "'Fira Code', monospace", whiteSpace: 'nowrap' }}>
-                      <FiBriefcase size={11} />{exp.duration}
-                    </span>
+                    <div className="text-[11px] font-bold uppercase tracking-[0.2em] px-4 py-2 rounded-lg bg-white/5 border border-white/5 opacity-60" aria-label="Employment duration">
+                      {exp.duration}
+                    </div>
                   </div>
 
-                  <p className="text-slate-400 leading-relaxed mb-6">{exp.description}</p>
+                  <p className="text-slate-400 leading-relaxed mb-8 text-lg font-light">{exp.description}</p>
 
-                  <div className="grid md:grid-cols-2 gap-2 mb-6">
+                  <div className="grid md:grid-cols-2 gap-4 mb-10" aria-label="Key Achievements">
                     {exp.achievements.map((a, i) => (
-                      <div key={i} className="flex items-start gap-2 text-sm text-slate-300">
-                        <span className="mt-0.5 flex-shrink-0 font-bold" style={{ color: index === 0 ? '#60a5fa' : '#34d399' }}>✓</span>
-                        <span>{a}</span>
+                      <div key={i} className="flex items-start gap-3 text-sm text-slate-300">
+                        <span className="mt-1.5 w-1.5 h-1.5 rounded-full flex-shrink-0" aria-hidden="true" style={{ background: index === 0 ? 'var(--accent-primary)' : 'rgba(255,255,255,0.3)' }} />
+                        <span className="leading-relaxed">{a}</span>
                       </div>
                     ))}
                   </div>
 
-                  <div className="flex flex-wrap gap-2">
-                    {experienceData[index].technologies.map((tech) => (
-                      <span key={tech} className="px-2.5 py-1 rounded-md text-xs font-medium"
-                        style={{ color: index === 0 ? '#93c5fd' : '#6ee7b7', background: index === 0 ? 'rgba(59,130,246,0.08)' : 'rgba(16,185,129,0.08)', border: `1px solid ${index === 0 ? 'rgba(59,130,246,0.15)' : 'rgba(16,185,129,0.15)'}`, fontFamily: "'Fira Code', monospace" }}>
+                  <div className="flex flex-wrap gap-2 pt-6 border-t border-white/5" aria-label="Technologies used">
+                    {exp.technologies.map((tech) => (
+                      <span key={tech} className="px-3 py-1.5 rounded-lg text-[10px] font-bold uppercase tracking-wider bg-white/5 border border-white/5 text-slate-400 hover:text-white transition-colors">
                         {tech}
                       </span>
                     ))}
                   </div>
-                </motion.div>
+                </motion.article>
               </motion.div>
             ))}
           </div>

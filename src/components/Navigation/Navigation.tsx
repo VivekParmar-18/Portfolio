@@ -7,13 +7,13 @@ import { personal } from '../../data/personalData';
 
 const navItems = [
   { id: 'hero',          label: 'Home' },
-  { id: 'about',         label: 'About' },
-  { id: 'java-expertise',label: 'Java' },
-  { id: 'skills',        label: 'Skills' },
-  { id: 'experience',    label: 'Experience' },
-  { id: 'projects',      label: 'Projects' },
-  { id: 'blog',          label: 'Blog' },
-  { id: 'contact',       label: 'Contact' },
+  { id: 'about',         label: 'The Journey' },
+  { id: 'java-expertise',label: 'Java Specialist' },
+  { id: 'skills',        label: 'Engineering Tech' },
+  { id: 'experience',    label: 'Career Growth' },
+  { id: 'projects',      label: 'Build Archive' },
+  { id: 'blog',          label: 'Reflections' },
+  { id: 'contact',       label: 'Connect' },
 ];
 
 const scrollTo = (id: string) => {
@@ -68,6 +68,15 @@ const Navigation = ({ className = '' }: { className?: string }) => {
 
   return (
     <>
+      {/* ── Skip to content for Accessibility ── */}
+      <a 
+        href="#hero" 
+        className="sr-only focus:not-sr-only focus:fixed focus:top-6 focus:left-6 focus:z-[100] focus:px-6 focus:py-3 focus:bg-blue-600 focus:text-white focus:rounded-xl focus:font-bold focus:shadow-2xl focus:shadow-blue-500/50 transition-all outline-none"
+        onClick={(e) => { e.preventDefault(); scrollTo('hero'); }}
+      >
+        Skip to Content
+      </a>
+
       {/* ── Desktop pill nav ── */}
       {!isSmall && (
         <motion.nav
@@ -92,6 +101,7 @@ const Navigation = ({ className = '' }: { className?: string }) => {
               <motion.button
                 key={item.id}
                 onClick={() => scrollTo(item.id)}
+                aria-label={`Scroll to ${item.label}`}
                 className="relative px-3 py-1.5 rounded-full text-sm font-medium transition-colors"
                 style={{ color: activeSection === item.id ? '#fff' : 'rgba(148,163,184,0.9)' }}
                 whileHover={!prefersReducedMotion ? { scale: 1.05 } : {}}
@@ -119,6 +129,7 @@ const Navigation = ({ className = '' }: { className?: string }) => {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.2, duration: prefersReducedMotion ? 0.1 : 0.3 }}
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          aria-label={isMobileMenuOpen ? "Close Menu" : "Open Menu"}
           className="fixed top-4 right-4 z-50 flex items-center justify-center rounded-full touch-manipulation"
           style={{
             width: 52, height: 52,
@@ -154,13 +165,18 @@ const Navigation = ({ className = '' }: { className?: string }) => {
               {/* Header */}
               <div className="flex items-center justify-between px-6 pt-6 pb-4 border-b border-white/[0.06]">
                 <span className="text-white font-bold" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>{personal.name}</span>
-                <button onClick={() => setIsMobileMenuOpen(false)} className="p-1.5 rounded-lg text-slate-400 hover:text-white" style={{ background: 'rgba(255,255,255,0.05)' }}>
-                  <HiX className="w-5 h-5" />
+                <button 
+                  onClick={() => setIsMobileMenuOpen(false)} 
+                  className="p-1.5 rounded-lg text-slate-400 hover:text-white" 
+                  aria-label="Close mobile menu"
+                  style={{ background: 'rgba(255,255,255,0.05)' }}
+                >
+                  <HiX className="w-5 h-5" aria-hidden="true" />
                 </button>
               </div>
 
               {/* Nav items */}
-              <nav className="flex-1 overflow-y-auto px-4 py-4">
+              <nav className="flex-1 overflow-y-auto px-4 py-4" aria-label="Mobile navigation links">
                 <ul className="space-y-1">
                   {navItems.map((item, i) => (
                     <motion.li key={item.id}
@@ -171,6 +187,7 @@ const Navigation = ({ className = '' }: { className?: string }) => {
                       <button
                         onClick={() => { scrollTo(item.id); setIsMobileMenuOpen(false); }}
                         className="w-full text-left px-4 py-3 rounded-xl font-medium transition-all"
+                        aria-label={`Navigate to ${item.label}`}
                         style={{
                           color: activeSection === item.id ? '#60a5fa' : 'rgba(148,163,184,0.9)',
                           background: activeSection === item.id ? 'rgba(59,130,246,0.1)' : 'transparent',

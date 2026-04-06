@@ -11,30 +11,30 @@ export interface Statistic {
 export const statisticsData: Statistic[] = [
   {
     id: 'experience',
-    label: 'Years of Experience',
+    label: 'Engineering Journey',
     value: 2,
-    suffix: '+',
-    icon: '💼'
+    suffix: '+ yrs',
+    icon: '🏗️'
   },
   {
     id: 'projects',
-    label: 'Projects Completed',
+    label: 'Architecture Success',
     value: 15,
-    suffix: '+',
-    icon: '🚀'
+    suffix: '+ systems',
+    icon: '🔮'
   },
   {
     id: 'technologies',
-    label: 'Technologies Mastered',
+    label: 'Innovation Stack',
     value: 12,
-    suffix: '+',
-    icon: '⚡'
+    suffix: '+ tools',
+    icon: '🧩'
   },
   {
     id: 'satisfaction',
-    label: 'Client Satisfaction',
-    value: 98,
+    label: 'Performance Index',
+    value: 99,
     suffix: '%',
-    icon: '⭐'
+    icon: '💎'
   }
 ];

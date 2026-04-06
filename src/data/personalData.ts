@@ -6,7 +6,7 @@
 export const personal = {
   name: "Vivek Parmar",
   firstName: "Vivek",
-  title: "Associate Software Developer",
+  title: "Software Engineer - L1",
   company: "Techforce Global",
   yearsOfExperience: 2,
   location: "Ahmedabad, India",
@@ -15,7 +15,7 @@ export const personal = {
   phone: "+91 8401278136",
   github: "https://github.com/VivekParmar-18",
   linkedin: "https://linkedin.com/in/vivek1812",
-  domain: "https://vivekparmar.is-a.dev",
+  domain: (import.meta.env.VITE_SITE_URL || "https://vivekparmar.is-a.dev").replace(/\/$/, ""),
   resumeUrl: "/Vivek_Parmar_Full_Stack_SDE.pdf",
   profileImage: "/profile-photo.jpg",
   ogImage: "/og-image.png",

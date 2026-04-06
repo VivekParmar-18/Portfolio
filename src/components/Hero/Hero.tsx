@@ -13,12 +13,6 @@ const techBadges = [
   { label: 'TypeScript', color: '#3B82F6', bg: 'rgba(59,130,246,0.10)' },
 ];
 
-const stats = [
-  { value: '2+', label: 'Years Experience', color: '#3B82F6' },
-  { value: '15+', label: 'Projects Delivered', color: '#10B981' },
-  { value: '12+', label: 'Technologies', color: '#8B5CF6' },
-  { value: '100%', label: 'Dedication', color: '#F59E0B' },
-];
 
 const Hero = () => {
   const heroRef = useRef<HTMLDivElement>(null);
@@ -77,8 +71,7 @@ const Hero = () => {
     <section
       ref={heroRef}
       id="hero"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-slate-950"
-      style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+      className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
       {/* ── Mesh gradient background ── */}
       <div className="absolute inset-0 pointer-events-none">
@@ -141,13 +134,13 @@ const Hero = () => {
           <div className={`flex-1 ${isMobile ? '' : 'max-w-xl'}`}>
 
             {/* Status badge */}
-            <motion.div variants={item} className="mb-5">
+            <motion.div variants={item} className="mb-6">
               <span
-                className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-sm font-medium"
-                style={{ background: 'rgba(16,185,129,0.08)', border: '1px solid rgba(16,185,129,0.2)', color: '#34d399', fontFamily: "'Fira Code', monospace" }}
+                className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-[11px] font-bold uppercase tracking-[0.2em]"
+                style={{ background: 'rgba(59,130,246,0.06)', border: '1px solid rgba(59,130,246,0.15)', color: '#60a5fa', fontFamily: 'var(--font-display)' }}
               >
-                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                Open to opportunities
+                <span className="w-1.5 h-1.5 rounded-full bg-blue-400 animate-[pulse_2s_infinite]" />
+                System Architect in training
               </span>
             </motion.div>
 
@@ -157,173 +150,125 @@ const Hero = () => {
             </motion.p>
 
             {/* Name */}
-            <motion.h1 variants={item} className="font-bold text-white leading-tight mb-4" style={{ fontSize: isMobile ? '2.4rem' : '4.5rem', letterSpacing: '-0.025em' }}>
+            <motion.h1 
+              variants={item} 
+              className="font-extrabold leading-tight mb-4 premium-gradient-text" 
+              style={{ 
+                fontSize: isMobile ? '3.5rem' : '5.5rem', 
+                letterSpacing: '-0.04em',
+                fontFamily: 'var(--font-display)' 
+              }}
+            >
               {personal.name}
             </motion.h1>
 
             {/* Title */}
-            <motion.h2 variants={item} className="font-semibold text-slate-300 mb-6" style={{ fontSize: isMobile ? '0.95rem' : '1.35rem', letterSpacing: '-0.01em', lineHeight: 1.4 }}>
-              {personal.title}
-              <span className="text-blue-400"> @ </span>
-              <span className="text-emerald-400">{personal.company}</span>
+            <motion.h2 variants={item} className="font-bold text-slate-300 mb-8" style={{ fontSize: isMobile ? '1.1rem' : '1.75rem', letterSpacing: '-0.02em', lineHeight: 1.25, maxWidth: '540px' }}>
+              Turning industrial-strength <span className="text-blue-400">Java</span> into elegant <span className="text-emerald-400">Products</span>.
             </motion.h2>
 
-            {/* Bio */}
-            <motion.p variants={item} className="text-slate-400 leading-relaxed mb-8"
-              style={{ fontSize: isMobile ? '0.875rem' : '1rem', maxWidth: '460px', margin: isMobile ? '0 auto 2rem' : '0 0 2rem' }}>
-              {personal.bio}
-            </motion.p>
+        {/* Bio */}
+        <motion.p variants={item} className="text-slate-400 leading-relaxed mb-8"
+          style={{ fontSize: isMobile ? '0.875rem' : '1rem', maxWidth: '460px', margin: isMobile ? '0 auto 2rem' : '0 0 2rem' }}>
+          {personal.bio}
+        </motion.p>
 
-            {/* Tech badges */}
-            <motion.div variants={item} className={`flex flex-wrap gap-2 mb-9 ${isMobile ? 'justify-center max-w-[300px] mx-auto' : ''}`}>
-              {techBadges.map((b) => (
-                <span key={b.label} className="px-2.5 py-1 rounded-md text-[10px] font-medium"
-                  style={{ color: b.color, background: b.bg, border: `1px solid ${b.color}28`, fontFamily: "'Fira Code', monospace" }}>
-                  {b.label}
-                </span>
-              ))}
-            </motion.div>
+        {/* Tech badges */}
+        <motion.div variants={item} className={`flex flex-wrap gap-2 mb-12 ${isMobile ? 'justify-center max-w-[300px] mx-auto' : ''}`}>
+          {techBadges.map((b) => (
+            <span key={b.label} className="px-3 py-1.5 rounded-md text-[10px] font-medium"
+              style={{ color: b.color, background: b.bg, border: `1px solid ${b.color}28`, fontFamily: "'Fira Code', monospace" }}>
+              {b.label}
+            </span>
+          ))}
+        </motion.div>
 
-            {/* ── CTA buttons ── */}
-            <motion.div variants={item} className={`flex gap-3 ${isMobile ? 'flex-col items-center' : 'flex-row'}`}>
-              <MagneticHover strength={0.2} disabled={isTouchDevice || prefersReducedMotion}>
-                <button
-                  onClick={handleDownloadCV}
-                  disabled={isDownloading}
-                  className="flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-semibold text-white transition-all select-none text-sm"
-                  style={{
-                    background: isDownloading ? 'rgba(59,130,246,0.5)' : 'linear-gradient(135deg, #3B82F6 0%, #2563EB 100%)',
-                    boxShadow: '0 0 20px rgba(59,130,246,0.2)',
-                    width: isMobile ? '200px' : 'auto',
-                  }}
-                >
-                  <FiDownload size={16} className={isDownloading ? 'animate-bounce' : ''} />
-                  {isDownloading ? 'Wait...' : 'CV Download'}
-                </button>
-              </MagneticHover>
-
-              <MagneticHover strength={0.2} disabled={isTouchDevice || prefersReducedMotion}>
-                <button
-                  onClick={handleContactClick}
-                  className="flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-semibold text-slate-300 hover:text-white transition-all select-none text-sm"
-                  style={{
-                    background: 'rgba(255,255,255,0.04)',
-                    border: '1px solid rgba(255,255,255,0.10)',
-                    width: isMobile ? '200px' : 'auto',
-                  }}
-                >
-                  <FiMail size={16} />
-                  Message Me
-                </button>
-              </MagneticHover>
-            </motion.div>
-          </div>
-
-          {/* ── Photo column ── */}
-          <motion.div
-            className={`relative flex-shrink-0 ${isMobile ? 'flex justify-center mx-auto mb-10' : ''}`}
-            variants={imgVariants}
-            style={{
-              x: !isMobile && !prefersReducedMotion ? mousePos.x * 0.08 : 0,
-              width: isMobile ? 180 : 300,
-              height: isMobile ? 180 : 300
-            }}
-          >
-            {/* Conic gradient ring */}
-            <div
-              className={`absolute inset-0 rounded-full ${isMobile ? 'scale-[1.08]' : 'scale-[1.05]'}`}
+        {/* ── CTA buttons ── */}
+        <motion.div variants={item} className={`flex gap-4 ${isMobile ? 'flex-col items-center' : 'flex-row'}`}>
+          <MagneticHover strength={0.2} disabled={isTouchDevice || prefersReducedMotion}>
+            <button
+              onClick={handleDownloadCV}
+              disabled={isDownloading}
+              aria-label="Download Resume"
+              className="group relative flex items-center justify-center gap-2 px-8 py-4 rounded-full font-bold text-white transition-all select-none text-sm active:scale-95 shadow-xl shadow-blue-500/20"
               style={{
-                background: 'conic-gradient(from 0deg, #3B82F6, #8B5CF6, #10B981, #F59E0B, #3B82F6)',
-                filter: 'blur(2px)',
-                borderRadius: '50%',
+                background: isDownloading ? 'rgba(59,130,246,0.5)' : 'linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%)',
+                width: isMobile ? '240px' : 'auto',
               }}
-            />
-
-            {/* Photo */}
-            <motion.div
-              className="relative rounded-full overflow-hidden"
-              style={{
-                width: isMobile ? 180 : 300,
-                height: isMobile ? 180 : 300,
-                border: '3px solid rgba(15,23,42,1)',
-                boxShadow: '0 0 40px rgba(59,130,246,0.15)',
-              }}
-              whileHover={!isTouchDevice ? { scale: 1.03 } : {}}
-              transition={{ duration: 0.3 }}
             >
-              <img
-                src={personal.profileImage}
-                alt={`${personal.name}`}
-                className={`w-full h-full object-cover transition-transform duration-500 ${isMobile ? 'scale-[1.5]' : 'scale-110'}`}
-                onError={(e) => {
-                  const t = e.target as HTMLImageElement;
-                  t.style.display = 'none';
-                  const p = t.parentElement!;
-                  p.style.background = 'linear-gradient(135deg, #1E3A5F 0%, #0f172a 100%)';
-                  p.innerHTML = '<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:3rem">👨‍💻</div>';
-                }}
-              />
-            </motion.div>
+              <FiDownload size={18} className={isDownloading ? 'animate-bounce' : 'group-hover:-translate-y-1 transition-transform'} />
+              {isDownloading ? 'Downloading...' : 'Download Resume'}
+            </button>
+          </MagneticHover>
 
-            {/* Floating info badges */}
-            {!prefersReducedMotion && (
-              <>
-                <motion.div
-                  className="absolute"
-                  style={{
-                    bottom: isMobile ? -10 : -18,
-                    left: isMobile ? -5 : -24,
-                    background: 'rgba(8,12,24,0.98)',
-                    border: '1px solid rgba(59,130,246,0.22)',
-                    borderRadius: '10px',
-                    padding: isMobile ? '4px 10px' : '8px 14px',
-                    backdropFilter: 'blur(16px)',
-                    whiteSpace: 'nowrap',
-                    boxShadow: '0 4px 20px rgba(0,0,0,0.5)',
-                  }}
-                  animate={{ y: [0, -6, 0] }}
-                  transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
-                >
-                  <div className="text-blue-400 text-[9px] font-mono mb-0.5">Experience</div>
-                  <div className="text-white font-bold text-[11px]">{personal.yearsOfExperience}+ Years</div>
-                </motion.div>
+          <MagneticHover strength={0.2} disabled={isTouchDevice || prefersReducedMotion}>
+            <button
+              onClick={handleContactClick}
+              aria-label="Contact Vivek"
+              className="glass-card flex items-center justify-center gap-2 px-8 py-4 font-bold text-slate-300 hover:text-white transition-all select-none text-sm active:scale-95 border-white/5 hover:border-white/20"
+              style={{
+                borderRadius: '9999px',
+                width: isMobile ? '240px' : 'auto',
+              }}
+            >
+              <FiMail size={18} />
+              Get in Touch
+            </button>
+          </MagneticHover>
+        </motion.div>
+      </div>
 
-                <motion.div
-                  className="absolute"
-                  style={{
-                    top: isMobile ? -10 : 20,
-                    right: isMobile ? -5 : -24,
-                    background: 'rgba(8,12,24,0.98)',
-                    border: '1px solid rgba(16,185,129,0.22)',
-                    borderRadius: '10px',
-                    padding: isMobile ? '4px 10px' : '8px 14px',
-                    backdropFilter: 'blur(16px)',
-                    whiteSpace: 'nowrap',
-                    boxShadow: '0 4px 20px rgba(0,0,0,0.5)',
-                  }}
-                  animate={{ y: [0, 6, 0] }}
-                  transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut', delay: 0.8 }}
-                >
-                  <div className="text-emerald-400 text-[9px] font-mono mb-0.5">Main Stack</div>
-                  <div className="text-white font-bold text-[11px]">Java + React</div>
-                </motion.div>
-              </>
-            )}
-          </motion.div>
-        </div>
+      {/* ── Photo column ── */}
+      <motion.div
+        className={`relative flex-shrink-0 ${isMobile ? 'flex justify-center mx-auto mb-10' : ''}`}
+        variants={imgVariants}
+        style={{
+          x: !isMobile && !prefersReducedMotion ? mousePos.x * 0.08 : 0,
+          width: isMobile ? 180 : 340,
+          height: isMobile ? 180 : 340
+        }}
+      >
+        {/* Conic gradient ring */}
+        <div
+          className={`absolute inset-0 rounded-full ${isMobile ? 'scale-[1.08]' : 'scale-[1.05]'}`}
+          aria-hidden="true"
+          style={{
+            background: 'conic-gradient(from 0deg, #3B82F6, #8B5CF6, #10B981, #F59E0B, #3B82F6)',
+            filter: 'blur(2px)',
+            borderRadius: '50%',
+          }}
+        />
 
-        {/* ── Stats row ── */}
-        <motion.div variants={item} className="mt-12 pt-8 border-t border-slate-800/40">
-          <div className={`grid ${isMobile ? 'grid-cols-2 gap-4' : 'grid-cols-4 gap-6'}`}>
-            {stats.map((s) => (
-              <div key={s.label} className="text-center">
-                <div className={`${isMobile ? 'text-xl' : 'text-3xl'} font-bold mb-0.5`} style={{ color: s.color }}>{s.value}</div>
-                <div className="text-slate-500 text-[10px] uppercase tracking-wider">{s.label}</div>
-              </div>
-            ))}
-          </div>
+        {/* Photo */}
+        <motion.div
+          className="relative rounded-full overflow-hidden"
+          style={{
+            width: '100%',
+            height: '100%',
+            border: '4px solid var(--bg-dark)',
+            boxShadow: '0 0 60px rgba(59,130,246,0.25)',
+            background: 'var(--bg-dark)',
+            zIndex: 2,
+          }}
+          whileHover={!isTouchDevice ? { scale: 1.05 } : {}}
+          transition={{ duration: 0.4 }}
+        >
+          <img
+            src={personal.profileImage}
+            alt={`${personal.name} profile`}
+            className={`w-full h-full object-cover transition-transform duration-700 hover:scale-110 ${isMobile ? 'scale-[1.5]' : 'scale-110'}`}
+            onError={(e) => {
+              const t = e.target as HTMLImageElement;
+              t.style.display = 'none';
+              const p = t.parentElement!;
+              p.style.background = 'linear-gradient(135deg, #1E3A5F 0%, #0f172a 100%)';
+              p.innerHTML = '<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:4rem">👨‍💻</div>';
+            }}
+          />
         </motion.div>
       </motion.div>
+    </div>
+  </motion.div>
 
       {/* Scroll indicator */}
       <motion.div
@@ -335,9 +280,10 @@ const Hero = () => {
         <span className="text-slate-600 text-xs tracking-widest uppercase" style={{ fontFamily: "'Fira Code', monospace" }}>
           Scroll
         </span>
-        <div className="w-5 h-8 rounded-full border border-slate-700 flex justify-center pt-1.5">
+        <div className="w-5 h-8 rounded-full border border-slate-700 flex justify-center pt-1.5 overflow-hidden">
           <motion.div
             className="w-1 h-2 rounded-full bg-blue-400"
+            aria-hidden="true"
             animate={!prefersReducedMotion ? { y: [0, 12, 0], opacity: [1, 0, 1] } : {}}
             transition={{ duration: 1.8, repeat: Infinity }}
           />

@@ -78,7 +78,11 @@ const JavaExpertise = () => {
         </motion.div>
 
         {/* Categories Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-20 md:mb-24">
+        <div 
+          className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-20 md:mb-24"
+          role="list"
+          aria-label="Core Java and Spring Boot technical skills"
+        >
           {javaSkills.map((cat, i) => (
             <motion.div
               key={cat.category}
@@ -87,17 +91,20 @@ const JavaExpertise = () => {
               transition={{ duration: 0.5, delay: i * 0.1 }}
               whileHover={{ y: -5, background: 'rgba(255,255,255,0.04)' }}
               className="p-4 md:p-6 rounded-2xl md:rounded-3xl bg-white/[0.02] border border-white/[0.05] transition-all duration-300 h-full"
+              role="listitem"
             >
-              <div className="text-xl md:text-3xl mb-3 md:mb-4">{cat.icon}</div>
-              <h3 className="text-white font-bold mb-3 text-[10px] md:text-sm uppercase tracking-widest leading-tight">{cat.category}</h3>
-              <ul className="space-y-1.5 md:space-y-2">
-                {cat.skills.map((skill) => (
-                  <li key={skill} className="flex items-center gap-2 text-slate-500 text-[9px] md:text-xs leading-tight">
-                    <span className="w-1 h-1 rounded-full flex-shrink-0" style={{ background: cat.color }} />
-                    {skill}
-                  </li>
-                ))}
-              </ul>
+              <motion.article aria-labelledby={`cat-title-${i}`}>
+                <div className="text-xl md:text-3xl mb-3 md:mb-4" aria-hidden="true">{cat.icon}</div>
+                <h3 id={`cat-title-${i}`} className="text-white font-bold mb-3 text-[10px] md:text-sm uppercase tracking-widest leading-tight">{cat.category}</h3>
+                <ul className="space-y-1.5 md:space-y-2" aria-label={`${cat.category} specialized skills`}>
+                  {cat.skills.map((skill) => (
+                    <li key={skill} className="flex items-center gap-2 text-slate-500 text-[9px] md:text-xs leading-tight">
+                      <span className="w-1 h-1 rounded-full flex-shrink-0" style={{ background: cat.color }} aria-hidden="true" />
+                      {skill}
+                    </li>
+                  ))}
+                </ul>
+              </motion.article>
             </motion.div>
           ))}
         </div>
@@ -106,16 +113,22 @@ const JavaExpertise = () => {
         <div className="grid lg:grid-cols-12 gap-10 items-start">
           {/* Left: Interactive Diagram */}
           <div className="lg:col-span-5 relative w-full overflow-hidden">
-            <div className="flex flex-col gap-3">
+            <div className="flex flex-col gap-3" role="tablist" aria-label="Architecture layers">
               {architectureSteps.map((step, index) => (
                 <motion.div
                   key={step.id}
+                  role="tab"
+                  aria-selected={activeStep === index}
+                  aria-controls={`step-panel-${index}`}
+                  id={`step-tab-${index}`}
+                  tabIndex={0}
                   className={`cursor-pointer p-4 rounded-2xl border transition-all duration-300 relative overflow-hidden group ${
                     activeStep === index
                       ? 'bg-white/[0.05] border-white/20'
                       : 'bg-transparent border-white/5 hover:border-white/10'
                   }`}
                   onClick={() => setActiveStep(index)}
+                  onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') setActiveStep(index); }}
                   initial={{ opacity: 0, x: -20 }}
                   animate={inView ? { opacity: 1, x: 0 } : {}}
                   transition={{ delay: 0.2 + index * 0.1 }}
@@ -125,13 +138,14 @@ const JavaExpertise = () => {
                     <motion.div
                       className="absolute left-0 top-0 bottom-0 w-[3px] bg-gradient-to-b from-orange-500 to-red-500"
                       layoutId="activeIndicator"
+                      aria-hidden="true"
                     />
                   )}
 
                   <div className="flex items-center gap-4">
                     <div className={`p-2 rounded-xl transition-colors ${
                       activeStep === index ? 'bg-orange-500/20 text-orange-400' : 'bg-white/5 text-slate-500'
-                    }`}>
+                    }`} aria-hidden="true">
                       {step.icon}
                     </div>
                     <div className="flex-1 min-w-0">
@@ -148,9 +162,14 @@ const JavaExpertise = () => {
 
           {/* Right: Detailed Insight Display */}
           <div className="lg:col-span-7 w-full overflow-hidden">
-            <div className="relative bg-white/[0.02] border border-white/[0.05] rounded-[1.5rem] md:rounded-[2rem] p-6 md:p-12 min-h-[320px] md:min-h-[400px] flex flex-col justify-center font-sans box-border">
+            <div 
+              className="relative bg-white/[0.02] border border-white/[0.05] rounded-[1.5rem] md:rounded-[2rem] p-6 md:p-12 min-h-[320px] md:min-h-[400px] flex flex-col justify-center font-sans box-border"
+              role="tabpanel"
+              id={`step-panel-${activeStep}`}
+              aria-labelledby={`step-tab-${activeStep}`}
+            >
               {/* Visual Accent */}
-              <div className="absolute top-0 right-0 p-8 opacity-[0.03] hidden md:block">
+              <div className="absolute top-0 right-0 p-8 opacity-[0.03] hidden md:block" aria-hidden="true">
                 <FiActivity size={120} />
               </div>
 
@@ -164,7 +183,7 @@ const JavaExpertise = () => {
                   className="space-y-6"
                 >
                   <div className="flex items-center gap-3 text-orange-500 mb-2">
-                    <FiLayers size={18} />
+                    <FiLayers size={18} aria-hidden="true" />
                     <span className="text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] font-mono">System Architecture</span>
                   </div>
                   <h3 className="text-2xl md:text-5xl font-bold text-white leading-tight">
@@ -174,7 +193,7 @@ const JavaExpertise = () => {
                     {architectureSteps[activeStep].desc}
                   </p>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 pt-4 md:pt-6">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 pt-4 md:pt-6" aria-label="Key performance indicators">
                     <div className="p-4 rounded-xl md:rounded-2xl bg-white/[0.03] border border-white/5">
                       <p className="text-[9px] text-slate-500 font-bold uppercase mb-1 tracking-widest">Key KPI</p>
                       <p className="text-white text-sm md:text-base font-medium">High Availability</p>
@@ -186,9 +205,9 @@ const JavaExpertise = () => {
                   </div>
 
                   <div className="pt-8">
-                    <button className="flex items-center gap-2 text-sm font-bold text-white hover:text-orange-400 transition-colors group uppercase tracking-widest">
+                    <button className="flex items-center gap-2 text-sm font-bold text-white hover:text-orange-400 transition-colors group uppercase tracking-widest" aria-label="Explore detailed layer architecture">
                       Explore Layer Architecture
-                      <motion.span animate={{ x: [0, 5, 0] }} transition={{ repeat: Infinity, duration: 2 }}>→</motion.span>
+                      <motion.span animate={{ x: [0, 5, 0] }} transition={{ repeat: Infinity, duration: 2 }} aria-hidden="true">→</motion.span>
                     </button>
                   </div>
                 </motion.div>

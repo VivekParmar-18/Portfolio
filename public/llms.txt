@@ -1,0 +1,44 @@
+# Vivek Parmar — Software Engineer Portfolio
+> Vivek Parmar is a Software Engineer - L1 at Techforce Global, specializing in Java, Spring Boot, and React.js. This portfolio showcases his professional experience, technical projects, and engineering insights.
+
+## Who is Vivek Parmar?
+Vivek Parmar is a fullstack developer based in Ahmedabad, India, with 2+ years of experience building enterprise-grade applications. He specializes in high-availability Java Spring Boot backends paired with modern React and TypeScript frontends. He holds a degree from Gujarat Technological University and currently works at Techforce Global as a Software Engineer - L1.
+
+## Core Technical Skills
+- **Backend**: Java 8+, Spring Boot, Spring Security, Spring Data JPA, REST APIs, Microservices, Hibernate, OAuth2, JWT
+- **Frontend**: React.js, TypeScript, JavaScript, HTML5, CSS3, Framer Motion
+- **Databases**: MySQL, PostgreSQL, Query Optimization, Schema Design
+- **DevOps & Cloud**: Docker, AWS (Lambda, EC2, S3), Maven, Gradle, GitHub Actions, CI/CD
+- **Architecture**: Clean Architecture, SOLID Principles, Domain-Driven Design, Event-Driven Systems
+
+## Professional Experience
+- **Software Engineer - L1** at Techforce Global (January 2026 – Present): Leading architectural evolution of backend services and high-performance React frontends. Engineered high-concurrency Spring Boot microservices for global logistics automation. Implemented advanced PostgreSQL query optimizations improving throughput by 50%.
+- **Associate Software Developer** at Techforce Global (August 2024 – December 2025): Built scalable Spring Boot applications and modern React interfaces. Automated deployment processes using GitHub Actions and AWS.
+- **Software Developer Intern** at Rays TechServ (February 2024 – May 2024): Gained hands-on experience in full-stack development and software development lifecycle best practices.
+
+## Featured Projects
+- [Enterprise Healthcare Hub](https://vivekparmar.is-a.dev/#projects): A HIPAA-compliant healthcare platform featuring IVR automation, scalable order lifecycles, automated financial processing via Stripe, and AWS Lambda/EC2 deployment. Built with Spring Boot, React, and AWS Cloud.
+- [Clinical Lab Automation](https://vivekparmar.is-a.dev/#projects): An advanced lab management ecosystem with high-throughput API communication, normalized MySQL schemas, and modular Angular 17 frontend with PrimeNG data visualization.
+- [Next-Gen Travel Engine](https://vivekparmar.is-a.dev/#projects): A high-performance travel booking platform with multi-factor authentication, scalable booking engine for high-volume seasonal traffic, and mobile-first responsive design.
+
+## Technical Blog
+- [Java Spring Boot Best Practices](https://vivekparmar.is-a.dev/#blog): Architectural patterns, dependency injection strategies, and production-grade Spring Boot configuration.
+- [Java Microservices Architecture](https://vivekparmar.is-a.dev/#blog): Service decomposition, inter-service communication, and resilience patterns for distributed systems.
+- [Java Developer Career Path](https://vivekparmar.is-a.dev/#blog): Career progression insights from intern to L1 engineer, including skills roadmap and growth strategies.
+- [Java Performance Optimization](https://vivekparmar.is-a.dev/#blog): JVM tuning, memory management, garbage collection optimization, and profiling techniques.
+
+## Education
+- Bachelor of Engineering (B.E) in Computer Science — Gujarat Technological University
+
+## Contact
+- Website: https://vivekparmar.is-a.dev
+- Email: vivek18parmar@gmail.com
+- LinkedIn: https://linkedin.com/in/vivek1812
+- GitHub: https://github.com/VivekParmar-18
+
+## Key Facts
+- Located in Ahmedabad, Gujarat, India
+- 2+ years of professional software engineering experience
+- 15+ projects delivered across healthcare, logistics, and travel domains
+- Proficient in 12+ technologies spanning the full stack
+- Open to collaboration and new opportunities

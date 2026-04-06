@@ -93,8 +93,8 @@ const SinglePagePortfolio = () => {
         <LazyBlog />
       </Suspense>
 
-      {/* ── Contact ── */}
-      <section id="contact" className="py-28 bg-slate-950 relative overflow-hidden">
+      {/* ── Contact & Footer ── */}
+      <footer id="contact" className="py-28 bg-slate-950 relative overflow-hidden">
         {/* Glow */}
         <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse 80% 50% at 50% 100%, rgba(59,130,246,0.07) 0%, transparent 70%)' }} />
 
@@ -120,7 +120,7 @@ const SinglePagePortfolio = () => {
           </motion.div>
 
           {/* Contact method cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16" aria-label="Contact Methods">
             {contactMethods.map((method, index) => (
               <ContactCard
                 key={method.title}
@@ -146,7 +146,7 @@ const SinglePagePortfolio = () => {
             >
               <h3 className="text-2xl font-bold text-white mb-4" style={{ letterSpacing: '-0.01em' }}>Send Me a Message</h3>
               <p className="text-slate-400 leading-relaxed mb-8">Fill out the form and I'll get back to you within 24 hours.</p>
-              <div className="space-y-3">
+              <div className="space-y-3" aria-label="Professional Commitments">
                 {[
                   { icon: '⚡', title: 'Fast Response', desc: 'Usually within 24 hours' },
                   { icon: '🤝', title: 'Open to Collaboration', desc: 'Projects of any size' },
@@ -154,7 +154,7 @@ const SinglePagePortfolio = () => {
                 ].map((item) => (
                   <div key={item.title} className="flex items-start gap-3 p-4 rounded-xl"
                     style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)' }}>
-                    <span className="text-xl">{item.icon}</span>
+                    <span className="text-xl" aria-hidden="true">{item.icon}</span>
                     <div>
                       <div className="text-white font-semibold text-sm">{item.title}</div>
                       <div className="text-slate-500 text-xs mt-0.5">{item.desc}</div>
@@ -176,13 +176,13 @@ const SinglePagePortfolio = () => {
           </div>
 
           {/* Footer Copyright */}
-          <div className="text-center pt-12 border-t border-slate-900/50 mt-16">
+          <div className="text-center pt-12 border-t border-slate-900/50 mt-16" role="contentinfo">
             <p className="text-slate-600 text-[13px] font-medium tracking-wider uppercase" style={{ fontFamily: "'Fira Code', monospace", opacity: 0.8 }}>
-              &copy; {new Date().getFullYear()} {personal.name}. All Rights Reserved.
+              &copy; {new Date().getFullYear()} {personal.name}. Software Engineer - L1. All Rights Reserved.
             </p>
           </div>
         </div>
-      </section>
+      </footer>
 
       <ScrollToTop />
     </div>

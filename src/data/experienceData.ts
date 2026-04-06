@@ -3,17 +3,30 @@ import type { WorkExperience } from '../types/types';
 export const experienceData: WorkExperience[] = [
   {
     company: "Techforce Global",
+    position: "Software Engineer - L1",
+    duration: "January 2026 - Present",
+    description: "Leading the architectural evolution of robust backend services and high-performance React frontends. Specialising in enterprise scalability and system resilience.",
+    achievements: [
+      "Engineered high-concurrency Spring Boot microservices for global logistics automation",
+      "Spearheaded the migration to a modular React architecture, reducing bundle sizes by 35%",
+      "Implemented advanced query optimisations in PostgreSQL, improving throughput by 50%",
+      "Architected secure authentication flows utilizing OAuth2 and JWT standards",
+      "Mentoring junior developers and establishing clean code standards across teams"
+    ],
+    technologies: ["Java", "Spring Boot", "React", "PostgreSQL", "Docker", "OAuth2", "Microservices"]
+  },
+  {
+    company: "Techforce Global",
     position: "Associate Software Developer",
-    duration: "August 2024 - Present",
-    description: "Building scalable Spring Boot applications and modern React interfaces. Working with cross-functional teams to deliver high-quality software solutions and exploring CI/CD and AWS technologies.",
+    duration: "August 2024 - December 2025",
+    description: "Built scalable Spring Boot applications and modern React interfaces. Working with cross-functional teams to deliver high-quality software solutions and exploring CI/CD and AWS technologies.",
     achievements: [
       "Developed scalable Spring Boot applications for enterprise clients",
       "Built responsive React.js applications with modern UI/UX principles",
-      "Gained expertise in React JS development and component architecture",
-      "Explored CI/CD pipelines and AWS cloud services for deployment",
-      "Collaborated with cross-functional teams in Agile development environment"
+      "Collaborated on critical features for production-level web applications",
+      "Automated deployment processes using GitHub Actions and AWS",
     ],
-    technologies: ["Java", "Spring Boot", "React", "CI/CD", "AWS", "REST APIs", "Git", "Agile"]
+    technologies: ["Java", "Spring Boot", "React", "CI/CD", "AWS", "Git"]
   },
   {
     company: "Rays TechServ",

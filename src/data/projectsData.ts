@@ -8,38 +8,40 @@ export interface Project {
 
 export const projectsData: Project[] = [
     {
-        title: "Healthcare Management System",
-        description: "Enterprise healthcare platform with IVR integration, order management, and invoice processing. Features EHR integration, Stripe payment gateway, order tracking, and comprehensive AWS cloud infrastructure.",
-        tags: ["Spring Boot", "React", "EHR", "Stripe", "AWS Lambda", "S3", "API Gateway", "EC2", "RDS"],
+        title: "Enterprise Healthcare Hub",
+        description: "A mission-critical healthcare platform architected for HIPAA compliance, featuring IVR automation, scalable order lifecycles, and automated financial processing.",
+        tags: ["Spring Boot", "React", "AWS Cloud", "Serverless", "Stripe Engine"],
         features: [
-            "IVR system integration for patient communication",
-            "Order tracking and invoice management",
-            "EHR integration for medical records",
-            "Stripe payment processing",
-            "AWS serverless architecture with Lambda, S3, API Gateway, EC2, and RDS"
+            "Architected IVR communication systems for automated patient engagement",
+            "Engineered complex order tracking with real-time state management",
+            "Integrated EHR protocols for secure medical record orchestration",
+            "Optimized PCI-compliant payment flows via Stripe Global API",
+            "Deployed high-availability infrastructure using AWS Lambda & EC2"
         ],
         color: "blue"
     },
     {
-        title: "Lab Automation Tool",
-        description: "Comprehensive lab management system with API integration and MySQL database. Built using Angular 17 with PrimeNG theme for modern UI components.",
-        tags: ["Angular 17", "PrimeNG", "MySQL", "API Integration"],
+        title: "Clinical Lab Automation",
+        description: "An advanced lab management ecosystem focused on data integrity and high-throughput API communication, built with modern architectural patterns.",
+        tags: ["Angular 17", "PrimeNG", "MySQL Forge", "RESTful Core"],
         features: [
-            "API integration for data management",
-            "MySQL database design and optimization",
-            "Modern UI with PrimeNG components"
+            "Developed high-performance API layers for real-time lab data syncing",
+            "Designed normalized MySQL schemas for complex research data sets",
+            "Engineered a modular frontend using Angular 17's reactive state architecture",
+            "Implemented custom PrimeNG components for high-density data visualization"
         ],
         color: "purple"
     },
     {
-        title: "First Flight Travels",
-        description: "Travel agency booking website with comprehensive user authentication system. Features signup/login functionality for seamless travel package booking experience.",
-        tags: ["Web Development", "Authentication", "Booking System"],
+        title: "Next-Gen Travel Engine",
+        description: "A high-performance travel booking platform featuring advanced security protocols and a seamless, journey-focused user experience.",
+        tags: ["Full Stack", "Auth Protocol", "System Design"],
         features: [
-            "User authentication system",
-            "Travel package booking functionality",
-            "Responsive design for all devices"
+            "Implemented secure multi-factor authentication systems",
+            "Designed a scalable booking engine for high-volume seasonal traffic",
+            "Engineered a responsive, mobile-first interface for cross-platform booking",
+            "Optimized server response times for real-time inventory updates"
         ],
-        color: "blue"
+        color: "emerald"
     }
 ];

@@ -11,7 +11,7 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const baseUrl = 'https://vivekparmar.is-a.dev'; 
+const baseUrl = (process.env.VITE_SITE_URL || 'https://vivekparmar.is-a.dev').replace(/\/$/, '');
 const buildDir = path.join(__dirname, '../dist');
 const publicDir = path.join(__dirname, '../public');
 

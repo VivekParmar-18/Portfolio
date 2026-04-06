@@ -11,17 +11,11 @@ const Skills = () => {
   return (
     <section
       id="skills"
-      className="py-28 bg-slate-950 relative overflow-hidden"
+      className="py-32 relative overflow-hidden"
       ref={ref}
     >
       {/* BG glows */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background:
-            'radial-gradient(ellipse 60% 40% at 20% 50%, rgba(59,130,246,0.06) 0%, transparent 60%), radial-gradient(ellipse 50% 40% at 80% 50%, rgba(16,185,129,0.05) 0%, transparent 60%)',
-        }}
-      />
+      <div className="glow-mesh" />
 
       <div className="max-w-6xl mx-auto px-6 relative z-10">
         {/* Heading */}
@@ -29,42 +23,35 @@ const Skills = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-center mb-20"
+          className="text-center mb-24"
         >
           <span
-            className="inline-block text-xs font-semibold tracking-[0.2em] uppercase mb-4 px-3 py-1 rounded-full"
+            className="inline-block text-[10px] font-bold tracking-[0.3em] uppercase mb-6 px-5 py-2 rounded-full"
             style={{
               color: '#34d399',
               background: 'rgba(16,185,129,0.08)',
-              border: '1px solid rgba(16,185,129,0.2)',
-              fontFamily: "'Fira Code', monospace",
+              border: '1px solid rgba(16,185,129,0.15)',
+              fontFamily: 'var(--font-display)',
             }}
           >
-            Toolkit
+            Capabilities
           </span>
           <h2
-            className="text-4xl md:text-5xl font-bold text-white mb-4"
-            style={{ letterSpacing: '-0.02em' }}
+            className="text-4xl md:text-7xl font-extrabold text-white mb-8"
+            style={{ letterSpacing: '-0.05em', fontFamily: 'var(--font-display)' }}
           >
-            Skills &{' '}
-            <span
-              style={{
-                background: 'linear-gradient(135deg,#60a5fa,#34d399)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text',
-              }}
-            >
-              Tech Stack
-            </span>
+            The Technical <span className="premium-gradient-text">Ecosystem</span>
           </h2>
-          <p className="text-slate-400 text-lg max-w-xl mx-auto">
-            The technologies I use to build fast, scalable fullstack applications.
+          <p className="text-slate-400 text-xl max-w-2xl mx-auto font-light leading-relaxed">
+            A curated selection of tools and frameworks I've mastered to bridge the gap between complex logic and human-centric design.
           </p>
         </motion.div>
 
         {/* Staggered grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-4">
+        <div 
+          className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-5"
+          aria-label="Technical Skills and Frameworks"
+        >
           {skillsData.map((tech: Technology, i: number) => (
             <motion.div
               key={tech.name}
@@ -77,48 +64,30 @@ const Skills = () => {
               }}
               whileHover={
                 !prefersReducedMotion
-                  ? { y: -8, scale: 1.08, transition: { duration: 0.2 } }
+                  ? { y: -8, scale: 1.05, transition: { duration: 0.2 } }
                   : {}
               }
               className="group cursor-default"
+              aria-label={`${tech.name} proficiency`}
             >
               <div
-                className="relative rounded-2xl p-5 text-center overflow-hidden h-full flex flex-col items-center justify-center gap-3"
-                style={{
-                  background: 'rgba(255,255,255,0.03)',
-                  border: '1px solid rgba(255,255,255,0.07)',
-                  transition: 'border-color 0.25s, background 0.25s, box-shadow 0.25s',
-                }}
-                onMouseEnter={(e) => {
-                  (e.currentTarget as HTMLDivElement).style.borderColor = 'rgba(59,130,246,0.35)';
-                  (e.currentTarget as HTMLDivElement).style.background = 'rgba(59,130,246,0.06)';
-                  (e.currentTarget as HTMLDivElement).style.boxShadow = '0 8px 32px rgba(59,130,246,0.12)';
-                }}
-                onMouseLeave={(e) => {
-                  (e.currentTarget as HTMLDivElement).style.borderColor = 'rgba(255,255,255,0.07)';
-                  (e.currentTarget as HTMLDivElement).style.background = 'rgba(255,255,255,0.03)';
-                  (e.currentTarget as HTMLDivElement).style.boxShadow = 'none';
-                }}
+                className="glass-card relative p-6 text-center overflow-hidden h-full flex flex-col items-center justify-center gap-4 border-white/5 group-hover:border-blue-500/30 group-hover:bg-blue-500/5 transition-all duration-500"
               >
                 {/* Shimmer on hover */}
                 <div
                   className="absolute inset-0 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-300"
                   style={{
                     background:
-                      'linear-gradient(135deg, rgba(255,255,255,0.04) 0%, transparent 50%)',
+                      'linear-gradient(135deg, rgba(59,130,246,0.1) 0%, transparent 100%)',
                   }}
                 />
 
                 {/* Icon */}
-                <div className="w-12 h-12 flex items-center justify-center">
+                <div className="w-14 h-14 flex items-center justify-center">
                   <img
                     src={tech.icon}
-                    alt={`${tech.name} logo`}
-                    className="w-10 h-10 object-contain"
-                    style={{
-                      transition: 'transform 0.3s ease',
-                      filter: 'drop-shadow(0 2px 8px rgba(0,0,0,0.3))',
-                    }}
+                    alt={tech.name}
+                    className="w-12 h-12 object-contain group-hover:scale-110 transition-transform duration-500 drop-shadow-lg"
                     loading="lazy"
                     onError={(e) => {
                       (e.target as HTMLImageElement).style.display = 'none';
@@ -128,8 +97,8 @@ const Skills = () => {
 
                 {/* Name */}
                 <span
-                  className="text-slate-300 text-xs font-semibold group-hover:text-white transition-colors leading-tight text-center"
-                  style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+                  className="text-slate-300 text-sm font-bold group-hover:text-white transition-colors leading-tight text-center"
+                  style={{ fontFamily: 'var(--font-display)' }}
                 >
                   {tech.name}
                 </span>
