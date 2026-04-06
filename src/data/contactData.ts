@@ -10,7 +10,6 @@ export const contactInfo: ContactInfo = {
 export const socialLinks: SocialLink[] = [
   { platform: 'LinkedIn', url: personal.linkedin, icon: 'linkedin' },
   { platform: 'GitHub', url: personal.github, icon: 'github' },
-  { platform: 'Twitter', url: personal.twitter, icon: 'twitter' },
   { platform: 'Email', url: `mailto:${personal.email}`, icon: 'mail' },
 ];
 

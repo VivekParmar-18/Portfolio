@@ -19,17 +19,15 @@ export interface SEOData {
 }
 
 export const defaultSEOConfig: SEOData = {
-  title: `${personal.name} — Fullstack Java & React Developer`,
-  description: personal.bio,
-  keywords: seoKeywords,
-  author: personal.name,
+  title: `Vivek Parmar (Vivek) — Fullstack Java & React Developer`,
+  description: `Vivek Parmar (Vivek) is a Fullstack Developer specializing in Java, Spring Boot, and React.js. Explore his professional portfolio and technical blog.`,
+  keywords: ["Vivek", "Vivek Parmar", ...seoKeywords],
+  author: "Vivek Parmar",
   image: `${personal.domain}${personal.ogImage}`,
   url: personal.domain,
   type: 'profile',
-  siteName: `${personal.name} Portfolio`,
+  siteName: personal.name,
   locale: 'en_US',
-  twitterCard: 'summary_large_image',
-  twitterCreator: personal.twitter,
   structuredData: {
     '@context': 'https://schema.org',
     '@type': 'Person',
@@ -51,7 +49,7 @@ export const defaultSEOConfig: SEOData = {
     },
     url: personal.domain,
     email: personal.email,
-    sameAs: [personal.linkedin, personal.github, personal.twitter].filter(Boolean),
+    sameAs: [personal.linkedin, personal.github].filter(Boolean),
     knowsAbout: [...seoKeywords, 'Java Microservices', 'Spring Boot', 'System Design', 'Cloud Architecture'],
     address: {
       '@type': 'PostalAddress',
@@ -125,7 +123,9 @@ export const updateMetaTags = (data: Partial<SEOData>) => {
   setMeta('[property="twitter:creator"]', d.twitterCreator);
 
   if (d.structuredData) {
-    let ld = document.querySelector('script[type="application/ld+json"]');
+    let ld = Array.from(document.querySelectorAll('script[type="application/ld+json"]'))
+      .find(script => script.textContent?.includes('"@type": "Person"') || script.textContent?.includes('"@type":"Person"'));
+    
     if (!ld) { 
       ld = document.createElement('script'); 
       ld.setAttribute('type', 'application/ld+json'); 

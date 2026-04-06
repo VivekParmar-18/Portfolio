@@ -2,6 +2,19 @@
 <html lang="en">
 
 <head>
+  <!-- WebSite schema for Site Name eligibility (Placed first for faster crawler detection) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "url": "https://vivekparmar.is-a.dev/",
+    "name": "Vivek Parmar",
+    "shortName": "Vivek Parmar",
+    "alternateName": ["Vivek", "Vivek Parmar", "Vivek Parmar Portfolio", "Vivek Dev", "Vivek Java Developer"],
+    "author": { "@type": "Person", "name": "Vivek Parmar" }
+  }
+  </script>
+
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -23,30 +36,38 @@
   <meta property="og:title" content="Vivek Parmar — Fullstack Java & React Developer" />
   <meta property="og:description"
     content="🚀 Ready to elevate your web presence? I'm Vivek Parmar, a Fullstack Developer specializing in Java & React.js. Let's build scalable, user-centric applications that drive real results!" />
-  <meta property="og:image" content="https://vivekparmar.is-a.dev/og-image.jpg" />
+  <meta property="og:image" content="https://vivekparmar.is-a.dev/og-image.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta property="og:site_name" content="Vivek Parmar" />
   <meta property="og:locale" content="en_US" />
 
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:url" content="https://vivekparmar.is-a.dev/" />
-  <meta name="twitter:title" content="Vivek Parmar — Fullstack Java & React Developer" />
-  <meta name="twitter:description"
-    content="🚀 Ready to elevate your web presence? I'm Vivek Parmar, a Fullstack Developer specializing in Java & React.js. Let's build scalable, user-centric applications that drive real results!" />
-  <meta name="twitter:image" content="https://vivekparmar.is-a.dev/og-image.jpg" />
-  <meta name="twitter:creator" content="@vivekparmar18" />
-  <meta name="twitter:site" content="@vivekparmar18" />
+
 
   <!-- Canonical -->
-  <link rel="canonical" href="https://vivekparmar.is-a.dev/" />
-
-  <!-- Icons -->
+  <!-- Favicons (48x48 prioritized for Google Bot) -->
+  <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png" />
   <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-  <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
+
+  <!-- Apple Touch Icons (Comprehensive device support) -->
+  <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png" />
+  <link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png" />
+  <link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png" />
+  <link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png" />
+  <link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png" />
+  <link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png" />
+  <link rel="apple-touch-icon" sizes="144x144" href="/apple-icon-144x144.png" />
+  <link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png" />
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+
+  <!-- Windows Tile Support -->
+  <meta name="msapplication-TileColor" content="#020817" />
+  <meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
+  <meta name="msapplication-config" content="/browserconfig.xml" />
+
   <link rel="manifest" href="/site.webmanifest" />
 
   <!-- Preconnect to font CDNs -->
@@ -70,8 +91,9 @@
     "name": "Vivek Parmar",
     "givenName": "Vivek",
     "familyName": "Parmar",
+    "alternateName": "Vivek",
     "jobTitle": "Associate Software Developer",
-    "description": "Fullstack developer specialising in Java Spring Boot and React.js",
+    "description": "Vivek Parmar (Vivek) — A Fullstack Java & React Developer specialising in building enterprise-grade applications.",
     "worksFor": {
       "@type": "Organization",
       "name": "Techforce Global"
@@ -80,8 +102,7 @@
     "email": "vivek18parmar@gmail.com",
     "sameAs": [
       "https://linkedin.com/in/vivek1812",
-      "https://github.com/VivekParmar-18",
-      "https://twitter.com/vivekparmar18"
+      "https://github.com/VivekParmar-18"
     ],
     "knowsAbout": [
       "Java", "Spring Boot", "React.js", "TypeScript",
@@ -95,18 +116,6 @@
       "addressCountry": "IN"
     },
     "image": "https://vivekparmar.is-a.dev/profile-photo.jpg"
-  }
-  </script>
-
-  <!-- WebSite schema for sitelinks searchbox eligibility -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    "url": "https://vivekparmar.is-a.dev/",
-    "name": "Vivek Parmar",
-    "alternateName": "Vivek Parmar Portfolio",
-    "author": { "@type": "Person", "name": "Vivek Parmar" }
   }
   </script>
 </head>

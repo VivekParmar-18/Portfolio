@@ -23,7 +23,7 @@ if (!fs.existsSync(buildDir)) {
 // Generate sitemap.xml
 const generateSitemap = () => {
   const pages = [
-    { url: '/', priority: '1.0', changefreq: 'weekly', images: ['/profile-photo.jpg', '/og-image.jpg'] },
+    { url: '/', priority: '1.0', changefreq: 'weekly', images: ['/profile-photo.jpg', '/og-image.png'] },
     { url: '/#about', priority: '0.8', changefreq: 'monthly' },
     { url: '/#experience', priority: '0.8', changefreq: 'monthly' },
     { url: '/#projects', priority: '0.9', changefreq: 'monthly' },
@@ -99,7 +99,7 @@ Allow: /`;
 
 // Generate security.txt (optional)
 const generateSecurityTxt = () => {
-  const securityTxt = `Contact: mailto:security@johndeveloper.dev
+  const securityTxt = `Contact: mailto:vivek18parmar@gmail.com
 Expires: ${new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString()}
 Preferred-Languages: en
 Canonical: ${baseUrl}/.well-known/security.txt`;

@@ -7,14 +7,11 @@ import {
   ContactCard,
   ContactForm,
   ScrollToTop,
-  SocialLinks,
 } from '../components';
 import { contactMethods } from '../data/contactData';
 import { motion } from 'framer-motion';
 import { personal } from '../data/personalData';
 import { useSEO } from '../hooks/useSEO';
-// SocialLinks now imported from components index
-import { socialLinks } from '../data/contactData';
 
 const LazyAbout       = lazy(() => import('../components/About/About'));
 const LazyJavaExpertise = lazy(() => import('../components/JavaExpertise/JavaExpertise'));
@@ -178,10 +175,11 @@ const SinglePagePortfolio = () => {
             </motion.div>
           </div>
 
-          {/* Social links */}
-          <div className="text-center">
-            <p className="text-slate-500 mb-6 text-sm">Also find me on</p>
-            <SocialLinks socialLinks={socialLinks} />
+          {/* Footer Copyright */}
+          <div className="text-center pt-12 border-t border-slate-900/50 mt-16">
+            <p className="text-slate-600 text-[13px] font-medium tracking-wider uppercase" style={{ fontFamily: "'Fira Code', monospace", opacity: 0.8 }}>
+              &copy; {new Date().getFullYear()} {personal.name}. All Rights Reserved.
+            </p>
           </div>
         </div>
       </section>
