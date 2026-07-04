@@ -1,34 +1,37 @@
-# Vivek Parmar — Software Engineer Portfolio
-> Vivek Parmar is a Software Engineer - L1 at Techforce Global, specializing in Java, Spring Boot, and React.js. This portfolio showcases his professional experience, technical projects, and engineering insights.
+# Vivek Parmar — Software Developer Portfolio
+> Vivek Parmar is a Software Developer at Techforce Infotech Pvt. Ltd., specializing in Java 17, Spring Boot, and React. This portfolio covers his professional experience, technical projects, and education.
 
 ## Who is Vivek Parmar?
-Vivek Parmar is a fullstack developer based in Ahmedabad, India, with 2+ years of experience building enterprise-grade applications. He specializes in high-availability Java Spring Boot backends paired with modern React and TypeScript frontends. He holds a degree from Gujarat Technological University and currently works at Techforce Global as a Software Engineer - L1.
+Vivek Parmar is a backend-focused full-stack software engineer based in Ahmedabad, India, with 2 years of experience. He works at Techforce Infotech Pvt. Ltd. as a Software Developer (promoted from Associate Software Developer), building an enterprise US healthcare order and patient management platform that supports 100+ practices, agencies, manufacturers, and administrators. He holds a B.E. in Computer Engineering from Vishwakarma Government Engineering College, Ahmedabad (Gujarat Technological University).
 
 ## Core Technical Skills
-- **Backend**: Java 8+, Spring Boot, Spring Security, Spring Data JPA, REST APIs, Microservices, Hibernate, OAuth2, JWT
-- **Frontend**: React.js, TypeScript, JavaScript, HTML5, CSS3, Framer Motion
-- **Databases**: MySQL, PostgreSQL, Query Optimization, Schema Design
-- **DevOps & Cloud**: Docker, AWS (Lambda, EC2, S3), Maven, Gradle, GitHub Actions, CI/CD
-- **Architecture**: Clean Architecture, SOLID Principles, Domain-Driven Design, Event-Driven Systems
+- **Backend**: Java 17, Spring Boot, Spring Security, JWT, JPA/Hibernate, REST APIs, Microservices, Async Processing, Distributed Job Locking, WebSocket
+- **Frontend**: React.js, TypeScript, JavaScript, Redux Toolkit, HTML5, CSS3, Angular 17, PrimeNG
+- **Databases**: MySQL, SQL
+- **Cloud & DevOps**: AWS (EC2, S3, Lambda, RDS), GitHub Actions, Jenkins, CI/CD, Git, GitHub, SVN, Maven
+- **AI**: Custom LLM integration for EHR document completeness checks
+- **Quality & Tooling**: JUnit, Mockito, Postman, SonarQube
+- **Integrations**: Stripe, ERP systems, email/SMS APIs, webhooks, Apache PDFBox, Apache POI
 
 ## Professional Experience
-- **Software Engineer - L1** at Techforce Global (January 2026 – Present): Leading architectural evolution of backend services and high-performance React frontends. Engineered high-concurrency Spring Boot microservices for global logistics automation. Implemented advanced PostgreSQL query optimizations improving throughput by 50%.
-- **Associate Software Developer** at Techforce Global (August 2024 – December 2025): Built scalable Spring Boot applications and modern React interfaces. Automated deployment processes using GitHub Actions and AWS.
-- **Software Developer Intern** at Rays TechServ (February 2024 – May 2024): Gained hands-on experience in full-stack development and software development lifecycle best practices.
+- **Software Developer** at Techforce Infotech Pvt. Ltd. (August 2024 – Present, promoted from Associate Software Developer): Designed, developed, and maintained 40+ REST APIs (Java 17, Spring Boot) for order, invoice, payment, notification, and document workflows on an enterprise US healthcare platform — 10,000+ orders and invoices handled across 100+ organizations. Built reusable React + TypeScript + Redux Toolkit components, implemented JWT authentication with role-based access control for secure patient data workflows, integrated Stripe, ERP systems, email/SMS providers, and webhooks, resolved production-critical issues across Dev/Stage/Prod, and deployed on AWS with Jenkins CI/CD.
+- **Software Developer Intern** at Rays TechServ (February 2024 – May 2024): Frontend and backend feature development, debugging, and defect resolution following Agile, Git, and SDLC practices.
 
 ## Featured Projects
-- [Enterprise Healthcare Hub](https://vivekparmar.is-a.dev/#projects): A HIPAA-compliant healthcare platform featuring IVR automation, scalable order lifecycles, automated financial processing via Stripe, and AWS Lambda/EC2 deployment. Built with Spring Boot, React, and AWS Cloud.
-- [Clinical Lab Automation](https://vivekparmar.is-a.dev/#projects): An advanced lab management ecosystem with high-throughput API communication, normalized MySQL schemas, and modular Angular 17 frontend with PrimeNG data visualization.
-- [Next-Gen Travel Engine](https://vivekparmar.is-a.dev/#projects): A high-performance travel booking platform with multi-factor authentication, scalable booking engine for high-volume seasonal traffic, and mobile-first responsive design.
-
-## Technical Blog
-- [Java Spring Boot Best Practices](https://vivekparmar.is-a.dev/#blog): Architectural patterns, dependency injection strategies, and production-grade Spring Boot configuration.
-- [Java Microservices Architecture](https://vivekparmar.is-a.dev/#blog): Service decomposition, inter-service communication, and resilience patterns for distributed systems.
-- [Java Developer Career Path](https://vivekparmar.is-a.dev/#blog): Career progression insights from intern to L1 engineer, including skills roadmap and growth strategies.
-- [Java Performance Optimization](https://vivekparmar.is-a.dev/#blog): JVM tuning, memory management, garbage collection optimization, and profiling techniques.
+- [Healthcare Order Management Platform](https://vivekparmar.is-a.dev/#projects): Production system at Techforce Infotech — 40+ REST APIs handling 10,000+ orders and invoices for 100+ organizations, with Stripe payments, WebSocket notifications, custom LLM-powered EHR document completeness checks, and AWS deployment with GitHub Actions and Jenkins CI/CD. Built with Java 17, Spring Boot, React, Redux Toolkit, and MySQL.
+- [Skillroom — Prompt Intelligence Engine](https://github.com/VivekParmar-18/skillroom): Open-source Claude Agent Skill (MIT licensed) that transforms brief prompts into expert-level prompts — intent classification across 13+ domains, automatic role assignment, and a transparent 0–100 quality scorecard.
+- [Lab Automation Tool](https://vivekparmar.is-a.dev/#projects): Client project at Techforce Infotech — lab workflow management built with Angular 17, PrimeNG, MySQL, and REST APIs.
+- [First Flight Travels](https://vivekparmar.is-a.dev/#projects): Personal project — a multi-page travel booking website front-end built with HTML5 and CSS3.
 
 ## Education
-- Bachelor of Engineering (B.E) in Computer Science — Gujarat Technological University
+- B.E. — Computer Engineering, Vishwakarma Government Engineering College, Ahmedabad (Gujarat Technological University), 2020 – 2024
+
+## Certifications
+- Model Context Protocol: Advanced Topics — Anthropic (2026)
+- Claude Code in Action — Anthropic (2026)
+- Java Foundations Professional Certificate — JetBrains (2026)
+- Building AI Agents: Advanced Techniques for Developers — LinkedIn Learning (2026)
+- AWS Certified Developer – Associate (in progress)
 
 ## Contact
 - Website: https://vivekparmar.is-a.dev
@@ -38,7 +41,8 @@ Vivek Parmar is a fullstack developer based in Ahmedabad, India, with 2+ years o
 
 ## Key Facts
 - Located in Ahmedabad, Gujarat, India
-- 2+ years of professional software engineering experience
-- 15+ projects delivered across healthcare, logistics, and travel domains
-- Proficient in 12+ technologies spanning the full stack
-- Open to collaboration and new opportunities
+- 2 years of professional software engineering experience
+- 40+ production REST APIs designed, developed, and maintained
+- 10,000+ orders and invoices handled; 100+ organizations supported
+- Team Motivator Award recipient; preparing for AWS Certified Developer – Associate
+- Open to software engineer roles (Ahmedabad / Remote)

@@ -5,15 +5,15 @@ import { useResponsive, useReducedMotion } from '../../hooks/useResponsive';
 import { useSwipeGesture } from '../../hooks/useSwipeGesture';
 import { personal } from '../../data/personalData';
 
+// "Home" lives on the logo; keeping the list short so the pill never clips.
 const navItems = [
-  { id: 'hero',          label: 'Home' },
-  { id: 'about',         label: 'The Journey' },
-  { id: 'java-expertise',label: 'Java Specialist' },
-  { id: 'skills',        label: 'Engineering Tech' },
-  { id: 'experience',    label: 'Career Growth' },
-  { id: 'projects',      label: 'Build Archive' },
-  { id: 'blog',          label: 'Reflections' },
-  { id: 'contact',       label: 'Connect' },
+  { id: 'about',         label: 'About' },
+  { id: 'java-expertise',label: 'Backend' },
+  { id: 'skills',        label: 'Skills' },
+  { id: 'experience',    label: 'Experience' },
+  { id: 'projects',      label: 'Projects' },
+  { id: 'education',     label: 'Education' },
+  { id: 'contact',       label: 'Contact' },
 ];
 
 const scrollTo = (id: string) => {
@@ -25,16 +25,10 @@ const Navigation = ({ className = '' }: { className?: string }) => {
   const [isScrolled,        setIsScrolled]        = useState(false);
   const [activeSection,     setActiveSection]      = useState('hero');
   const [isMobileMenuOpen,  setIsMobileMenuOpen]   = useState(false);
-  const [isReady,           setIsReady]            = useState(false);
   const { isMobile, isTablet, isTouchDevice } = useResponsive();
   const prefersReducedMotion = useReducedMotion();
   const mobileMenuRef = useRef<HTMLDivElement>(null);
   const isSmall = isMobile || isTablet;
-
-  useEffect(() => {
-    const t = setTimeout(() => setIsReady(true), 150);
-    return () => clearTimeout(t);
-  }, []);
 
   const { attachSwipeListeners } = useSwipeGesture({
     onSwipeRight: () => isMobileMenuOpen && setIsMobileMenuOpen(false),
@@ -47,24 +41,37 @@ const Navigation = ({ className = '' }: { className?: string }) => {
     }
   }, [attachSwipeListeners, isTouchDevice, isMobileMenuOpen]);
 
-  // Scroll-based active section
+  // Nav background state: rAF-throttled, reads only scrollY — no layout reads.
   useEffect(() => {
+    let ticking = false;
     const onScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-      const scrollY = window.scrollY + window.innerHeight * 0.35;
-      let active = 'hero';
-      for (const item of navItems) {
-        const el = document.getElementById(item.id);
-        if (el && el.offsetTop <= scrollY) active = item.id;
-      }
-      setActiveSection(active);
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        ticking = false;
+        setIsScrolled(window.scrollY > 50);
+      });
     };
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  if (!isReady) return null;
+  // Active section via IntersectionObserver — the previous version read
+  // offsetTop of every section on every scroll event (layout thrash).
+  useEffect(() => {
+    const obs = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) setActiveSection(e.target.id);
+        });
+      },
+      { rootMargin: '-35% 0px -55% 0px', threshold: 0 }
+    );
+    // #contact is a <footer>, so match any element with an id we navigate to
+    document.querySelectorAll('section[id], footer[id]').forEach((s) => obs.observe(s));
+    return () => obs.disconnect();
+  }, []);
 
   return (
     <>
@@ -78,31 +85,43 @@ const Navigation = ({ className = '' }: { className?: string }) => {
       </a>
 
       {/* ── Desktop pill nav ── */}
+      {/* Centering lives on this wrapper: framer-motion owns the nav's transform for the
+          y-entrance, which would clobber a Tailwind -translate-x-1/2 on the same element. */}
       {!isSmall && (
+        <div className="fixed top-4 inset-x-0 z-50 flex justify-center px-4 pointer-events-none">
         <motion.nav
           initial={{ y: -80, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: prefersReducedMotion ? 0.1 : 0.5, ease: 'easeOut' }}
-          className={`fixed top-4 left-1/2 -translate-x-1/2 z-50 ${className}`}
+          className={`pointer-events-auto max-w-full ${className}`}
         >
           <div
-            className="flex items-center gap-1 px-4 py-2 rounded-full"
+            className="flex items-center gap-0.5 xl:gap-1 px-3 xl:px-4 py-2 rounded-full"
             style={{
               background: isScrolled ? 'rgba(10,15,30,0.92)' : 'rgba(10,15,30,0.75)',
               backdropFilter: 'blur(20px)',
               border: '1px solid rgba(255,255,255,0.08)',
               boxShadow: isScrolled ? '0 8px 32px rgba(0,0,0,0.4)' : '0 4px 16px rgba(0,0,0,0.2)',
-              transition: 'background 0.3s, box-shadow 0.3s',
+              transition: 'background var(--dur-micro) var(--ease-brand), box-shadow var(--dur-micro) var(--ease-brand)',
             }}
           >
-            {/* Logo removed as requested */}
+            {/* Logo — scrolls to top */}
+            <button
+              onClick={() => scrollTo('hero')}
+              aria-label="Scroll to top"
+              className="pl-1 pr-2 xl:pr-3 mr-1 py-1 text-sm font-bold text-white whitespace-nowrap border-r border-white/10 hover:text-blue-400 transition-colors"
+              style={{ fontFamily: 'var(--font-display)', letterSpacing: '-0.01em' }}
+            >
+              Vivek Parmar
+            </button>
 
             {navItems.map((item) => (
               <motion.button
                 key={item.id}
                 onClick={() => scrollTo(item.id)}
                 aria-label={`Scroll to ${item.label}`}
-                className="relative px-3 py-1.5 rounded-full text-sm font-medium transition-colors"
+                aria-current={activeSection === item.id ? 'true' : undefined}
+                className="relative px-2 xl:px-3 py-1.5 rounded-full text-[13px] xl:text-sm font-medium transition-colors whitespace-nowrap"
                 style={{ color: activeSection === item.id ? '#fff' : 'rgba(148,163,184,0.9)' }}
                 whileHover={!prefersReducedMotion ? { scale: 1.05 } : {}}
                 whileTap={{ scale: 0.95 }}
@@ -120,6 +139,7 @@ const Navigation = ({ className = '' }: { className?: string }) => {
             ))}
           </div>
         </motion.nav>
+        </div>
       )}
 
       {/* ── Mobile hamburger ── */}
@@ -164,7 +184,7 @@ const Navigation = ({ className = '' }: { className?: string }) => {
             >
               {/* Header */}
               <div className="flex items-center justify-between px-6 pt-6 pb-4 border-b border-white/[0.06]">
-                <span className="text-white font-bold" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>{personal.name}</span>
+                <span className="text-white font-bold" style={{ fontFamily: 'var(--font-display)' }}>{personal.name}</span>
                 <button 
                   onClick={() => setIsMobileMenuOpen(false)} 
                   className="p-1.5 rounded-lg text-slate-400 hover:text-white" 
@@ -188,6 +208,7 @@ const Navigation = ({ className = '' }: { className?: string }) => {
                         onClick={() => { scrollTo(item.id); setIsMobileMenuOpen(false); }}
                         className="w-full text-left px-4 py-3 rounded-xl font-medium transition-all"
                         aria-label={`Navigate to ${item.label}`}
+                        aria-current={activeSection === item.id ? 'true' : undefined}
                         style={{
                           color: activeSection === item.id ? '#60a5fa' : 'rgba(148,163,184,0.9)',
                           background: activeSection === item.id ? 'rgba(59,130,246,0.1)' : 'transparent',
@@ -202,9 +223,6 @@ const Navigation = ({ className = '' }: { className?: string }) => {
                 </ul>
               </nav>
 
-              <div className="px-6 py-4 border-t border-white/[0.06]">
-                <p className="text-slate-600 text-xs text-center" style={{ fontFamily: "'Fira Code', monospace" }}>Swipe right to close</p>
-              </div>
             </motion.div>
           </>
         )}

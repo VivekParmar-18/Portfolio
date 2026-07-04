@@ -1,4 +1,4 @@
-import { useEffect, lazy, Suspense } from 'react';
+import { useEffect } from 'react';
 import {
   Navigation,
   Hero,
@@ -8,57 +8,33 @@ import {
   ContactForm,
   ScrollToTop,
 } from '../components';
+// Sections are imported eagerly on purpose: each chunk was only 2–4 kB gzipped,
+// so lazy-loading saved almost nothing while making sections pop in as
+// skeletons mid-scroll. One slightly larger bundle scrolls perfectly smooth.
+import About from '../components/About/About';
+import JavaExpertise from '../components/JavaExpertise/JavaExpertise';
+import Experience from '../components/Experience/Experience';
+import Projects from '../components/Projects/Projects';
+import Education from '../components/Education/Education';
 import { contactMethods } from '../data/contactData';
 import { motion } from 'framer-motion';
 import { personal } from '../data/personalData';
 import { useSEO } from '../hooks/useSEO';
 
-const LazyAbout       = lazy(() => import('../components/About/About'));
-const LazyJavaExpertise = lazy(() => import('../components/JavaExpertise/JavaExpertise'));
-const LazyExperience  = lazy(() => import('../components/Experience/Experience'));
-const LazyProjects    = lazy(() => import('../components/Projects/Projects'));
-const LazyBlog        = lazy(() => import('../components/Blog/Blog'));
-
-const SectionFallback = ({ label }: { label: string }) => (
-  <div className="flex items-center justify-center py-32">
-    <div className="flex flex-col items-center gap-3">
-      <div className="w-8 h-8 border-2 border-blue-400/30 border-t-blue-400 rounded-full animate-spin" />
-      <span className="text-slate-500 text-sm font-mono">Loading {label}…</span>
-    </div>
-  </div>
-);
+const EASE = [0.22, 1, 0.36, 1] as const;
 
 const SinglePagePortfolio = () => {
   const { updateSEO } = useSEO();
 
   useEffect(() => {
     updateSEO({
-      title: `${personal.name} — Fullstack Java & React Developer`,
+      title: 'Vivek Parmar — Software Developer | Java, Spring Boot & React',
       description: personal.bio,
     });
   }, [updateSEO]);
 
-  // IntersectionObserver to drive nav highlight
-  useEffect(() => {
-    const obs = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) {
-            window.dispatchEvent(
-              new CustomEvent('sectionChange', { detail: { sectionId: e.target.id } })
-            );
-          }
-        });
-      },
-      { rootMargin: '-40% 0px -40% 0px', threshold: 0 }
-    );
-    const sections = document.querySelectorAll('section[id]');
-    sections.forEach((s) => obs.observe(s));
-    return () => obs.disconnect();
-  }, []);
-
   return (
-    <div className="min-h-screen bg-slate-950 relative overflow-x-hidden" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+    <div className="min-h-screen bg-slate-950 relative overflow-x-hidden" style={{ fontFamily: 'var(--font-body)' }}>
       <BackgroundElements />
       <Navigation />
 
@@ -66,35 +42,25 @@ const SinglePagePortfolio = () => {
       <Hero />
 
       {/* ── About ── */}
-      <Suspense fallback={<SectionFallback label="About" />}>
-        <LazyAbout />
-      </Suspense>
+      <About />
 
       {/* ── Java Expertise ── */}
-      <Suspense fallback={<SectionFallback label="Java Expertise" />}>
-        <LazyJavaExpertise />
-      </Suspense>
+      <JavaExpertise />
 
       {/* ── Skills ── */}
       <Skills />
 
       {/* ── Experience ── */}
-      <Suspense fallback={<SectionFallback label="Experience" />}>
-        <LazyExperience />
-      </Suspense>
+      <Experience />
 
       {/* ── Projects ── */}
-      <Suspense fallback={<SectionFallback label="Projects" />}>
-        <LazyProjects />
-      </Suspense>
+      <Projects />
 
-      {/* ── Blog ── */}
-      <Suspense fallback={<SectionFallback label="Blog" />}>
-        <LazyBlog />
-      </Suspense>
+      {/* ── Education ── */}
+      <Education />
 
       {/* ── Contact & Footer ── */}
-      <footer id="contact" className="py-28 bg-slate-950 relative overflow-hidden">
+      <footer id="contact" className="py-24 md:py-32 2xl:py-40 bg-slate-950 relative overflow-hidden">
         {/* Glow */}
         <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse 80% 50% at 50% 100%, rgba(59,130,246,0.07) 0%, transparent 70%)' }} />
 
@@ -103,19 +69,22 @@ const SinglePagePortfolio = () => {
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            viewport={{ once: true, margin: '-80px' }}
+            transition={{ duration: 0.6, ease: EASE }}
             className="text-center mb-16"
           >
-            <span className="inline-block text-xs font-semibold tracking-[0.2em] uppercase mb-4 px-3 py-1 rounded-full"
-              style={{ color: '#60a5fa', background: 'rgba(59,130,246,0.08)', border: '1px solid rgba(59,130,246,0.15)', fontFamily: "'Fira Code', monospace" }}>
-              Let's Connect
+            <span className="flex items-center justify-center gap-3 mb-5">
+              <span className="w-6 h-px bg-blue-500/40" aria-hidden="true" />
+              <span className="text-[11px] tracking-[0.25em] uppercase text-blue-400" style={{ fontFamily: "'Fira Code', monospace" }}>
+                Contact
+              </span>
+              <span className="w-6 h-px bg-blue-500/40" aria-hidden="true" />
             </span>
-            <h2 className="text-4xl md:text-6xl font-bold text-white mb-5" style={{ letterSpacing: '-0.03em' }}>
-              Get In Touch
+            <h2 className="text-4xl md:text-5xl font-bold text-white tracking-tight mb-5">
+              Get in touch
             </h2>
             <p className="text-xl text-slate-400 max-w-xl mx-auto leading-relaxed">
-              Ready to work together? I'm always excited to discuss new opportunities and innovative projects.
+              Hiring for a backend or full-stack role? Email me or reach out on LinkedIn — I reply within 24 hours.
             </p>
           </motion.div>
 
@@ -140,45 +109,85 @@ const SinglePagePortfolio = () => {
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
+              viewport={{ once: true, margin: '-80px' }}
+              transition={{ duration: 0.6, ease: EASE }}
               className="md:col-span-2"
             >
-              <h3 className="text-2xl font-bold text-white mb-4" style={{ letterSpacing: '-0.01em' }}>Send Me a Message</h3>
+              <h3 className="text-2xl font-bold text-white mb-4" style={{ letterSpacing: '-0.01em' }}>Send me a message</h3>
               <p className="text-slate-400 leading-relaxed mb-8">Fill out the form and I'll get back to you within 24 hours.</p>
-              <div className="space-y-3" aria-label="Professional Commitments">
-                {[
-                  { icon: '⚡', title: 'Fast Response', desc: 'Usually within 24 hours' },
-                  { icon: '🤝', title: 'Open to Collaboration', desc: 'Projects of any size' },
-                  { icon: '🌍', title: 'Remote Friendly', desc: 'Working across time zones' },
-                ].map((item) => (
-                  <div key={item.title} className="flex items-start gap-3 p-4 rounded-xl"
-                    style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)' }}>
-                    <span className="text-xl" aria-hidden="true">{item.icon}</span>
-                    <div>
-                      <div className="text-white font-semibold text-sm">{item.title}</div>
-                      <div className="text-slate-500 text-xs mt-0.5">{item.desc}</div>
-                    </div>
-                  </div>
-                ))}
-              </div>
+              <p className="text-slate-500 text-sm leading-relaxed">
+                Based in Ahmedabad, India — open to on-site, hybrid, and remote roles.
+              </p>
             </motion.div>
 
             <motion.div
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.1 }}
+              viewport={{ once: true, margin: '-80px' }}
+              transition={{ duration: 0.6, delay: 0.08, ease: EASE }}
               className="md:col-span-3"
             >
               <ContactForm />
             </motion.div>
           </div>
 
-          {/* Footer Copyright */}
-          <div className="text-center pt-12 border-t border-slate-900/50 mt-16" role="contentinfo">
-            <p className="text-slate-600 text-[13px] font-medium tracking-wider uppercase" style={{ fontFamily: "'Fira Code', monospace", opacity: 0.8 }}>
-              &copy; {new Date().getFullYear()} {personal.name}. Software Engineer - L1. All Rights Reserved.
+          {/* Footer */}
+          <div className="pt-12 border-t border-white/5 mt-16" role="contentinfo">
+            {/* Identity + quick links */}
+            <div className="flex flex-col md:flex-row items-center justify-between gap-6 mb-10">
+              <div className="text-center md:text-left">
+                <p className="text-white font-semibold text-sm">{personal.name}</p>
+                <p className="text-slate-400 text-sm mt-1">Software Developer — Java, Spring Boot &amp; React</p>
+              </div>
+              <nav aria-label="Footer">
+                <ul className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
+                  <li>
+                    <a href="#about" className="text-sm text-slate-400 hover:text-white transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/60 rounded-sm">
+                      About
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#projects" className="text-sm text-slate-400 hover:text-white transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/60 rounded-sm">
+                      Projects
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href={personal.resumeUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-sm text-slate-400 hover:text-white transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/60 rounded-sm"
+                    >
+                      Resume
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href={personal.github}
+                      target="_blank"
+                      rel="noopener noreferrer me"
+                      className="text-sm text-slate-400 hover:text-white transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/60 rounded-sm"
+                    >
+                      GitHub
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href={personal.linkedin}
+                      target="_blank"
+                      rel="noopener noreferrer me"
+                      className="text-sm text-slate-400 hover:text-white transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/60 rounded-sm"
+                    >
+                      LinkedIn
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+
+            {/* Copyright */}
+            <p className="text-center text-slate-500 text-[13px] font-medium tracking-wider uppercase" style={{ fontFamily: "'Fira Code', monospace" }}>
+              &copy; {new Date().getFullYear()} {personal.name} · Software Developer · Ahmedabad, India
             </p>
           </div>
         </div>

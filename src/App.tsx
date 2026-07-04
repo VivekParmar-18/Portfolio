@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { CursorFollower } from './components/index';
 import { initializeLazyLoading } from './utils/lazyAnimationLoader';
 import { animationCleanupRegistry } from './utils/animationOptimization';
 import SinglePagePortfolio from './pages/SinglePagePortfolio';
@@ -22,7 +21,6 @@ function App() {
       <div className="App">
         {/* Core UI Overlays */}
         <ReadingProgress />
-        <CursorFollower />
 
         {/* Navigation & Content */}
         <Routes>

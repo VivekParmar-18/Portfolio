@@ -65,7 +65,7 @@ const SocialLinks: React.FC<SocialLinksProps> = ({ socialLinks }) => {
             hover:bg-slate-700/50 hover:border-slate-600/50
             transition-all duration-300 ease-out
             hover:shadow-lg hover:shadow-blue-500/20
-            backdrop-blur-sm
+            
           "
         >
           {/* Icon */}

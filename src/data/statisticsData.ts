@@ -11,30 +11,26 @@ export interface Statistic {
 export const statisticsData: Statistic[] = [
   {
     id: 'experience',
-    label: 'Engineering Journey',
+    label: 'Years of experience',
     value: 2,
-    suffix: '+ yrs',
-    icon: '🏗️'
+    suffix: '+ yrs'
   },
   {
-    id: 'projects',
-    label: 'Architecture Success',
-    value: 15,
-    suffix: '+ systems',
-    icon: '🔮'
+    id: 'apis',
+    label: 'Production REST APIs',
+    value: 40,
+    suffix: '+'
   },
   {
-    id: 'technologies',
-    label: 'Innovation Stack',
-    value: 12,
-    suffix: '+ tools',
-    icon: '🧩'
+    id: 'orders',
+    label: 'Orders & invoices processed',
+    value: 10000,
+    suffix: '+'
   },
   {
-    id: 'satisfaction',
-    label: 'Performance Index',
-    value: 99,
-    suffix: '%',
-    icon: '💎'
+    id: 'organizations',
+    label: 'Organizations supported',
+    value: 100,
+    suffix: '+'
   }
 ];

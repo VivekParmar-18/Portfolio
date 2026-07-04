@@ -8,9 +8,10 @@ interface FormData { name: string; email: string; subject: string; message: stri
 interface FormErrors { name?: string; email?: string; subject?: string; message?: string; }
 type FormStatus = { type: 'idle' | 'loading' | 'success' | 'error'; message?: string };
 
-// ✅ Replace YOUR_FORM_ID below after signing up at https://formspree.io
-// The free plan allows 50 submissions/month — perfect for a portfolio.
-const FORMSPREE_ENDPOINT = `https://formspree.io/f/YOUR_FORM_ID`;
+// FormSubmit relays submissions to the inbox below — no signup required.
+// NOTE: the FIRST submission triggers a one-time activation email from
+// FormSubmit that must be confirmed before messages start arriving.
+const FORM_ENDPOINT = 'https://formsubmit.co/ajax/vivek18parmar@gmail.com';
 
 const inputBase = {
   background: 'rgba(255,255,255,0.04)',
@@ -21,22 +22,24 @@ const inputBase = {
   fontSize: '0.95rem',
   width: '100%',
   outline: 'none',
-  transition: 'border-color 0.2s, box-shadow 0.2s',
-  fontFamily: "'Space Grotesk', sans-serif",
+  transition: 'border-color 0.2s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.2s cubic-bezier(0.22, 1, 0.36, 1)',
+  fontFamily: 'var(--font-body)',
 } as React.CSSProperties;
 
 const inputFocus = {
-  borderColor: 'rgba(59,130,246,0.5)',
-  boxShadow: '0 0 0 3px rgba(59,130,246,0.10)',
+  borderColor: 'rgba(59,130,246,0.6)',
+  boxShadow: '0 0 0 2px rgba(59,130,246,0.25)',
 };
 
-const Field = ({ label, error, children }: { label: string; error?: string; children: React.ReactNode }) => (
+const Field = ({ id, label, error, children }: { id: string; label: string; error?: string; children: React.ReactNode }) => (
   <div>
-    <label className="block text-sm font-medium text-slate-300 mb-2">{label}</label>
+    <label htmlFor={id} className="block text-sm font-medium text-slate-300 mb-2">
+      {label} <span className="text-blue-400" aria-hidden="true">*</span>
+    </label>
     {children}
     <AnimatePresence>
       {error && (
-        <motion.p initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -4 }} className="mt-1.5 text-xs text-red-400 flex items-center gap-1">
+        <motion.p initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -4 }} role="alert" className="mt-1.5 text-xs text-red-400 flex items-center gap-1">
           <ExclamationCircleIcon className="w-3.5 h-3.5" />{error}
         </motion.p>
       )}
@@ -58,9 +61,17 @@ const ContactForm = () => {
     return undefined;
   };
 
-  const handleChange = (name: string, value: string) => {
+  // Validate on blur, not per keystroke; while typing, only clear an error once it's fixed.
+  const handleChange = (name: keyof FormData, value: string) => {
     setFormData(prev => ({ ...prev, [name]: value }));
-    setErrors(prev => ({ ...prev, [name]: validate(name, value) }));
+    if (errors[name] && !validate(name, value)) {
+      setErrors(prev => ({ ...prev, [name]: undefined }));
+    }
+  };
+
+  const handleBlur = (name: keyof FormData) => {
+    setFocused(null);
+    setErrors(prev => ({ ...prev, [name]: validate(name, formData[name]) }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -70,14 +81,20 @@ const ContactForm = () => {
       const err = validate(k, v);
       if (err) newErrors[k] = err;
     });
-    if (Object.keys(newErrors).length > 0) { setErrors(newErrors); return; }
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      // Move focus to the first invalid field so keyboard/screen-reader users land on the problem
+      const first = (['name', 'email', 'subject', 'message'] as const).find(k => newErrors[k]);
+      if (first) document.getElementById(`contact-${first}`)?.focus();
+      return;
+    }
 
     setStatus({ type: 'loading' });
     try {
-      const res = await fetch(FORMSPREE_ENDPOINT, {
+      const res = await fetch(FORM_ENDPOINT, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify({ ...formData, _replyto: formData.email }),
+        body: JSON.stringify({ ...formData, _subject: formData.subject, _replyto: formData.email }),
       });
       if (res.ok) {
         setStatus({ type: 'success', message: "Message sent! I'll get back to you within 24 hours." });
@@ -98,41 +115,46 @@ const ContactForm = () => {
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.6 }}
+      viewport={{ once: true, margin: '-80px' }}
+      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
       className="p-8 rounded-2xl"
       style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)' }}
     >
-      <form onSubmit={handleSubmit} className="space-y-5">
+      <form onSubmit={handleSubmit} className="space-y-5" noValidate>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-          <Field label="Your Name" error={errors.name}>
-            <input style={getInputStyle('name')} placeholder="Vivek Parmar" value={formData.name}
+          <Field id="contact-name" label="Your Name" error={errors.name}>
+            <input id="contact-name" style={getInputStyle('name')} placeholder="Vivek Parmar" value={formData.name}
+              autoComplete="name" aria-invalid={!!errors.name}
               onChange={(e) => handleChange('name', e.target.value)}
-              onFocus={() => setFocused('name')} onBlur={() => setFocused(null)} />
+              onFocus={() => setFocused('name')} onBlur={() => handleBlur('name')} />
           </Field>
-          <Field label="Email Address" error={errors.email}>
-            <input style={getInputStyle('email')} placeholder="you@example.com" type="email" value={formData.email}
+          <Field id="contact-email" label="Email Address" error={errors.email}>
+            <input id="contact-email" style={getInputStyle('email')} placeholder="you@example.com" type="email" value={formData.email}
+              autoComplete="email" inputMode="email" aria-invalid={!!errors.email}
               onChange={(e) => handleChange('email', e.target.value)}
-              onFocus={() => setFocused('email')} onBlur={() => setFocused(null)} />
+              onFocus={() => setFocused('email')} onBlur={() => handleBlur('email')} />
           </Field>
         </div>
 
-        <Field label="Subject" error={errors.subject}>
-          <input style={getInputStyle('subject')} placeholder="Project collaboration, job opportunity…" value={formData.subject}
+        <Field id="contact-subject" label="Subject" error={errors.subject}>
+          <input id="contact-subject" style={getInputStyle('subject')} placeholder="Project collaboration, job opportunity…" value={formData.subject}
+            aria-invalid={!!errors.subject}
             onChange={(e) => handleChange('subject', e.target.value)}
-            onFocus={() => setFocused('subject')} onBlur={() => setFocused(null)} />
+            onFocus={() => setFocused('subject')} onBlur={() => handleBlur('subject')} />
         </Field>
 
-        <Field label="Message" error={errors.message}>
-          <textarea style={{ ...getInputStyle('message'), resize: 'vertical', minHeight: '140px' } as React.CSSProperties}
+        <Field id="contact-message" label="Message" error={errors.message}>
+          <textarea id="contact-message" style={{ ...getInputStyle('message'), resize: 'vertical', minHeight: '140px' } as React.CSSProperties}
             placeholder="Tell me about your project or opportunity…" value={formData.message}
+            aria-invalid={!!errors.message}
             onChange={(e) => handleChange('message', e.target.value)}
-            onFocus={() => setFocused('message')} onBlur={() => setFocused(null)} rows={5} />
+            onFocus={() => setFocused('message')} onBlur={() => handleBlur('message')} rows={5} />
         </Field>
 
         <AnimatePresence>
           {status.message && (
             <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 8 }}
+              role="alert"
               className="flex items-start gap-2.5 p-4 rounded-xl text-sm"
               style={{ background: status.type === 'success' ? 'rgba(16,185,129,0.08)' : 'rgba(239,68,68,0.08)', border: `1px solid ${status.type === 'success' ? 'rgba(16,185,129,0.2)' : 'rgba(239,68,68,0.2)'}`, color: status.type === 'success' ? '#34d399' : '#f87171' }}>
               {status.type === 'success' ? <CheckCircleIcon className="w-5 h-5 flex-shrink-0 mt-0.5" /> : <ExclamationCircleIcon className="w-5 h-5 flex-shrink-0 mt-0.5" />}
@@ -153,7 +175,7 @@ const ContactForm = () => {
           )}
         </motion.button>
 
-        <p className="text-center text-xs text-slate-600">
+        <p className="text-center text-xs text-slate-500">
           Prefer email? <a href={`mailto:${personal.email}`} className="text-blue-400 hover:underline">{personal.email}</a>
         </p>
       </form>

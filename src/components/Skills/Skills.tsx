@@ -1,8 +1,9 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { skillsData } from '../../data/skillsData';
-import type { Technology } from '../../types/types';
+import { skillTiers } from '../../data/skillsData';
 import { useReducedMotion } from '../../hooks/useResponsive';
+
+const EASE = [0.22, 1, 0.36, 1] as const;
 
 const Skills = () => {
   const [ref, inView] = useInView({ threshold: 0.05, triggerOnce: true });
@@ -11,116 +12,98 @@ const Skills = () => {
   return (
     <section
       id="skills"
-      className="py-32 relative overflow-hidden"
+      className="py-24 md:py-32 2xl:py-40 relative overflow-hidden"
       ref={ref}
     >
       {/* BG glows */}
       <div className="glow-mesh" />
 
-      <div className="max-w-6xl mx-auto px-6 relative z-10">
+      <div className="max-w-5xl mx-auto px-6 relative z-10">
         {/* Heading */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-24"
+          transition={{ duration: 0.6, ease: EASE }}
+          className="text-center mb-16"
         >
-          <span
-            className="inline-block text-[10px] font-bold tracking-[0.3em] uppercase mb-6 px-5 py-2 rounded-full"
-            style={{
-              color: '#34d399',
-              background: 'rgba(16,185,129,0.08)',
-              border: '1px solid rgba(16,185,129,0.15)',
-              fontFamily: 'var(--font-display)',
-            }}
-          >
-            Capabilities
+          <span className="flex items-center justify-center gap-3 mb-5">
+            <span className="w-6 h-px bg-blue-500/40" aria-hidden="true" />
+            <span className="text-[11px] tracking-[0.25em] uppercase text-blue-400" style={{ fontFamily: "'Fira Code', monospace" }}>
+              Tooling
+            </span>
+            <span className="w-6 h-px bg-blue-500/40" aria-hidden="true" />
           </span>
           <h2
-            className="text-4xl md:text-7xl font-extrabold text-white mb-8"
-            style={{ letterSpacing: '-0.05em', fontFamily: 'var(--font-display)' }}
+            className="text-4xl md:text-5xl font-bold text-white tracking-tight mb-8"
+            style={{ fontFamily: 'var(--font-display)' }}
           >
-            The Technical <span className="premium-gradient-text">Ecosystem</span>
+            Skills
           </h2>
           <p className="text-slate-400 text-xl max-w-2xl mx-auto font-light leading-relaxed">
-            A curated selection of tools and frameworks I've mastered to bridge the gap between complex logic and human-centric design.
+            Grouped by how often each tool earns its place in my day — not a wall of logos.
           </p>
         </motion.div>
 
-        {/* Staggered grid */}
-        <div 
-          className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-5"
-          aria-label="Technical Skills and Frameworks"
-        >
-          {skillsData.map((tech: Technology, i: number) => (
+        {/* Tiered stack */}
+        <div className="space-y-5" aria-label="Technical skills grouped by depth">
+          {skillTiers.map((tier, tierIndex) => (
             <motion.div
-              key={tech.name}
-              initial={{ opacity: 0, y: 30, scale: 0.9 }}
-              animate={inView ? { opacity: 1, y: 0, scale: 1 } : {}}
+              key={tier.title}
+              initial={{ opacity: 0, y: 24 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{
-                duration: prefersReducedMotion ? 0.1 : 0.4,
-                delay: prefersReducedMotion ? 0 : i * 0.04,
-                ease: [0.25, 0.46, 0.45, 0.94],
+                duration: prefersReducedMotion ? 0.1 : 0.6,
+                delay: prefersReducedMotion ? 0 : tierIndex * 0.08,
+                ease: EASE,
               }}
-              whileHover={
-                !prefersReducedMotion
-                  ? { y: -8, scale: 1.05, transition: { duration: 0.2 } }
-                  : {}
-              }
-              className="group cursor-default"
-              aria-label={`${tech.name} proficiency`}
+              className="glass-card border-white/5 p-6 md:p-8 lg:flex lg:items-start lg:gap-10"
+              style={{ borderRadius: 20 }}
             >
-              <div
-                className="glass-card relative p-6 text-center overflow-hidden h-full flex flex-col items-center justify-center gap-4 border-white/5 group-hover:border-blue-500/30 group-hover:bg-blue-500/5 transition-all duration-500"
-              >
-                {/* Shimmer on hover */}
-                <div
-                  className="absolute inset-0 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-300"
-                  style={{
-                    background:
-                      'linear-gradient(135deg, rgba(59,130,246,0.1) 0%, transparent 100%)',
-                  }}
-                />
-
-                {/* Icon */}
-                <div className="w-14 h-14 flex items-center justify-center">
-                  <img
-                    src={tech.icon}
-                    alt={tech.name}
-                    className="w-12 h-12 object-contain group-hover:scale-110 transition-transform duration-500 drop-shadow-lg"
-                    loading="lazy"
-                    onError={(e) => {
-                      (e.target as HTMLImageElement).style.display = 'none';
-                    }}
-                  />
+              {/* Tier label */}
+              <div className="lg:w-[220px] flex-shrink-0 mb-5 lg:mb-0">
+                <div className="flex items-baseline gap-3">
+                  <span
+                    className="text-[11px] text-slate-600"
+                    style={{ fontFamily: "'Fira Code', monospace" }}
+                    aria-hidden="true"
+                  >
+                    {String(tierIndex + 1).padStart(2, '0')}
+                  </span>
+                  <h3 className="text-white font-bold text-lg" style={{ fontFamily: 'var(--font-display)' }}>
+                    {tier.title}
+                  </h3>
                 </div>
-
-                {/* Name */}
-                <span
-                  className="text-slate-300 text-sm font-bold group-hover:text-white transition-colors leading-tight text-center"
-                  style={{ fontFamily: 'var(--font-display)' }}
-                >
-                  {tech.name}
-                </span>
+                <p className="text-slate-500 text-sm leading-relaxed mt-2">{tier.desc}</p>
               </div>
+
+              {/* Chips */}
+              <ul className="flex flex-wrap gap-2.5 flex-1 m-0 p-0 list-none" aria-label={`${tier.title} technologies`}>
+                {tier.items.map((item) => (
+                  <li key={item.name}>
+                    <span
+                      className="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg text-sm text-slate-300 bg-white/[0.03] border border-white/[0.07] hover:border-blue-500/40 hover:bg-blue-500/[0.06] hover:text-white cursor-default"
+                      style={{ transition: 'all var(--dur-micro, 0.35s) var(--ease-brand, ease-out)' }}
+                    >
+                      {item.icon && (
+                        <img
+                          src={item.icon}
+                          alt=""
+                          aria-hidden="true"
+                          width={16}
+                          height={16}
+                          className="w-4 h-4 object-contain"
+                          loading="lazy"
+                          onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
+                        />
+                      )}
+                      {item.name}
+                    </span>
+                  </li>
+                ))}
+              </ul>
             </motion.div>
           ))}
         </div>
-
-        {/* Bottom fade-in note */}
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={inView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.6, delay: skillsData.length * 0.04 + 0.2 }}
-          className="text-center text-slate-600 text-sm mt-12"
-          style={{ fontFamily: "'Fira Code', monospace" }}
-        >
-          +{' '}
-          <span className="text-slate-500">
-            Maven · Gradle · IntelliJ · Postman · Linux
-          </span>{' '}
-          & more
-        </motion.p>
       </div>
     </section>
   );

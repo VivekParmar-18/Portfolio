@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
-// Lighter easing
-const lightEasing = 'ease-out';
+// Signature brand easing
+const lightEasing = 'var(--ease-brand, ease-out)';
 
 const ScrollToTop = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -33,16 +33,18 @@ const ScrollToTop = () => {
   return (
     <button
       onClick={scrollToTop}
-      className={`fixed bottom-8 right-8 z-50 p-3 bg-blue-500 hover:bg-blue-600 text-white rounded-full shadow-lg ${
+      className={`fixed bottom-6 right-6 md:bottom-8 md:right-8 z-30 flex items-center justify-center bg-blue-500 hover:bg-blue-600 text-white rounded-full shadow-lg touch-manipulation focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950 ${
         isVisible ? 'opacity-100' : 'opacity-0 pointer-events-none'
       }`}
       style={{
+        width: 48, // 44px+ touch target
+        height: 48,
         transform: isVisible ? 'translate3d(0, 0, 0) scale(1)' : 'translate3d(0, 64px, 0) scale(0.8)',
         transition: `all 0.3s ${lightEasing}`, // Faster transition
         willChange: isVisible ? 'auto' : 'transform, opacity', // Dynamic will-change
         backfaceVisibility: 'hidden' // GPU optimization
       }}
-      aria-label="Scroll to top"
+      aria-label="Back to top"
     >
       <svg 
         className="w-6 h-6" 

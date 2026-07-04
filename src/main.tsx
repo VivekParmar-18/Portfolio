@@ -24,10 +24,10 @@ const hideInitialLoader = () => {
 const preloadCriticalImages = (): Promise<void[]> => {
   const criticalImages = [
     '/profile-photo.jpg',
-    'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg',
-    'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg',
-    'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg',
-    'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg'
+    '/icons/java.svg',
+    '/icons/spring.svg',
+    '/icons/react.svg',
+    '/icons/mysql.svg'
   ];
 
   return Promise.all(

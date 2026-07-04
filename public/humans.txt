@@ -1,21 +1,21 @@
 /* TEAM */
 Developer: Vivek Parmar
-Role: Software Engineer - L1
-Company: Techforce Global
+Role: Software Developer
+Company: Techforce Infotech Pvt. Ltd.
 Location: Ahmedabad, Gujarat, India
 Contact: vivek18parmar@gmail.com
 LinkedIn: https://linkedin.com/in/vivek1812
 GitHub: https://github.com/VivekParmar-18
 
 /* SITE */
-Last update: 2026-04-06
+Last update: 2026-07-04
 Standards: HTML5, CSS3, ES2023, TypeScript
-Components: React 18, Framer Motion, Vite
-Design: Custom dark theme, glassmorphism, premium animations
-Fonts: Outfit, Space Grotesk, Inter, Fira Code (Google Fonts)
+Components: React, Framer Motion, Vite
+Design: Custom dark theme, glassmorphism
+Fonts: Bricolage Grotesque, Instrument Sans, Fira Code (Google Fonts)
 
 /* THANKS */
-React — facebook.github.io/react
+React — react.dev
 Vite — vitejs.dev
 Framer Motion — framer.com/motion
 TypeScript — typescriptlang.org

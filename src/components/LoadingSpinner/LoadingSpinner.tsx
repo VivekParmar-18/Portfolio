@@ -16,7 +16,7 @@ const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({
   };
 
   return (
-    <div className={`flex items-center justify-center ${className}`}>
+    <div className={`flex items-center justify-center ${className}`} role="status" aria-label="Loading">
       <motion.div
         className={`${sizeClasses[size]} border-2 border-blue-500/30 border-t-blue-500 rounded-full`}
         animate={{ rotate: 360 }}

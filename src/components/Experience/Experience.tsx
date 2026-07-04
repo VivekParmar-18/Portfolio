@@ -3,29 +3,34 @@ import { useInView } from 'react-intersection-observer';
 import { experienceData } from '../../data/experienceData';
 import { FiBriefcase } from 'react-icons/fi';
 
+const EASE = [0.22, 1, 0.36, 1] as const;
+
 const Experience = () => {
   const [ref, inView] = useInView({ threshold: 0.05, triggerOnce: true });
 
   return (
-    <section id="experience" className="py-32 relative overflow-hidden" ref={ref}>
+    <section id="experience" className="py-24 md:py-32 2xl:py-40 relative overflow-hidden" ref={ref}>
       <div className="glow-mesh" />
 
       <div className="max-w-5xl mx-auto px-6 relative z-10">
         {/* Heading */}
-        <motion.div initial={{ opacity: 0, y: 30 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6 }} className="text-center mb-20">
-          <span className="inline-block text-xs font-semibold tracking-[0.2em] uppercase mb-4 px-3 py-1 rounded-full"
-            style={{ color: '#34d399', background: 'rgba(16,185,129,0.08)', border: '1px solid rgba(16,185,129,0.2)', fontFamily: "'Fira Code', monospace" }}>
-            Career
+        <motion.div initial={{ opacity: 0, y: 30 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, ease: EASE }} className="text-center mb-20">
+          <span className="flex items-center justify-center gap-3 mb-5">
+            <span className="w-6 h-px bg-blue-500/40" aria-hidden="true" />
+            <span className="text-[11px] tracking-[0.25em] uppercase text-blue-400" style={{ fontFamily: "'Fira Code', monospace" }}>
+              Career
+            </span>
+            <span className="w-6 h-px bg-blue-500/40" aria-hidden="true" />
           </span>
-          <h2 className="text-4xl md:text-6xl font-extrabold text-white" style={{ letterSpacing: '-0.04em' }}>
-            Work <span className="premium-gradient-text">Experience</span>
+          <h2 className="text-4xl md:text-5xl font-bold text-white tracking-tight">
+            Work Experience
           </h2>
         </motion.div>
 
         {/* Timeline */}
         <div className="relative">
           {/* Vertical line */}
-          <div className="absolute left-8 top-0 bottom-0 w-px hidden md:block" aria-hidden="true" style={{ background: 'linear-gradient(to bottom, rgba(59,130,246,0.4), rgba(16,185,129,0.4), transparent)' }} />
+          <div className="absolute left-8 top-0 bottom-0 w-px hidden md:block" aria-hidden="true" style={{ background: 'linear-gradient(to bottom, rgba(59,130,246,0.4), rgba(59,130,246,0.15), transparent)' }} />
 
           <div className="space-y-12" role="list" aria-label="Professional career timeline">
             {experienceData.map((exp, index) => (
@@ -33,7 +38,7 @@ const Experience = () => {
                 key={`${exp.company}-${exp.position}`}
                 initial={{ opacity: 0, x: -40 }}
                 animate={inView ? { opacity: 1, x: 0 } : {}}
-                transition={{ duration: 0.55, delay: index * 0.15 }}
+                transition={{ duration: 0.6, delay: index * 0.08, ease: EASE }}
                 className="relative md:pl-24"
                 role="listitem"
               >
@@ -46,7 +51,7 @@ const Experience = () => {
 
                 <motion.article
                   className="glass-card p-8 md:p-12 relative overflow-hidden group border-white/5 hover:border-white/10 transition-all duration-500"
-                  whileHover={{ y: -8, boxShadow: '0 30px 60px rgba(0,0,0,0.5)' }}
+                  whileHover={{ y: -4, boxShadow: '0 24px 48px rgba(0,0,0,0.45)', transition: { duration: 0.25, ease: EASE } }}
                   aria-labelledby={`exp-title-${index}`}
                 >
                   <div className="absolute top-0 left-0 w-full h-1" aria-hidden="true" style={{ background: index === 0 ? 'linear-gradient(90deg, var(--accent-primary), transparent)' : 'rgba(255,255,255,0.05)' }} />

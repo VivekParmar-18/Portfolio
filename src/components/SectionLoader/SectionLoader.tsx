@@ -1,123 +1,51 @@
 import React from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 
 interface SectionLoaderProps {
   isLoading: boolean;
   message?: string;
+  /** Kept for backward compatibility — the skeleton renders the same for all variants. */
   variant?: 'dots' | 'pulse' | 'wave' | 'spiral';
   className?: string;
 }
 
-const LoadingVariants = {
-  dots: () => (
-    <div className="flex space-x-2">
-      {[0, 1, 2].map((index) => (
-        <motion.div
-          key={index}
-          className="w-3 h-3 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"
-          animate={{
-            scale: [1, 1.5, 1],
-            opacity: [0.5, 1, 0.5],
-          }}
-          transition={{
-            duration: 1.2,
-            repeat: Infinity,
-            delay: index * 0.2,
-            ease: "easeInOut",
-          }}
-        />
-      ))}
-    </div>
-  ),
-  
-  pulse: () => (
-    <motion.div
-      className="w-16 h-16 rounded-full bg-gradient-to-r from-blue-500 to-purple-500"
-      animate={{
-        scale: [1, 1.2, 1],
-        opacity: [0.7, 1, 0.7],
-      }}
-      transition={{
-        duration: 1.5,
-        repeat: Infinity,
-        ease: "easeInOut",
-      }}
-    />
-  ),
-  
-  wave: () => (
-    <div className="flex space-x-1">
-      {[0, 1, 2, 3, 4].map((index) => (
-        <motion.div
-          key={index}
-          className="w-1 bg-gradient-to-t from-blue-500 to-purple-500 rounded-full"
-          animate={{
-            height: [20, 40, 20],
-          }}
-          transition={{
-            duration: 1,
-            repeat: Infinity,
-            delay: index * 0.1,
-            ease: "easeInOut",
-          }}
-        />
-      ))}
-    </div>
-  ),
-  
-  spiral: () => (
-    <motion.div
-      className="w-12 h-12 border-4 border-transparent border-t-blue-500 border-r-purple-500 rounded-full"
-      animate={{
-        rotate: 360,
-      }}
-      transition={{
-        duration: 1,
-        repeat: Infinity,
-        ease: "linear",
-      }}
-    />
-  ),
-};
-
+// Subtle skeleton that mirrors the section rhythm (eyebrow, heading, card grid),
+// so a lazy-loading section never looks broken while its chunk downloads.
 export const SectionLoader: React.FC<SectionLoaderProps> = ({
   isLoading,
-  message = "Loading...",
-  variant = 'dots',
+  message = 'Loading section',
   className = ''
 }) => {
-  const LoadingComponent = LoadingVariants[variant];
-
   return (
     <AnimatePresence>
       {isLoading && (
         <motion.div
-          className={`fixed inset-0 z-50 flex items-center justify-center bg-slate-900/80 backdrop-blur-sm ${className}`}
+          className={`py-24 md:py-32 2xl:py-40 ${className}`}
+          role="status"
+          aria-label={message}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.3 }}
+          transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
         >
-          <motion.div
-            className="flex flex-col items-center space-y-4"
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0.8, opacity: 0 }}
-            transition={{ duration: 0.3, delay: 0.1 }}
-          >
-            <LoadingComponent />
-            
-            {message && (
-              <motion.p
-                className="text-white/80 text-sm font-medium"
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3, delay: 0.2 }}
-              >
-                {message}
-              </motion.p>
-            )}
-          </motion.div>
+          <div className="max-w-6xl mx-auto px-6">
+            <div className="animate-pulse">
+              {/* Eyebrow placeholder */}
+              <div className="flex items-center justify-center gap-3 mb-6">
+                <span className="w-6 h-px bg-slate-800" />
+                <span className="h-3 w-24 rounded bg-slate-800/80" />
+                <span className="w-6 h-px bg-slate-800" />
+              </div>
+              {/* Heading placeholder */}
+              <div className="h-10 md:h-12 w-2/3 max-w-md mx-auto rounded-xl bg-slate-800/60 mb-14" />
+              {/* Card placeholders */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {[0, 1, 2].map((i) => (
+                  <div key={i} className="h-44 rounded-2xl bg-slate-900/80 border border-white/[0.04]" />
+                ))}
+              </div>
+            </div>
+          </div>
         </motion.div>
       )}
     </AnimatePresence>

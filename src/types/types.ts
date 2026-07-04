@@ -41,7 +41,6 @@ export interface WorkExperience {
 
 export interface ContactInfo {
   email: string;
-  phone?: string;
   location: string;
 }
 

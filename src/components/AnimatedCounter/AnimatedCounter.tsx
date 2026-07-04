@@ -55,20 +55,22 @@ const AnimatedCounter = ({
     };
   }, [isIntersecting, end, duration]);
 
-  const displayValue = decimals > 0 
-    ? count.toFixed(decimals)
-    : Math.floor(count).toString();
+  // Thousands separators so 10000 renders as "10,000"
+  const displayValue = decimals > 0
+    ? count.toLocaleString('en-US', { minimumFractionDigits: decimals, maximumFractionDigits: decimals })
+    : Math.floor(count).toLocaleString('en-US');
 
   return (
     <motion.span
       ref={ref}
-      initial={{ opacity: 0, scale: 0.5 }}
-      animate={isIntersecting ? { 
-        opacity: 1, 
+      initial={{ opacity: 0, scale: 0.9 }}
+      animate={isIntersecting ? {
+        opacity: 1,
         scale: 1,
-        transition: { duration: 0.5 }
+        transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] }
       } : {}}
       className={className}
+      style={{ fontVariantNumeric: 'tabular-nums' }}
     >
       {prefix}{displayValue}{suffix}
     </motion.span>

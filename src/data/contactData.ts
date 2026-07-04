@@ -3,7 +3,6 @@ import { personal } from './personalData';
 
 export const contactInfo: ContactInfo = {
   email: personal.email,
-  phone: personal.phone,
   location: personal.location,
 };
 
@@ -15,27 +14,27 @@ export const socialLinks: SocialLink[] = [
 
 export const contactMethods = [
   {
-    title: 'Email Me',
-    description: 'Get in touch via email',
+    title: 'Email',
+    description: 'The fastest way to reach me',
     value: personal.email,
     action: `mailto:${personal.email}`,
     icon: 'mail',
     color: 'blue',
   },
   {
-    title: 'Call Me',
-    description: "Let's have a conversation",
-    value: personal.phone,
-    action: `tel:${personal.phone}`,
-    icon: 'phone',
+    title: 'LinkedIn',
+    description: 'Connect with me professionally',
+    value: 'linkedin.com/in/vivek1812',
+    action: personal.linkedin,
+    icon: 'linkedin',
     color: 'emerald',
   },
   {
-    title: 'Location',
-    description: 'Based in Ahmedabad, India',
-    value: personal.location,
-    action: '#',
-    icon: 'location',
+    title: 'GitHub',
+    description: 'See what I build',
+    value: 'github.com/VivekParmar-18',
+    action: personal.github,
+    icon: 'github',
     color: 'purple',
   },
 ];

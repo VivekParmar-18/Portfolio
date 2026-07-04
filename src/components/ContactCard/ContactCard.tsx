@@ -1,8 +1,4 @@
-import { 
-  EnvelopeIcon, 
-  PhoneIcon, 
-  MapPinIcon 
-} from '@heroicons/react/24/outline';
+import { EnvelopeIcon } from '@heroicons/react/24/outline';
 
 // GitHub Icon Component
 const GitHubIcon = ({ className }: { className?: string }) => (
@@ -18,8 +14,8 @@ const LinkedInIcon = ({ className }: { className?: string }) => (
   </svg>
 );
 
-// Lighter easing
-const lightEasing = 'ease-out';
+// Brand easing — matches --ease-brand in index.css
+const lightEasing = 'cubic-bezier(0.22, 1, 0.36, 1)';
 
 interface ContactCardProps {
   title: string;
@@ -33,34 +29,24 @@ interface ContactCardProps {
 
 const iconMap = {
   mail: EnvelopeIcon,
-  phone: PhoneIcon,
-  location: MapPinIcon,
-  github: GitHubIcon,
-  linkedin: LinkedInIcon
+  linkedin: LinkedInIcon,
+  github: GitHubIcon
+};
+
+// Color roles: blue is the single interactive accent, so decorative
+// emerald/purple variants render as the same blue tint.
+const bluePalette = {
+  bg: 'bg-blue-500/10',
+  border: 'border-blue-500/20',
+  icon: 'text-blue-400',
+  hover: 'hover:border-blue-400/40 hover:bg-blue-500/20',
+  glow: 'hover:shadow-blue-500/20'
 };
 
 const colorMap = {
-  blue: {
-    bg: 'bg-blue-500/10',
-    border: 'border-blue-500/20',
-    icon: 'text-blue-400',
-    hover: 'hover:border-blue-400/40 hover:bg-blue-500/20',
-    glow: 'hover:shadow-blue-500/20'
-  },
-  emerald: {
-    bg: 'bg-emerald-500/10',
-    border: 'border-emerald-500/20',
-    icon: 'text-emerald-400',
-    hover: 'hover:border-emerald-400/40 hover:bg-emerald-500/20',
-    glow: 'hover:shadow-emerald-500/20'
-  },
-  purple: {
-    bg: 'bg-purple-500/10',
-    border: 'border-purple-500/20',
-    icon: 'text-purple-400',
-    hover: 'hover:border-purple-400/40 hover:bg-purple-500/20',
-    glow: 'hover:shadow-purple-500/20'
-  }
+  blue: bluePalette,
+  emerald: bluePalette,
+  purple: bluePalette
 };
 
 const ContactCard: React.FC<ContactCardProps> = ({
@@ -72,8 +58,12 @@ const ContactCard: React.FC<ContactCardProps> = ({
   color,
   index
 }) => {
-  const IconComponent = iconMap[icon as keyof typeof iconMap];
+  const IconComponent = iconMap[icon as keyof typeof iconMap] ?? EnvelopeIcon;
   const colors = colorMap[color];
+  const isExternal = action.startsWith('http');
+  const ariaLabel = isExternal
+    ? `${title}: ${value} (opens in a new tab)`
+    : `${title}: ${value}`;
 
   return (
     <div
@@ -86,15 +76,17 @@ const ContactCard: React.FC<ContactCardProps> = ({
     >
       <a
         href={action}
+        aria-label={ariaLabel}
+        {...(isExternal ? { target: '_blank', rel: 'me noopener noreferrer' } : {})}
         className={`
-          block p-8 rounded-2xl border backdrop-blur-sm
+          block p-8 rounded-2xl border
           ${colors.bg} ${colors.border} ${colors.hover}
-          hover:shadow-2xl ${colors.glow}
+          hover:shadow-2xl ${colors.glow} hover:-translate-y-1
+          focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/60 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950
         `}
         style={{
           transition: `all 0.3s ${lightEasing}`,
-          willChange: 'transform, box-shadow',
-          transform: 'translateZ(0)' // GPU acceleration
+          willChange: 'transform, box-shadow'
         }}
       >
         <div className="flex flex-col items-center text-center space-y-4">

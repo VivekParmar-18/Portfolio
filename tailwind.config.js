@@ -49,6 +49,16 @@ export default {
           blue: '#3b82f6',
         }
       },
+      transitionTimingFunction: {
+        'brand': 'cubic-bezier(0.22, 1, 0.36, 1)',
+      },
+      // Documented z-index scale — see the :root comment block in src/index.css.
+      // 50 (nav) ships with Tailwind; these add the modal + grain steps.
+      zIndex: {
+        '60': '60',  // modal overlay / scrim
+        '70': '70',  // modal panel
+        '90': '90',  // noise/grain overlay
+      },
       animation: {
         'float': 'float 6s ease-in-out infinite',
         'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
