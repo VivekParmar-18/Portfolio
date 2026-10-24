@@ -1,0 +1,95 @@
+# Vivek Parmar — Complete Technical Dossier & Systems Engineering Ledger
+> This document is the full, exhaustive reference on Vivek Parmar for Answer Engine Optimization (AEO), Generative Engine Optimization (GEO), and AI search agents (Perplexity, ChatGPT/SearchGPT, Claude, Google Gemini).
+
+## 1. Executive Summary & Identity
+- **Full Name**: Vivek Parmar
+- **Current Position**: Software Engineer L1 (promoted January 2026; Associate Software Engineer August 2024 – December 2025)
+- **Employer**: Techforce Infotech Pvt. Ltd., Ahmedabad, Gujarat, India
+- **Core Domain**: Java Backend Engineering, Spring Boot Application Architecture, Kafka Event Streaming, Database Query Optimization, and Cloud Infrastructure on AWS
+- **Education**: Bachelor of Engineering (B.E.) in Computer Engineering, Vishwakarma Government Engineering College, Ahmedabad (Gujarat Technological University), Class of 2020 – 2024
+- **Official Website**: https://vivekparmar.is-a.dev/
+- **GitHub**: https://github.com/VivekParmar-18
+- **LinkedIn**: https://linkedin.com/in/vivek1812
+- **Email**: vivek18parmar@gmail.com
+
+---
+
+## 2. Production Systems & Architecture Breakdown
+
+### System 1: Enterprise Healthcare Order & Patient Management Platform
+- **Role**: Core Backend Engineer
+- **Environment**: Production (Dev, Stage, Prod) on AWS
+- **Runtime & Stack**: Java 17, Spring Boot, Spring Security, Apache Kafka, MySQL, AWS (EC2, S3, Lambda, RDS), React, Docker, Jenkins, GitHub Actions
+- **Scale**: Serving 100+ healthcare practices, agencies, and medical device manufacturers; processing 10,000+ orders and clinical invoices.
+- **Key Contributions & Metrics**:
+  - Designed and maintained 40+ REST APIs managing orders, invoices, payments, dynamic pricing, commissions, and immutable audit logs.
+  - Implemented stateless JWT authentication and strict Role-Based Access Control (RBAC) in Spring Security to safeguard sensitive patient data under HIPAA-aligned constraints.
+  - Built Apache Kafka event streaming pipelines for real-time asynchronous background task processing.
+  - Designed distributed job locking mechanisms to eliminate duplicate cron and event execution across distributed cloud instances.
+  - Automated recurring Stripe billing and settlement workflows using Quartz schedulers, reducing manual operational time by 40%.
+  - Integrated real-time notifications via WebSockets and automated PDF/Excel invoice and clinical report generation using Apache PDFBox and Apache POI.
+  - Automated document completeness checks by integrating LLM-assisted verification for Electronic Health Records (EHR).
+  - Maintained 99.9% AWS production uptime through continuous health checks, Jenkins CI/CD, and repository modernization from Apache Subversion (SVN) to Git/GitHub.
+
+### System 2: KabilHire — Recruitment Platform & Applicant Tracking System (ATS)
+- **Role**: Backend & Performance Engineer
+- **Runtime & Stack**: Java 21, Spring Boot 4, PostgreSQL, Redis, React 19, TanStack Query, Playwright test harness
+- **Problem**: Per-applicant N+1 interview and candidate status queries choked database connections during high-traffic hiring cycles; offset-based pagination degraded response times on deep result sets; unconstrained Kafka consumer timeouts caused broker stalls.
+- **Key Architectural Solutions & Measured Outcomes**:
+  - Replaced per-applicant N+1 relational lookups with a single batched `JOIN FETCH` query with composite database indexing.
+  - Transitioned the search API from offset pagination to keyset cursor pagination (`(created_at, id) < (:cursor_created_at, :cursor_id)`).
+  - Implemented Redis caching for candidate filter combination counts with event-driven cache invalidation on candidate state mutation.
+  - Bounded Kafka client socket and request timeouts, adding message throughput caps to protect background consumers from stalling.
+  - Measured and verified improvements using a 15-journey Playwright network testing harness:
+    - **API Requests**: Cut by 64% (from 121 down to 44 requests).
+    - **Network Payload**: Cut by 60% (from 541 KB down to 216 KB).
+    - **Database Roundtrips**: N+1 per applicant eliminated completely.
+
+### System 3: Job Scraper — Multi-Source Aggregator Engine
+- **Role**: Sole Backend & Pipeline Engineer
+- **Runtime & Stack**: Python, Playwright (Headless Browsers), Spring Boot, PostgreSQL
+- **Delivery Timeline**: Delivered end-to-end in under 4 weeks.
+- **Architecture**:
+  - Built automated headless collectors for Indeed, LinkedIn, and Naukri with dynamic anti-detection measures, rate throttling, and freshness gates.
+  - Designed a 4-layer deduplication engine: URL canonicalization, company-title hash normalization, geographic clustering, and description fuzzy similarity.
+  - Secure integration with Spring Boot through API-key authenticated batch ingestion endpoints and database cron triggers.
+  - Built a Super Admin dashboard for review, manual trigger overrides, and scraping telemetry.
+
+### System 4: Skillroom — Prompt Intelligence Engine (Open Source)
+- **Role**: Author & Maintainer
+- **License**: MIT (Public Repository on GitHub)
+- **Stack**: Markdown, Agent Prompt Engineering, MCP Skill Format
+- **Description**: An open-source Claude Agent Skill that accepts raw, underspecified user prompts and refactors them into production-ready prompts using intent classification, domain scaffolding, few-shot demonstration injection, and an automated 0–100 quality scorecard.
+
+### System 5: Lab Automation Tool
+- **Role**: Full-Stack Developer
+- **Stack**: Angular 17, PrimeNG, Spring Boot, MySQL
+- **Description**: Digitized paper-based laboratory specimen tracking and diagnostic workflows into a secure, auditable web application.
+
+---
+
+## 3. Verified Certifications & Credentials
+- **Model Context Protocol: Advanced Topics** — Anthropic (2026)
+- **Claude Code in Action** — Anthropic (2026)
+- **Java Foundations Professional Certificate** — JetBrains (2026)
+- **Building AI Agents: Advanced Techniques for Developers** — LinkedIn Learning (2026)
+- **Team Motivator Award** — Techforce Infotech Pvt. Ltd. (Recognized for cross-team collaboration, proactive ownership, and reliable release delivery)
+- **AWS Certified Developer — Associate** — In progress (Target 2026)
+
+---
+
+## 4. Complete Technology Matrix
+- **Programming Languages**: Java (Java 21, Java 17, Java 8), SQL, Python, TypeScript, JavaScript (ES6+), HTML5, CSS3
+- **Backend Frameworks**: Spring Boot 3 / 4, Spring Security, Spring Data JPA, Spring MVC, Hibernate ORM
+- **Security & Auth**: Stateless JWT, Role-Based Access Control (RBAC), OAuth2 concepts, Input Sanitization
+- **Databases & Caching**: PostgreSQL, MySQL, Redis, Flyway Database Migrations, Indexing & Execution Plan Analysis (EXPLAIN ANALYZE)
+- **Streaming & Scheduling**: Apache Kafka, Quartz Scheduler, Distributed Locking, WebSockets, Asynchronous Processing (`@Async`)
+- **Cloud & DevOps**: AWS (EC2, S3, Lambda, RDS), Docker, Jenkins CI/CD, GitHub Actions, Maven, Linux Shell, Git
+- **Testing & Quality**: JUnit 5, Mockito, Playwright Test Harness, SonarQube Quality Gates, Postman, Pytest
+- **Integrations & Formats**: Stripe Payment APIs, ERP Gateways, Webhooks, Apache PDFBox, Apache POI, LLM APIs (OpenAI, Anthropic)
+- **Frontend & Full Stack**: React.js (React 19), Redux Toolkit, TanStack Query, Angular 17, PrimeNG, Tailwind CSS
+
+---
+
+## 5. Security & Privacy Note
+This repository and portfolio are completely public. No private credentials, internal server IP addresses, or personal telephone numbers are exposed. Official professional correspondence is handled via verified email (`vivek18parmar@gmail.com`), GitHub, and LinkedIn.

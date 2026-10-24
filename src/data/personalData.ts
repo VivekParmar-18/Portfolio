@@ -6,11 +6,12 @@
 export const personal = {
   name: "Vivek Parmar",
   firstName: "Vivek",
-  title: "Software Developer",
+  title: "Java Backend Engineer",
+  role: "Software Engineer L1",
   company: "Techforce Infotech Pvt. Ltd.",
   yearsOfExperience: 2,
   location: "Ahmedabad, India",
-  bio: "Backend-focused full-stack engineer with 2 years on an enterprise US healthcare platform — 40+ production REST APIs in Java 17 and Spring Boot, React and TypeScript front-ends, and AWS deployments supporting 100+ organizations.",
+  bio: "Java backend engineer with 2+ years of experience building and scaling Spring Boot applications on AWS for healthcare and recruitment platforms, with full-stack experience in React.js. Experienced in REST API design, PostgreSQL/MySQL query tuning, Redis caching, Kafka-based asynchronous processing, and multi-source data pipelines.",
   email: "vivek18parmar@gmail.com",
   github: "https://github.com/VivekParmar-18",
   linkedin: "https://linkedin.com/in/vivek1812",
@@ -19,7 +20,7 @@ export const personal = {
   profileImage: "/profile-photo.jpg",
   ogImage: "/og-image.png",
   about: {
-    text: "I build the backend of an enterprise US healthcare order and patient management platform at Techforce Infotech — 40+ REST APIs in Java 17 and Spring Boot covering orders, invoices, payments, documents, and notifications, serving 100+ practices, agencies, and manufacturers.\n\nI care about software that holds up in production: JWT authentication and role-based access control around secure patient data workflows, code quality gated through SonarQube, and hands-on resolution of production-critical issues across Dev, Stage, and Prod environments on AWS.\n\nRight now I'm preparing for the AWS Certified Developer – Associate certification and going deeper into distributed systems — schedulers, distributed job locking, and real-time WebSocket notifications.",
+    text: "I build and scale production backend systems at Techforce Infotech across enterprise healthcare and recruitment platforms. My day-to-day work spans Java 17/21, Spring Boot, Apache Kafka event streaming, PostgreSQL/MySQL query tuning, Redis caching, and AWS cloud infrastructure.\n\nI care deeply about production reliability and quantifiable performance: eliminating N+1 query bottlenecks, shifting to keyset cursor pagination, bounding broker timeouts, securing sensitive workflows with JWT and role-based access control, and automating tests with JUnit, Mockito, and Playwright harnesses.\n\nPromoted to Software Engineer L1 in January 2026, recipient of the Team Motivator Award, and actively certified across modern AI agents, MCP, and Java enterprise ecosystems.",
   },
 };
 
@@ -40,5 +41,7 @@ export const seoKeywords = [
   "ahmedabad",
   "india",
   "spring boot",
-  "microservices"
+  "rest apis",
+  "event streaming",
+  "distributed systems"
 ];

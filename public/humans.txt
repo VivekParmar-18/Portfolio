@@ -1,6 +1,6 @@
 /* TEAM */
 Developer: Vivek Parmar
-Role: Software Developer
+Role: Java Backend Engineer (Software Engineer L1)
 Company: Techforce Infotech Pvt. Ltd.
 Location: Ahmedabad, Gujarat, India
 Contact: vivek18parmar@gmail.com
@@ -8,11 +8,11 @@ LinkedIn: https://linkedin.com/in/vivek1812
 GitHub: https://github.com/VivekParmar-18
 
 /* SITE */
-Last update: 2026-07-04
-Standards: HTML5, CSS3, ES2023, TypeScript
-Components: React, Framer Motion, Vite
-Design: Custom dark theme, glassmorphism
-Fonts: Bricolage Grotesque, Instrument Sans, Fira Code (Google Fonts)
+Last update: 2026-10-24
+Standards: HTML5, CSS3, ES2024, TypeScript
+Components: React 19, Framer Motion, Vite
+Design: Console Theme (modern-minimal, obsidian ground, electric cyan & ice blue telemetry)
+Fonts: Host Grotesk, Atkinson Hyperlegible Mono (Google Fonts)
 
 /* THANKS */
 React — react.dev

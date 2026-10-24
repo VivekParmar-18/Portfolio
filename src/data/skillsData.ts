@@ -1,6 +1,7 @@
 export interface SkillItem {
   name: string;
-  icon?: string; // local /icons/*.svg when a recognizable logo exists
+  icon?: string;
+  badge?: string;
 }
 
 export interface SkillTier {
@@ -9,48 +10,75 @@ export interface SkillTier {
   items: SkillItem[];
 }
 
-// Tiered on purpose: explicit depth reads more senior than a flat wall of logos.
 export const skillTiers: SkillTier[] = [
   {
-    title: 'Daily drivers',
-    desc: 'The core stack I ship production work with, every day.',
+    title: "Core Backend & Distributed Systems",
+    desc: "Production daily drivers for Spring Boot backends, event streaming, and cloud systems.",
     items: [
-      { name: 'Java 17', icon: '/icons/java.svg' },
-      { name: 'Spring Boot', icon: '/icons/spring.svg' },
-      { name: 'React', icon: '/icons/react.svg' },
-      { name: 'TypeScript', icon: '/icons/typescript.svg' },
-      { name: 'MySQL', icon: '/icons/mysql.svg' },
-      { name: 'AWS', icon: '/icons/amazonwebservices.svg' },
+      { name: "Java 17 / 21", icon: "/icons/java.svg" },
+      { name: "Spring Boot", icon: "/icons/spring.svg" },
+      { name: "Apache Kafka" },
+      { name: "PostgreSQL" },
+      { name: "Redis" },
+      { name: "MySQL", icon: "/icons/mysql.svg" },
+      { name: "AWS (EC2, S3, Lambda, RDS)", icon: "/icons/amazonwebservices.svg" },
+      { name: "Docker", icon: "/icons/docker.svg" },
     ],
   },
   {
-    title: 'Also ship with',
-    desc: 'Regular parts of my toolkit across projects and deployments.',
+    title: "Data Persistence & Concurrency",
+    desc: "Techniques and frameworks for high-concurrency database access and async execution.",
     items: [
-      { name: 'Redux Toolkit', icon: '/icons/redux.svg' },
-      { name: 'JavaScript', icon: '/icons/javascript.svg' },
-      { name: 'Angular 17', icon: '/icons/angular.svg' },
-      { name: 'GitHub Actions' },
-      { name: 'Jenkins' },
-      { name: 'Docker', icon: '/icons/docker.svg' },
-      { name: 'Git', icon: '/icons/git.svg' },
-      { name: 'Maven' },
-      { name: 'Tailwind CSS', icon: '/icons/tailwindcss.svg' },
-      { name: 'HTML5', icon: '/icons/html5.svg' },
-      { name: 'CSS3', icon: '/icons/css3.svg' },
+      { name: "Spring Data JPA" },
+      { name: "Hibernate" },
+      { name: "Distributed Job Locking" },
+      { name: "Quartz Scheduler" },
+      { name: "Flyway" },
+      { name: "Query Optimization & Indexing" },
+      { name: "WebSocket" },
+      { name: "Event-Driven Architecture" },
     ],
   },
   {
-    title: 'Quality & practices',
-    desc: 'How the work stays reliable once it ships.',
+    title: "Security, APIs & Integrations",
+    desc: "Securing regulated healthcare workflows, payments, and multi-source pipelines.",
     items: [
-      { name: 'JUnit' },
-      { name: 'Mockito' },
-      { name: 'SonarQube' },
-      { name: 'Postman' },
-      { name: 'Swagger / OpenAPI' },
-      { name: 'Agile / Scrum' },
-      { name: 'Secure coding' },
+      { name: "Spring Security" },
+      { name: "JWT & RBAC" },
+      { name: "REST APIs & OpenAPI" },
+      { name: "Stripe & ERP Integrations" },
+      { name: "Webhooks" },
+      { name: "Python & Playwright" },
+      { name: "Apache PDFBox & POI" },
+      { name: "LLM APIs" },
+    ],
+  },
+  {
+    title: "Frontend & Full-Stack Tooling",
+    desc: "Full-stack client architectures, state management, and request caching.",
+    items: [
+      { name: "React.js (React 19)", icon: "/icons/react.svg" },
+      { name: "TypeScript", icon: "/icons/typescript.svg" },
+      { name: "TanStack Query" },
+      { name: "Redux Toolkit", icon: "/icons/redux.svg" },
+      { name: "JavaScript (ES6+)", icon: "/icons/javascript.svg" },
+      { name: "Angular 17", icon: "/icons/angular.svg" },
+      { name: "HTML5 & CSS3", icon: "/icons/html5.svg" },
+      { name: "Tailwind CSS", icon: "/icons/tailwindcss.svg" },
+    ],
+  },
+  {
+    title: "Testing, DevOps & Engineering Practices",
+    desc: "Production gating, continuous delivery, and engineering discipline.",
+    items: [
+      { name: "JUnit & Mockito" },
+      { name: "SonarQube Quality Gates" },
+      { name: "pytest" },
+      { name: "GitHub Actions & Jenkins" },
+      { name: "Postman" },
+      { name: "Maven & Linux" },
+      { name: "Git & Code Review", icon: "/icons/git.svg" },
+      { name: "System Design & OOP" },
     ],
   },
 ];

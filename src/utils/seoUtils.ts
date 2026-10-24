@@ -20,8 +20,8 @@ export interface SEOData {
 }
 
 export const defaultSEOConfig: SEOData = {
-  title: `Vivek Parmar — Software Developer | Java, Spring Boot & React`,
-  description: `Vivek Parmar is a Software Developer at Techforce Infotech Pvt. Ltd., specializing in Java, Spring Boot, and React. He builds the backend of an enterprise US healthcare platform — 40+ production REST APIs supporting 100+ organizations.`,
+  title: `Vivek Parmar | Java Backend Engineer | Software Engineer L1`,
+  description: personal.bio,
   keywords: ["Vivek", "Vivek Parmar", ...seoKeywords],
   author: "Vivek Parmar",
   image: `${personal.domain}${personal.ogImage}`,
@@ -36,7 +36,7 @@ export const defaultSEOConfig: SEOData = {
 
 export const getSEODataForPage = (path: string): SEOData => {
   const overrides: Record<string, Partial<SEOData>> = {
-    '/': { title: `${personal.name} — ${personal.title} | Java & React Portfolio` },
+    '/': { title: `${personal.name} | ${personal.title} | Ahmedabad` },
     '/#about': { title: `About ${personal.name} — Journey & Experience` },
     '/#projects': { title: `${personal.name}'s Projects — Enterprise Software Portfolio` },
     '/#contact': { title: `Contact ${personal.name} — Let's Build Together` },
@@ -88,14 +88,14 @@ export const updateMetaTags = (data: Partial<SEOData>) => {
   setMeta('[property="og:type"]', d.type);
   setMeta('[property="og:site_name"]', d.siteName);
   setMeta('[property="og:locale"]', d.locale);
-  setMeta('[property="og:image:alt"]', `${personal.name} — Software Developer Portfolio`);
+  setMeta('[property="og:image:alt"]', `${personal.name} — Java & Spring Boot Backend Engineer Portfolio`);
 
   // Twitter
   setMeta('[name="twitter:card"]', d.twitterCard);
   setMeta('[name="twitter:title"]', d.title);
   setMeta('[name="twitter:description"]', d.description);
   setMeta('[name="twitter:image"]', d.image);
-  setMeta('[name="twitter:image:alt"]', `${personal.name} — Software Developer Portfolio`);
+  setMeta('[name="twitter:image:alt"]', `${personal.name} — Java & Spring Boot Backend Engineer Portfolio`);
 };
 
 export const preloadCriticalResources = () => {

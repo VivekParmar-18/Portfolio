@@ -7,6 +7,32 @@ export default {
   theme: {
     extend: {
       colors: {
+        // Hallmark Console Theme token mappings
+        paper: {
+          DEFAULT: 'var(--color-paper)',
+          2: 'var(--color-paper-2)',
+          3: 'var(--color-paper-3)',
+        },
+        ink: {
+          DEFAULT: 'var(--color-ink)',
+          2: 'var(--color-ink-2)',
+          muted: 'var(--color-muted)',
+        },
+        rule: {
+          DEFAULT: 'var(--color-rule)',
+          2: 'var(--color-rule-2)',
+        },
+        console: {
+          accent: 'var(--color-accent)',
+          'accent-ink': 'var(--color-accent-ink)',
+          'accent-soft': 'var(--color-accent-soft)',
+          cool: 'var(--color-cool)',
+          'cool-soft': 'var(--color-cool-soft)',
+          ok: 'var(--color-ok)',
+          'ok-soft': 'var(--color-ok-soft)',
+          bad: 'var(--color-bad)',
+          'bad-soft': 'var(--color-bad-soft)',
+        },
         // Custom color scheme from design document
         primary: {
           50: '#eff6ff',
@@ -48,6 +74,11 @@ export default {
           purple: '#8b5cf6',
           blue: '#3b82f6',
         }
+      },
+      fontFamily: {
+        display: ['var(--font-display)'],
+        body: ['var(--font-body)'],
+        mono: ['var(--font-outlier)'],
       },
       transitionTimingFunction: {
         'brand': 'cubic-bezier(0.22, 1, 0.36, 1)',

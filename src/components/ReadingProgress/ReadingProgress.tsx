@@ -32,7 +32,7 @@ export const ReadingProgress = () => {
       style={{
         height: '2px',
         scaleX: springVal,
-        background: '#3B82F6',
+        background: 'var(--color-accent-primary)',
       }}
     />
   );

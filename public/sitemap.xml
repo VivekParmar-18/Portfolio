@@ -2,14 +2,18 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://vivekparmar.is-a.dev/</loc>
-    <lastmod>2026-07-04</lastmod>
+    <lastmod>2026-10-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <image:image>
       <image:loc>https://vivekparmar.is-a.dev/profile-photo.jpg</image:loc>
+      <image:title>Vivek Parmar — Java Backend Engineer (Software Engineer L1)</image:title>
+      <image:caption>Profile photograph of Vivek Parmar, Java Backend Engineer based in Ahmedabad, India</image:caption>
     </image:image>
     <image:image>
       <image:loc>https://vivekparmar.is-a.dev/og-image.png</image:loc>
+      <image:title>Vivek Parmar Portfolio — Spring Boot, Kafka & Cloud Architecture</image:title>
+      <image:caption>Engineering portfolio social card of Vivek Parmar</image:caption>
     </image:image>
   </url>
 </urlset>

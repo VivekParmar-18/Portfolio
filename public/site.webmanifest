@@ -2,12 +2,12 @@
   "id": "/",
   "name": "Vivek Parmar Portfolio",
   "short_name": "Vivek",
-  "description": "Vivek Parmar — Software Developer. Java, Spring Boot & React portfolio.",
+  "description": "Vivek Parmar — Java Backend Engineer (Software Engineer L1). Spring Boot, Kafka streaming, Redis caching, and AWS cloud architecture.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
-  "background_color": "#0F172A",
-  "theme_color": "#020817",
+  "background_color": "#080b11",
+  "theme_color": "#080b11",
   "orientation": "portrait-primary",
   "icons": [
     {

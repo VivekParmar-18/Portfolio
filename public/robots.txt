@@ -1,5 +1,83 @@
+# Universal rule for search engines & browsers
 User-agent: *
 Allow: /
 
-# Sitemap
+# Googlebot (Google Search, Google Images, Google Discover)
+User-agent: Googlebot
+Allow: /
+User-agent: Googlebot-Image
+Allow: /
+
+# Bingbot (Microsoft Bing, Yahoo, DuckDuckGo, Copilot)
+User-agent: Bingbot
+Allow: /
+User-agent: msnbot
+Allow: /
+
+# Applebot (Apple Siri, Spotlight, Safari suggestions)
+User-agent: Applebot
+Allow: /
+
+# DuckDuckBot (DuckDuckGo Search)
+User-agent: DuckDuckBot
+Allow: /
+
+# Baiduspider (Baidu Search)
+User-agent: Baiduspider
+Allow: /
+
+# YandexBot (Yandex Search)
+User-agent: YandexBot
+Allow: /
+
+# Yahoo (Yahoo Slurp)
+User-agent: Slurp
+Allow: /
+
+# Social Preview Crawlers (LinkedIn, Twitter/X, Facebook, WhatsApp, Telegram, Discord, Slack)
+User-agent: Twitterbot
+Allow: /
+User-agent: facebookexternalhit
+Allow: /
+User-agent: LinkedInBot
+Allow: /
+User-agent: WhatsApp
+Allow: /
+User-agent: TelegramBot
+Allow: /
+User-agent: Discordbot
+Allow: /
+User-agent: Slackbot
+Allow: /
+User-agent: SkypeUriPreview
+Allow: /
+
+# AI Answer Engines & LLM Search Bots (ChatGPT, Claude, Perplexity, Gemini, Cohere, Meta, Amazon)
+User-agent: GPTBot
+Allow: /
+User-agent: OAI-SearchBot
+Allow: /
+User-agent: ChatGPT-User
+Allow: /
+User-agent: ClaudeBot
+Allow: /
+User-agent: anthropic-ai
+Allow: /
+User-agent: Claude-Web
+Allow: /
+User-agent: PerplexityBot
+Allow: /
+User-agent: Google-Extended
+Allow: /
+User-agent: cohere-ai
+Allow: /
+User-agent: meta-externalagent
+Allow: /
+User-agent: Amazonbot
+Allow: /
+User-agent: Bytespider
+Allow: /
+
+# Sitemap & Host specifications
 Sitemap: https://vivekparmar.is-a.dev/sitemap.xml
+Host: https://vivekparmar.is-a.dev

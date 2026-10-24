@@ -1,105 +1,150 @@
 export interface Project {
   title: string;
-  context: string;          // "Production system — Techforce Infotech" | "Client project — Techforce Infotech" | "Personal project"
+  context: string;
   description: string;
-  tags: string[];           // REAL technologies only
+  tags: string[];
   problem: string;
   solution: string;
-  features: string[];       // honest technical work items
-  results: string[];        // honest, resume-backed outcomes
+  features: string[];
+  results: string[];
   learnings: string;
-  github?: string;          // only if a public repo exists
+  github?: string;
   color: 'blue' | 'purple' | 'emerald';
 }
 
 export const projectsData: Project[] = [
   {
-    title: "Healthcare Order Management Platform",
+    title: "KabilHire — Recruitment Platform & ATS Pipeline",
     context: "Production system — Techforce Infotech",
-    description: "Enterprise US healthcare order and patient management platform serving practices, agencies, manufacturers, and administrators. The code is private, but I can walk through the architecture and my contributions in detail in interviews.",
-    tags: ["Java 17", "Spring Boot", "React", "Redux Toolkit", "MySQL", "AWS", "Stripe", "WebSocket", "LLMs", "GitHub Actions"],
-    problem: "Healthcare organizations needed one platform to manage the full order-to-payment lifecycle — orders, invoices, payments, documents, and notifications — across 100+ practices, agencies, and manufacturers, with strict control over who can access patient data.",
-    solution: "I design, develop, and maintain the platform's REST API layer in Java 17 and Spring Boot, secured with JWT authentication and role-based access control aligned with healthcare compliance standards. The backend integrates Stripe payments, ERP systems, email/SMS providers, tracking services, and webhooks, uses custom LLMs to check EHR documents for completeness, and runs on AWS with GitHub Actions and Jenkins CI/CD.",
+    description: "High-performance recruitment platform and applicant tracking system (ATS) engineered with Java 21, Spring Boot 4, PostgreSQL, Redis, and React 19. Focused on database query tuning, high-concurrency search, and network efficiency.",
+    tags: ["Java 21", "Spring Boot 4", "PostgreSQL", "Redis", "React 19", "TanStack Query", "Playwright", "Apache Kafka"],
+    problem: "The ATS search and candidate pipeline suffered from query latency under heavy loads: per-applicant interview lookups resulted in N+1 queries, unbounded notification fetching caused HTTP/2 stream failures, and repeated COUNT(*) scans on multi-filter searches burdened the database.",
+    solution: "Re-architected the query layer: replaced N+1 queries with a batched JOIN FETCH query, transitioned pagination from offset to keyset cursors, created composite indexes, and cached filter counts and profile views in Redis with event-driven eviction. Bounded Kafka consumer timeouts and capped notification requests.",
     features: [
-      "40+ REST APIs covering order, invoice, payment, notification, and document workflows",
-      "JWT authentication and role-based access control for secure patient data workflows",
-      "Custom LLM-powered completeness checks for EHR documents",
-      "Stripe, ERP, email/SMS, tracking, and webhook integrations",
-      "Async processing with schedulers and distributed job locking",
-      "Real-time notifications via WebSocket",
-      "PDF and Excel document generation with Apache PDFBox and Apache POI",
-      "AWS deployment (EC2, S3, Lambda, RDS) with GitHub Actions & Jenkins CI/CD"
+      "Batched JOIN FETCH queries eliminating N+1 candidate interview lookups",
+      "Keyset cursor pagination replacing expensive offset scans on high-volume tables",
+      "Redis caching of candidate profiles and filter count totals with event-driven invalidation",
+      "Custom Playwright automated test harness verifying 15 user journeys across the network layer",
+      "Bounded Kafka client timeouts and capped notification fetches to guarantee stream stability",
+      "TanStack Query request deduplication and lean payload serialization"
     ],
     results: [
-      "40+ production REST APIs designed, developed, and maintained",
-      "10,000+ orders and invoices processed through the platform",
-      "100+ organizations supported across the US healthcare space",
-      "Production-critical issues resolved across Dev, Stage, and Prod with minimal downtime"
+      "Cut API requests by 64% (from 121 down to 44) across 15 user journeys",
+      "Reduced network payload size by 60% (from 541 KB to 216 KB)",
+      "Eliminated broker timeout stalls through strict Kafka consumer bounding",
+      "Zero repeated COUNT(*) table scans on cached filter combinations"
     ],
-    learnings: "Working on a production healthcare system taught me to treat security and reliability as first-class features — access control, SonarQube quality gates, and careful incident response matter as much as shipping new endpoints.",
+    learnings: "Production query performance requires thinking in database execution plans and measuring network roundtrips with real test harnesses. Eliminating N+1 queries and tuning cache invalidation delivered a dramatic reduction in server load and user latency.",
+    color: "emerald"
+  },
+  {
+    title: "Enterprise Healthcare Order & Patient Management",
+    context: "Production system — Techforce Infotech",
+    description: "Enterprise US healthcare order and patient management platform supporting practices, agencies, manufacturers, and administrators. 40+ REST APIs in Java 17 and Spring Boot with Kafka event streaming, Stripe automation, and AWS cloud infrastructure.",
+    tags: ["Java 17", "Spring Boot", "Apache Kafka", "AWS", "Stripe", "Quartz Scheduler", "WebSocket", "Docker", "LLM APIs"],
+    problem: "Healthcare organizations required a single, HIPAA-compliant platform to coordinate the entire order-to-payment lifecycle (orders, invoices, payments, documents, and notifications) across 100+ organizations while strictly safeguarding patient health information.",
+    solution: "Designed, developed, and maintained the platform's core REST API layer in Java 17 and Spring Boot, secured with stateless JWT and role-based access control. Implemented Kafka-based event streaming and background processors with distributed job locking, integrated automated Stripe payments via Quartz schedulers, and integrated custom LLM completeness checks for EHR records.",
+    features: [
+      "40+ REST APIs covering order, invoice, payment, pricing, commission, and audit logging workflows",
+      "Stateless JWT authentication and role-based access control (RBAC) protecting sensitive patient data",
+      "Apache Kafka event streaming for real-time processing and asynchronous background jobs",
+      "Distributed job locking to prevent duplicate cron executions across scaled instances",
+      "Automated Stripe payment workflows scheduled with Quartz, cutting manual processing by 40%",
+      "Real-time notifications via WebSocket and automated invoice/report generation with Apache PDFBox and POI",
+      "Custom LLM-powered completeness checks for electronic health record (EHR) documents",
+      "AWS deployment (EC2, S3, Lambda, RDS) with CI/CD in Jenkins and GitHub Actions at 99.9% uptime"
+    ],
+    results: [
+      "40+ production REST APIs designed, deployed, and maintained",
+      "10,000+ orders and invoices processed securely",
+      "100+ healthcare practices, agencies, and manufacturers supported",
+      "99.9% infrastructure uptime maintained on AWS",
+      "40% reduction in manual invoice and payment processing"
+    ],
+    learnings: "Working on regulated healthcare systems taught me to treat security, distributed locking, and auditability as first-class architectural concerns. Code quality gated by SonarQube and fast incident response in production are vital to keeping critical systems running.",
     color: "blue"
   },
   {
-    title: "Skillroom — Prompt Intelligence Engine",
-    context: "Open-source project",
-    description: "An open-source Claude Agent Skill (MIT licensed) that automatically transforms brief prompts into comprehensive, expert-level prompts — with intent classification, automatic role assignment, and a transparent quality scorecard.",
-    tags: ["Claude Agent Skills", "AI Tooling", "Prompt Engineering", "Markdown"],
-    problem: "Good prompts are a skill: most people under-specify what they want from AI assistants, silently lose context, and never know whether a prompt is actually good before running it.",
-    solution: "Built an agent skill with a staged optimization pipeline — difficulty estimation, intent classification across 13+ domains (coding, debugging, research, SQL, AWS, QA), context inference from conversation history, expert role assignment, and hidden-requirement expansion — using progressive disclosure so reference files load only when needed.",
+    title: "Job Scraper — Multi-Source Aggregation Engine",
+    context: "Production system — Techforce Infotech",
+    description: "Resilient job aggregation and web scraping engine built with Python, Playwright, Spring Boot, and PostgreSQL. Gathers postings from multiple recruitment platforms with multi-layer deduplication and automated scheduling.",
+    tags: ["Python", "Playwright", "Spring Boot", "PostgreSQL", "AWS EC2", "Automation", "REST APIs"],
+    problem: "Manual aggregation of job opportunities across fragmented portals was slow and prone to errors. Dynamic JavaScript rendering, anti-scraping measures, and frequent page timeouts stalled collector runs.",
+    solution: "Engineered an automated collector pipeline in under 4 weeks: Indeed and LinkedIn scrapers combined with a Playwright headless browser collector for Naukri. Built a 4-layer deduplication engine, integrated with Spring Boot via a database-driven cron scheduler, and provided a Super Admin review console.",
     features: [
-      "Intent classification across 13+ domains with automatic expert role assignment",
-      "Assumptions surfaced explicitly as [ASSUMED: …] tags instead of silent guessing",
-      "Transparent 0–100 quality scorecard with auto-improvement below 90",
-      "Difficulty-tiered depth, from simple tasks to enterprise-level decomposition",
-      "Progressive-disclosure design to keep the skill fast and token-efficient",
-      "One-command install: npx skills add VivekParmar-18/skillroom"
+      "Multi-platform collectors: Indeed and LinkedIn plus Playwright browser collector for Naukri",
+      "4-layer deduplication engine validating freshness and uniqueness before database ingestion",
+      "Database-driven cron scheduler running scrapers as managed child processes",
+      "Crash-safe Playwright teardown and hung-page recovery to prevent stalled runs",
+      "API-key secured ingestion endpoints and permission-gated Super Admin publish console",
+      "Complete EC2 deployment runbook and knowledge-transfer guide"
     ],
     results: [
-      "Published on GitHub under the MIT license, open to community contributions",
-      "Installable as a Claude Agent Skill with a single CLI command",
-      "Roadmap in progress: additional domain playbooks, Q&A mode, saved templates"
+      "Shipped complete multi-source aggregation engine end-to-end in under 4 weeks",
+      "Zero deadlocked scraper runs through crash-safe Playwright teardown handlers",
+      "High data cleanliness with 4-layer deduplication preventing duplicate ingestion into KabilHire"
     ],
-    learnings: "Designing for AI agents is real systems design — the skill needed deterministic staged behavior, explicit assumptions, and token-budget discipline, the same instincts as building a good API.",
+    learnings: "Resilient data ingestion demands defensive programming: process isolation, strict timeout boundaries, and automated resource cleanup so a single failed page never compromises the entire batch pipeline.",
+    color: "purple"
+  },
+  {
+    title: "Skillroom — Prompt Intelligence Engine",
+    context: "Open-source project — GitHub",
+    description: "Open-source Claude Agent Skill (MIT licensed) that transforms brief prompts into comprehensive, expert-level prompts with intent classification, automatic role assignment, and a transparent quality scorecard.",
+    tags: ["Claude Agent Skills", "AI Tooling", "Prompt Engineering", "Open Source", "Markdown"],
+    problem: "Developers and users often under-specify prompts when using AI assistants, resulting in hallucinated requirements, lost context, and low-quality outputs.",
+    solution: "Created an agent skill with a staged optimization pipeline: intent classification across 13+ domains, explicit assumption tagging via [ASSUMED: ...], transparent 0–100 quality scoring, and progressive-disclosure file loading to stay token-efficient.",
+    features: [
+      "Intent classification across 13+ domains with automated expert role assignment",
+      "Transparent 0–100 quality scorecard with auto-refinement triggers below 90",
+      "Explicit assumption surfacing preventing silent AI hallucinations",
+      "Progressive disclosure architecture ensuring high token efficiency",
+      "Single-command installation: npx skills add VivekParmar-18/skillroom"
+    ],
+    results: [
+      "Published on GitHub under open-source MIT license",
+      "Compatible across modern Claude agent runtimes and agentic coding workflows"
+    ],
+    learnings: "Designing for AI agents requires the same rigor as systems API design: deterministic state pipelines, explicit contracts, and strict token-budget discipline.",
     github: "https://github.com/VivekParmar-18/skillroom",
     color: "purple"
   },
   {
     title: "Lab Automation Tool",
     context: "Client project — Techforce Infotech",
-    description: "A lab management application built for a client to digitize lab workflows, with an Angular 17 front-end backed by REST APIs and a MySQL database.",
-    tags: ["Angular 17", "PrimeNG", "MySQL", "REST APIs"],
-    problem: "The client's lab processes relied on manual data handling, making it slow to record, track, and retrieve lab records accurately.",
-    solution: "Built a web application with an Angular 17 and PrimeNG front-end talking to REST APIs over a MySQL database, so lab data is entered, validated, and retrieved in one place.",
+    description: "Laboratory management platform designed to digitize manual lab workflows, sample records, and testing logs with Angular 17, PrimeNG, and Spring Boot REST APIs.",
+    tags: ["Angular 17", "PrimeNG", "Spring Boot", "MySQL", "REST APIs"],
+    problem: "The client's laboratory operations relied on paper logs and manual spreadsheets, resulting in slow record lookups, transcription errors, and difficulty generating compliance reports.",
+    solution: "Built a structured web application with an Angular 17 frontend and PrimeNG components, connecting to Spring Boot REST APIs and a normalized MySQL relational database.",
     features: [
-      "Angular 17 front-end with PrimeNG component library",
-      "REST API integration for lab data workflows",
-      "MySQL schema design for structured lab records",
-      "Form-driven data entry with validation"
+      "Angular 17 frontend with PrimeNG component library for high-speed data entry",
+      "RESTful API endpoints for sample management, testing logs, and patient records",
+      "Normalized MySQL database schema optimized for query searchability and audit trails"
     ],
     results: [
-      "Delivered a working lab management tool to the client",
-      "Replaced manual record handling with structured, searchable data"
+      "Replaced manual paper tracking with an instant, searchable digital workflow",
+      "Successfully delivered into daily laboratory use"
     ],
-    learnings: "This project made me comfortable in a second front-end ecosystem — Angular's module and dependency injection model — and reinforced how much a good component library like PrimeNG speeds up delivery.",
+    learnings: "Working across multiple frontend frameworks (React and Angular) deepened my appreciation for modular architecture and structured component design systems.",
     color: "emerald"
   },
   {
     title: "First Flight Travels",
     context: "Personal project",
-    description: "A multi-page travel booking website front-end built from scratch with plain HTML5 and CSS3 — landing, locations, login, and registration pages.",
-    tags: ["HTML5", "CSS3"],
-    problem: "I wanted to practice building a complete, multi-page website layout by hand — navigation, forms, and responsive pages — without leaning on a framework.",
-    solution: "Built the full site as static pages: home, about, locations, contact, login, registration, and terms pages sharing a consistent stylesheet and navigation.",
+    description: "Multi-page travel and flight booking front-end application built from scratch with semantic HTML5, CSS3, and JavaScript.",
+    tags: ["HTML5", "CSS3", "JavaScript", "Responsive Design"],
+    problem: "Mastering frontend fundamentals by building an entire multi-page web application with complex responsive layouts without relying on CSS frameworks.",
+    solution: "Hand-crafted a multi-page web application complete with flight search, location exploration, user registration, and booking confirmation interfaces.",
     features: [
-      "Multi-page structure: home, about, locations, contact, and terms pages",
-      "Login and registration form pages",
-      "Hand-written CSS3 styling shared across pages"
+      "Multi-page architecture with shared stylesheet and navigation system",
+      "Responsive layout optimized across mobile, tablet, and desktop viewports",
+      "Custom form validation and interactive UI controls"
     ],
     results: [
-      "Completed, publicly available static site on GitHub",
-      "Solid foundation in semantic HTML and CSS before moving to React and Angular"
+      "Public open-source repository available on GitHub",
+      "Solid foundation in semantic HTML, CSS box model, and responsive styling"
     ],
-    learnings: "Building every page by hand gave me a real understanding of HTML structure and CSS layout — the fundamentals that frameworks abstract away.",
+    learnings: "Writing layout and interaction logic from scratch gives an engineer deep intuition for the browser rendering engine that frameworks abstract away.",
     github: "https://github.com/VivekParmar-18/FirstFlights",
     color: "blue"
   }

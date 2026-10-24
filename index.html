@@ -1,9 +1,24 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" style="background-color:#080b11;color-scheme:dark;">
 
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="color-scheme" content="dark" />
+  <meta name="format-detection" content="telephone=no, date=no, address=no, email=no" />
+  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
+
+  <!-- Critical First-Paint CSS: prevents white canvas flash on refresh without layout interference -->
+  <style>
+    html, body {
+      background-color: #080b11 !important;
+      color: #f8fafc;
+      color-scheme: dark;
+      margin: 0;
+      padding: 0;
+    }
+  </style>
 
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-WJJVVV411E"></script>
@@ -16,32 +31,44 @@
   </script>
 
   <!-- Primary Meta -->
-  <title>Vivek Parmar | Java & Spring Boot Backend Engineer | Ahmedabad</title>
-  <meta name="google-site-verification" content="mEjkjN1rUXc3J-Y1aTsAtbxl72GjZVSfMGO9cVWLiT0" />
-  <meta name="title" content="Vivek Parmar | Java & Spring Boot Backend Engineer | Ahmedabad" />
-  <meta name="name" content="Vivek Parmar" />
-  <meta name="application-name" content="Vivek Parmar Portfolio" />
-  <meta name="apple-mobile-web-app-title" content="Vivek Parmar" />
+  <title>Vivek Parmar | Java Backend Engineer (Software Engineer L1) | Ahmedabad</title>
+  <meta name="title" content="Vivek Parmar | Java Backend Engineer (Software Engineer L1) | Ahmedabad" />
   <meta name="description"
-    content="Vivek Parmar — Java & Spring Boot backend engineer in Ahmedabad, India. 2+ years building 40+ production REST APIs, enterprise healthcare platforms, and AWS infrastructure. View projects, experience, and resume." />
+    content="Vivek Parmar — Java Backend Engineer (Software Engineer L1) at Techforce Infotech in Ahmedabad, India. 2+ years building Spring Boot applications on AWS, Kafka event streaming, PostgreSQL/MySQL query tuning, and Redis caching across healthcare and recruitment platforms." />
   <meta name="keywords"
-    content="Vivek Parmar, java developer, spring boot developer, backend engineer, java spring boot developer, java developer ahmedabad, spring boot developer ahmedabad, software engineer, react developer, full stack developer, REST APIs, AWS, portfolio" />
+    content="Vivek Parmar, java backend engineer, software engineer L1, spring boot developer, kafka event streaming, redis caching, aws, rest apis, postgresql query optimization, ahmedabad software engineer, techforce infotech, full stack developer" />
   <meta name="author" content="Vivek Parmar" />
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-  <meta name="theme-color" content="#020817" />
+  <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+  <meta name="bingbot" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
 
-  <!-- Canonical (Critical for indexability) -->
+  <!-- Search Engine Verification -->
+  <meta name="google-site-verification" content="mEjkjN1rUXc3J-Y1aTsAtbxl72GjZVSfMGO9cVWLiT0" />
+  <!-- Microsoft Bing Webmaster verification (Add your token from Bing Webmaster Tools if desired) -->
+  <!-- <meta name="msvalidate.01" content="YOUR_BING_VERIFICATION_CODE" /> -->
+
+  <!-- Theme & Browser Shell Colors -->
+  <meta name="theme-color" content="#080b11" />
+  <meta name="msapplication-TileColor" content="#080b11" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Vivek Parmar" />
+  <meta name="application-name" content="Vivek Parmar Portfolio" />
+
+  <!-- Canonical & Alternate URLs for Search & AI Engines -->
   <link rel="canonical" href="https://vivekparmar.is-a.dev/" />
   <link rel="author" href="/humans.txt" />
+  <link rel="alternate" type="text/plain" href="/llms.txt" title="LLM Summary" />
+  <link rel="alternate" type="text/plain" href="/llms-full.txt" title="LLM Full Technical Dossier" />
 
-  <!-- Favicons -->
+  <!-- Favicons for all platforms -->
   <link rel="shortcut icon" href="/favicon.ico" sizes="any" />
   <link rel="icon" href="/favicon.ico" sizes="any" />
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 
-  <!-- WebSite schema for Site Name eligibility (Standalone for better discovery) -->
+  <!-- WebSite schema for Search Box & Site Name eligibility -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -49,34 +76,46 @@
     "@id": "https://vivekparmar.is-a.dev/#website",
     "url": "https://vivekparmar.is-a.dev/",
     "name": "Vivek Parmar",
-    "alternateName": ["Vivek", "Vivek Parmar Portfolio", "Vivek Parmar Java Developer", "Vivek Parmar Backend Engineer", "Vivek Parmar Spring Boot Developer"],
+    "alternateName": [
+      "Vivek",
+      "Vivek Parmar Portfolio",
+      "Vivek Parmar Software Engineer",
+      "Vivek Parmar Java Developer",
+      "Vivek Parmar Backend Engineer"
+    ],
     "publisher": {
-      "@type": "Person",
-      "name": "Vivek Parmar"
+      "@id": "https://vivekparmar.is-a.dev/#person"
     }
   }
   </script>
 
-  <!-- Open Graph -->
+  <!-- Open Graph / Facebook / LinkedIn / WhatsApp / Telegram / Discord -->
   <meta property="og:type" content="profile" />
   <meta property="og:url" content="https://vivekparmar.is-a.dev/" />
-  <meta property="og:title" content="Vivek Parmar | Java & Spring Boot Backend Engineer | Ahmedabad" />
+  <meta property="og:site_name" content="Vivek Parmar" />
+  <meta property="og:title" content="Vivek Parmar | Java Backend Engineer (Software Engineer L1)" />
   <meta property="og:description"
-    content="Vivek Parmar — Java & Spring Boot backend engineer in Ahmedabad, India. 2+ years building 40+ production REST APIs, enterprise healthcare platforms, and AWS infrastructure. View projects, experience, and resume." />
+    content="Vivek Parmar — Java Backend Engineer (Software Engineer L1) on AWS. Spring Boot backends, Kafka event streaming, Redis caching, and PostgreSQL query tuning." />
   <meta property="og:image" content="https://vivekparmar.is-a.dev/og-image.png" />
+  <meta property="og:image:secure_url" content="https://vivekparmar.is-a.dev/og-image.png" />
+  <meta property="og:image:type" content="image/png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
-  <meta property="og:image:alt" content="Vivek Parmar — Java & Spring Boot Backend Engineer Portfolio" />
-  <meta property="og:site_name" content="Vivek Parmar" />
+  <meta property="og:image:alt" content="Vivek Parmar — Java Backend Engineer Portfolio" />
   <meta property="og:locale" content="en_US" />
+  <meta property="profile:first_name" content="Vivek" />
+  <meta property="profile:last_name" content="Parmar" />
+  <meta property="profile:username" content="vivek1812" />
 
-  <!-- Twitter / X -->
+  <!-- Twitter / X Cards -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Vivek Parmar | Java & Spring Boot Backend Engineer | Ahmedabad" />
+  <meta name="twitter:site" content="@VivekParmar" />
+  <meta name="twitter:creator" content="@VivekParmar" />
+  <meta name="twitter:title" content="Vivek Parmar | Java Backend Engineer (Software Engineer L1)" />
   <meta name="twitter:description"
-    content="Vivek Parmar — Java & Spring Boot backend engineer in Ahmedabad, India. 2+ years building 40+ production REST APIs, enterprise healthcare platforms, and AWS infrastructure. View projects, experience, and resume." />
+    content="Vivek Parmar — Java Backend Engineer (Software Engineer L1) on AWS. Spring Boot backends, Kafka event streaming, Redis caching, and PostgreSQL query tuning." />
   <meta name="twitter:image" content="https://vivekparmar.is-a.dev/og-image.png" />
-  <meta name="twitter:image:alt" content="Vivek Parmar — Java & Spring Boot Backend Engineer Portfolio" />
+  <meta name="twitter:image:alt" content="Vivek Parmar — Java Backend Engineer Portfolio" />
 
   <link rel="manifest" href="/site.webmanifest" />
 
@@ -84,16 +123,15 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
-  <!-- Fonts: loaded non-blocking (media=print swap trick) so first paint never
-       waits on the font CSS; display=swap shows fallback text meanwhile. -->
+  <!-- Fonts: Host Grotesk & Atkinson Hyperlegible Mono (Console theme) -->
   <link rel="preload" as="style"
-    href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&family=Fira+Code:wght@400;500&display=swap" />
+    href="https://fonts.googleapis.com/css2?family=Host+Grotesk:wght@400;500;600&family=Atkinson+Hyperlegible+Mono:wght@400;500&display=swap" />
   <link
-    href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&family=Fira+Code:wght@400;500&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Host+Grotesk:wght@400;500;600&family=Atkinson+Hyperlegible+Mono:wght@400;500&display=swap"
     rel="stylesheet" media="print" onload="this.media='all'" />
   <noscript>
     <link
-      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&family=Fira+Code:wght@400;500&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Host+Grotesk:wght@400;500;600&family=Atkinson+Hyperlegible+Mono:wght@400;500&display=swap"
       rel="stylesheet" />
   </noscript>
 
@@ -112,35 +150,50 @@
         "givenName": "Vivek",
         "familyName": "Parmar",
         "alternateName": "Vivek",
-        "jobTitle": "Java & Spring Boot Backend Engineer",
-        "description": "Vivek Parmar is a Java & Spring Boot backend engineer at Techforce Infotech Pvt. Ltd. in Ahmedabad, India, building an enterprise US healthcare order and patient management platform. He has designed and maintained 40+ production REST APIs with Java 17 and Spring Boot, built React and TypeScript front-ends, and deployed on AWS for a platform supporting 100+ organizations.",
+        "jobTitle": "Software Engineer L1 (Java Backend Engineer)",
+        "description": "Vivek Parmar is a Java Backend Engineer (Software Engineer L1) at Techforce Infotech Pvt. Ltd. in Ahmedabad, India, specializing in production Spring Boot backends, Kafka event streaming, Redis caching, and PostgreSQL query tuning on AWS.",
         "worksFor": {
           "@type": "Organization",
-          "name": "Techforce Infotech Pvt. Ltd."
+          "name": "Techforce Infotech Pvt. Ltd.",
+          "url": "https://techforceinfotech.com",
+          "sameAs": "https://techforceinfotech.com"
         },
         "alumniOf": {
           "@type": "CollegeOrUniversity",
-          "name": "Vishwakarma Government Engineering College (Gujarat Technological University)"
+          "name": "Vishwakarma Government Engineering College (Gujarat Technological University)",
+          "url": "https://www.vgecg.ac.in",
+          "sameAs": [
+            "https://www.vgecg.ac.in",
+            "https://en.wikipedia.org/wiki/Vishwakarma_Government_Engineering_College"
+          ]
         },
-        "url": "https://vivekparmar.is-a.dev",
-        "email": "vivek18parmar@gmail.com",
+        "url": "https://vivekparmar.is-a.dev/",
+        "mainEntityOfPage": "https://vivekparmar.is-a.dev/",
+        "email": "mailto:vivek18parmar@gmail.com",
         "image": "https://vivekparmar.is-a.dev/profile-photo.jpg",
         "gender": "Male",
         "nationality": {
           "@type": "Country",
           "name": "India"
         },
+        "knowsLanguage": ["en", "gu", "hi"],
         "sameAs": [
           "https://linkedin.com/in/vivek1812",
           "https://github.com/VivekParmar-18"
         ],
         "knowsAbout": [
-          "Java 17", "Spring Boot", "Spring Security", "JWT", "JPA/Hibernate",
-          "REST APIs", "React", "TypeScript", "Redux Toolkit",
-          "MySQL", "AWS EC2", "AWS S3", "AWS Lambda", "AWS RDS",
-          "GitHub Actions", "Jenkins", "JUnit", "Mockito", "WebSocket",
-          "Microservices", "Stripe integration", "LLM integration"
+          "Java 21", "Java 17", "Spring Boot", "Spring Security", "JWT", "Spring Data JPA", "Hibernate",
+          "Apache Kafka", "PostgreSQL", "MySQL", "Redis", "AWS (EC2, S3, Lambda, RDS)",
+          "Docker", "REST APIs", "Query Optimization", "Quartz Scheduler", "Distributed Job Locking",
+          "React 19", "TypeScript", "JUnit", "Mockito", "Playwright", "SonarQube"
         ],
+        "hasCredential": [
+          { "@type": "EducationalOccupationalCredential", "name": "Model Context Protocol: Advanced Topics", "credentialCategory": "Certification", "recognizedBy": { "@type": "Organization", "name": "Anthropic" } },
+          { "@type": "EducationalOccupationalCredential", "name": "Claude Code in Action", "credentialCategory": "Certification", "recognizedBy": { "@type": "Organization", "name": "Anthropic" } },
+          { "@type": "EducationalOccupationalCredential", "name": "Java Foundations Professional Certificate", "credentialCategory": "Certification", "recognizedBy": { "@type": "Organization", "name": "JetBrains" } },
+          { "@type": "EducationalOccupationalCredential", "name": "Building AI Agents: Advanced Techniques for Developers", "credentialCategory": "Certification", "recognizedBy": { "@type": "Organization", "name": "LinkedIn Learning" } }
+        ],
+        "award": "Team Motivator Award — Techforce Infotech",
         "address": {
           "@type": "PostalAddress",
           "addressLocality": "Ahmedabad",
@@ -153,15 +206,15 @@
         "@type": "ProfilePage",
         "@id": "https://vivekparmar.is-a.dev/#profilepage",
         "url": "https://vivekparmar.is-a.dev/",
-        "name": "Vivek Parmar | Java & Spring Boot Backend Engineer | Ahmedabad",
-        "description": "Vivek Parmar — Java & Spring Boot backend engineer in Ahmedabad, India. 2+ years building 40+ production REST APIs, enterprise healthcare platforms, and AWS infrastructure.",
+        "name": "Vivek Parmar | Java Backend Engineer (Software Engineer L1) | Ahmedabad",
+        "description": "Vivek Parmar — Java Backend Engineer (Software Engineer L1) in Ahmedabad, India. 2+ years building Spring Boot applications on AWS, Kafka event streaming, and PostgreSQL query tuning.",
         "inLanguage": "en-US",
         "mainEntity": { "@id": "https://vivekparmar.is-a.dev/#person" },
         "dateCreated": "2025-06-01",
-        "dateModified": "2026-08-16",
+        "dateModified": "2026-10-24",
         "speakable": {
           "@type": "SpeakableSpecification",
-          "cssSelector": ["#hero h1", "#hero h2", "#about h2", "#about p"]
+          "cssSelector": ["#hero h1", "#about h2", "#skills h2", "#experience h2"]
         }
       },
       {
@@ -181,51 +234,50 @@
   </script>
 </head>
 
-<body class="bg-[#030712] transition-colors duration-500">
-  <div class="noise-overlay"></div>
-  <div class="glow-mesh"></div>
+<body style="background-color:#080b11;" class="bg-[#080b11] text-[#f8fafc]">
   <div id="root"></div>
 
-  <!-- noscript fallback: crawlable content for bots that don't execute JS (AI crawlers, Googlebot fallback) -->
+  <!-- noscript fallback: crawlable content for bots and search engines that don't execute JS -->
   <noscript>
-    <div style="max-width:800px;margin:2rem auto;padding:2rem;color:#e2e8f0;font-family:system-ui,sans-serif;line-height:1.7">
-      <h1>Vivek Parmar — Java & Spring Boot Backend Engineer</h1>
-      <p>Vivek Parmar is a Java & Spring Boot backend engineer at Techforce Infotech Pvt. Ltd. in Ahmedabad, India, with 2+ years of experience. He builds an enterprise US healthcare order and patient management platform — 40+ production REST APIs with Java 17, Spring Boot, React, and TypeScript on AWS, serving 100+ organizations.</p>
+    <div style="max-width:820px;margin:2rem auto;padding:2rem;color:#f8fafc;font-family:system-ui,-apple-system,BlinkMacSystemFont,sans-serif;line-height:1.75">
+      <h1>Vivek Parmar — Java Backend Engineer (Software Engineer L1)</h1>
+      <p>Vivek Parmar is a Java Backend Engineer (Software Engineer L1) at Techforce Infotech Pvt. Ltd. in Ahmedabad, Gujarat, India. He builds and scales production Spring Boot applications, Kafka event streaming pipelines, and cloud infrastructure on AWS across enterprise healthcare and recruitment domains.</p>
 
-      <h2>What does Vivek Parmar specialize in?</h2>
-      <p>Vivek Parmar specializes in Java & Spring Boot backend engineering. He has designed, developed, and maintained 40+ production REST APIs for order, invoice, payment, notification, and document workflows — handling 10,000+ orders and invoices for a platform supporting 100+ organizations. His work includes JWT authentication with role-based access control for secure patient data workflows, real-time WebSocket notifications, async processing with schedulers and distributed job locking, Stripe and ERP integrations, and AWS deployments (EC2, S3, Lambda, RDS) with Jenkins CI/CD.</p>
+      <h2>Core Architecture & Technical Stack</h2>
+      <p>Vivek specializes in Java 17/21, Spring Boot, Apache Kafka event streaming, PostgreSQL/MySQL query tuning, Redis caching, and AWS cloud services (EC2, S3, Lambda, RDS). His focus is on measurable production engineering: eliminating N+1 database queries, implementing keyset pagination, distributed job locking with Quartz schedulers, stateless JWT authentication with role-based access control, and automating quality with JUnit, Mockito, and Playwright harnesses.</p>
 
       <h2>Professional Experience</h2>
       <ul>
-        <li><strong>Software Developer</strong> at Techforce Infotech Pvt. Ltd. (August 2024 – Present, promoted from Associate Software Developer): Building an enterprise US healthcare order and patient management platform — 40+ REST APIs in Java 17 and Spring Boot, reusable React + TypeScript + Redux Toolkit components, custom LLM-powered EHR document completeness checks, CI/CD with GitHub Actions and Jenkins, and production incident resolution across Dev, Stage, and Prod environments.</li>
-        <li><strong>Software Developer Intern</strong> at Rays TechServ (February 2024 – May 2024): Frontend and backend feature development, debugging, and defect resolution in an Agile SDLC.</li>
+        <li><strong>Software Engineer L1</strong> at Techforce Infotech Pvt. Ltd. (August 2024 – Present; promoted to Software Engineer L1 in January 2026): Engineering and maintaining enterprise healthcare order and patient management platforms and high-throughput recruitment search systems on AWS.</li>
+        <li><strong>Software Development Intern</strong> at Rays TechServ (February 2024 – May 2024): Java, Spring Boot, and React.js web application engineering.</li>
+        <li><strong>Web Development Intern</strong> at CodSoft (July 2023 – August 2023): Front-end web development with HTML5, CSS3, JavaScript, and React.js.</li>
       </ul>
 
-      <h2>Featured Projects</h2>
+      <h2>Featured Production Projects</h2>
       <ul>
-        <li><strong>Healthcare Order Management Platform</strong>: Production system at Techforce Infotech — 40+ REST APIs handling 10,000+ orders and invoices across 100+ organizations, with Stripe payments, WebSocket notifications, and AWS deployment.</li>
-        <li><strong>Skillroom — Prompt Intelligence Engine</strong>: Open-source Claude Agent Skill (MIT) that transforms brief prompts into expert-level prompts with intent classification and a transparent quality scorecard. <a href="https://github.com/VivekParmar-18/skillroom">github.com/VivekParmar-18/skillroom</a></li>
-        <li><strong>Lab Automation Tool</strong>: Client project at Techforce Infotech — lab workflow management built with Angular 17, PrimeNG, MySQL, and REST APIs.</li>
-        <li><strong>First Flight Travels</strong>: Personal project — a multi-page travel booking website front-end built with HTML5 and CSS3.</li>
+        <li><strong>Enterprise Healthcare Order & Patient Management Platform</strong>: Designed and maintained 40+ REST APIs in Java 17 and Spring Boot serving 100+ organizations and 10,000+ orders. Built Kafka event streaming, Quartz-scheduled Stripe automation (-40% manual time), and 99.9% uptime on AWS.</li>
+        <li><strong>KabilHire Recruitment Platform & ATS Query Optimization</strong>: Reworked candidate search pipeline in Java 21, Spring Boot 4, PostgreSQL, and Redis. Replaced N+1 lookups with batched JOIN FETCH, introduced keyset pagination, cutting API requests by 64% and network payload by 60% verified via Playwright.</li>
+        <li><strong>Job Scraper Multi-Source Aggregator Engine</strong>: Built multi-source engine in under 4 weeks covering Indeed, LinkedIn, and Naukri with Playwright headless browsers, freshness gates, and 4-layer deduplication.</li>
+        <li><strong>Skillroom — Prompt Intelligence Engine</strong>: Open-source Claude Agent Skill on GitHub (MIT) transforming brief prompts into structured, expert-level prompts with intent classification and a quality scorecard.</li>
+        <li><strong>Lab Automation Tool</strong>: Lab testing digitization with Angular 17, PrimeNG, MySQL, and Spring Boot REST APIs.</li>
       </ul>
 
-      <h2>Education</h2>
-      <p>B.E. — Computer Engineering, Vishwakarma Government Engineering College, Ahmedabad (Gujarat Technological University), 2020 – 2024.</p>
-
-      <h2>Certifications</h2>
+      <h2>Education, Credentials & Honors</h2>
+      <p><strong>B.E. in Computer Engineering</strong> — Vishwakarma Government Engineering College, Ahmedabad (GTU), 2020 – 2024.</p>
       <ul>
         <li>Model Context Protocol: Advanced Topics — Anthropic (2026)</li>
         <li>Claude Code in Action — Anthropic (2026)</li>
         <li>Java Foundations Professional Certificate — JetBrains (2026)</li>
         <li>Building AI Agents: Advanced Techniques for Developers — LinkedIn Learning (2026)</li>
-        <li>AWS Certified Developer – Associate (in progress)</li>
+        <li>Team Motivator Award — Techforce Infotech</li>
       </ul>
 
-      <h2>Contact Vivek Parmar</h2>
+      <h2>Contact Information</h2>
       <ul>
-        <li>Email: <a href="mailto:vivek18parmar@gmail.com">vivek18parmar@gmail.com</a></li>
-        <li>LinkedIn: <a href="https://linkedin.com/in/vivek1812">linkedin.com/in/vivek1812</a></li>
-        <li>GitHub: <a href="https://github.com/VivekParmar-18">github.com/VivekParmar-18</a></li>
+        <li>Email: <a href="mailto:vivek18parmar@gmail.com" style="color:#38bdf8">vivek18parmar@gmail.com</a></li>
+        <li>LinkedIn: <a href="https://linkedin.com/in/vivek1812" style="color:#38bdf8">linkedin.com/in/vivek1812</a></li>
+        <li>GitHub: <a href="https://github.com/VivekParmar-18" style="color:#38bdf8">github.com/VivekParmar-18</a></li>
+        <li>Website: <a href="https://vivekparmar.is-a.dev/" style="color:#38bdf8">https://vivekparmar.is-a.dev/</a></li>
       </ul>
     </div>
   </noscript>

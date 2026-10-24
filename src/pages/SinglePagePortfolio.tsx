@@ -8,88 +8,66 @@ import {
   ContactForm,
   ScrollToTop,
 } from '../components';
-// Sections are imported eagerly on purpose: each chunk was only 2–4 kB gzipped,
-// so lazy-loading saved almost nothing while making sections pop in as
-// skeletons mid-scroll. One slightly larger bundle scrolls perfectly smooth.
 import About from '../components/About/About';
 import JavaExpertise from '../components/JavaExpertise/JavaExpertise';
 import Experience from '../components/Experience/Experience';
 import Projects from '../components/Projects/Projects';
 import Education from '../components/Education/Education';
 import { contactMethods } from '../data/contactData';
-import { motion } from 'framer-motion';
 import { personal } from '../data/personalData';
 import { useSEO } from '../hooks/useSEO';
-
-const EASE = [0.22, 1, 0.36, 1] as const;
 
 const SinglePagePortfolio = () => {
   const { updateSEO } = useSEO();
 
   useEffect(() => {
     updateSEO({
-      title: 'Vivek Parmar — Software Developer | Java, Spring Boot & React',
+      title: 'Vivek Parmar | Java Backend Engineer | Software Engineer L1',
       description: personal.bio,
     });
   }, [updateSEO]);
 
   return (
-    <div className="min-h-screen bg-slate-950 relative overflow-x-hidden" style={{ fontFamily: 'var(--font-body)' }}>
+    <div className="min-h-screen bg-paper text-ink relative" style={{ overflowX: 'clip' }}>
       <BackgroundElements />
       <Navigation />
 
-      {/* ── Hero ── */}
+      {/* Hero */}
       <Hero />
 
-      {/* ── About ── */}
+      {/* About & Narrative */}
       <About />
 
-      {/* ── Java Expertise ── */}
+      {/* Java Expertise & Systems Architecture */}
       <JavaExpertise />
 
-      {/* ── Skills ── */}
+      {/* Skills & Domains */}
       <Skills />
 
-      {/* ── Experience ── */}
+      {/* Work Experience & Timeline */}
       <Experience />
 
-      {/* ── Projects ── */}
+      {/* Featured Projects & Catalog */}
       <Projects />
 
-      {/* ── Education ── */}
+      {/* Credentials, Education & Honors */}
       <Education />
 
-      {/* ── Contact & Footer ── */}
-      <footer id="contact" className="py-24 md:py-32 2xl:py-40 bg-slate-950 relative overflow-hidden">
-        {/* Glow */}
-        <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse 80% 50% at 50% 100%, rgba(59,130,246,0.07) 0%, transparent 70%)' }} />
-
-        <div className="max-w-5xl mx-auto px-6 relative z-10">
+      {/* Contact & Footer */}
+      <footer id="contact" className="pt-12 md:pt-16 pb-20 md:pb-24 bg-paper-3 border-t border-rule relative overflow-hidden">
+        <div className="container relative z-10">
           {/* Header */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-80px' }}
-            transition={{ duration: 0.6, ease: EASE }}
-            className="text-center mb-16"
-          >
-            <span className="flex items-center justify-center gap-3 mb-5">
-              <span className="w-6 h-px bg-blue-500/40" aria-hidden="true" />
-              <span className="text-[11px] tracking-[0.25em] uppercase text-blue-400" style={{ fontFamily: "'Fira Code', monospace" }}>
-                Contact
-              </span>
-              <span className="w-6 h-px bg-blue-500/40" aria-hidden="true" />
-            </span>
-            <h2 className="text-4xl md:text-5xl font-bold text-white tracking-tight mb-5">
+          <div className="text-center max-w-2xl mx-auto mb-14">
+            <h2 className="text-3xl md:text-4xl font-medium text-ink tracking-tight mb-4">
               Get in touch
             </h2>
-            <p className="text-xl text-slate-400 max-w-xl mx-auto leading-relaxed">
-              Hiring for a backend or full-stack role? Email me or reach out on LinkedIn — I reply within 24 hours.
+            <p className="text-ink-muted text-base leading-relaxed">
+              Hiring for a backend or full-stack engineering role? Reach out via email or LinkedIn; I respond within 24 hours.
             </p>
-          </motion.div>
+          </div>
 
           {/* Contact method cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16" aria-label="Contact Methods">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-14" aria-label="Contact methods">
             {contactMethods.map((method, index) => (
               <ContactCard
                 key={method.title}
@@ -105,79 +83,81 @@ const SinglePagePortfolio = () => {
           </div>
 
           {/* Form + info */}
-          <div className="grid md:grid-cols-5 gap-12 items-start mb-20">
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: '-80px' }}
-              transition={{ duration: 0.6, ease: EASE }}
-              className="md:col-span-2"
-            >
-              <h3 className="text-2xl font-bold text-white mb-4" style={{ letterSpacing: '-0.01em' }}>Send me a message</h3>
-              <p className="text-slate-400 leading-relaxed mb-8">Fill out the form and I'll get back to you within 24 hours.</p>
-              <p className="text-slate-500 text-sm leading-relaxed">
-                Based in Ahmedabad, India — open to on-site, hybrid, and remote roles.
+          <div className="grid md:grid-cols-12 gap-8 items-start mb-16">
+            <div className="md:col-span-5 space-y-4">
+              <h3 className="text-xl font-medium text-ink font-display">
+                Send a message
+              </h3>
+              <p className="text-ink-muted text-sm leading-relaxed font-body">
+                Fill out the form with role or project details and I will get back to you promptly.
               </p>
-            </motion.div>
+              <div className="p-4 rounded bg-paper-2 border border-rule space-y-2 text-xs font-mono text-ink-muted">
+                <div>
+                  <span className="text-console-cool">location:</span> {personal.location}
+                </div>
+                <div>
+                  <span className="text-console-accent">workplace:</span> on-site, hybrid, or remote
+                </div>
+                <div>
+                  <span className="text-console-ok">status:</span> open to opportunities
+                </div>
+              </div>
+            </div>
 
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: '-80px' }}
-              transition={{ duration: 0.6, delay: 0.08, ease: EASE }}
-              className="md:col-span-3"
-            >
+            <div className="md:col-span-7">
               <ContactForm />
-            </motion.div>
+            </div>
           </div>
 
-          {/* Footer */}
-          <div className="pt-12 border-t border-white/5 mt-16" role="contentinfo">
-            {/* Identity + quick links */}
-            <div className="flex flex-col md:flex-row items-center justify-between gap-6 mb-10">
+          {/* Masthead Footer */}
+          <div className="pt-10 border-t border-rule" role="contentinfo">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-6 mb-6">
               <div className="text-center md:text-left">
-                <p className="text-white font-semibold text-sm">{personal.name}</p>
-                <p className="text-slate-400 text-sm mt-1">Software Developer — Java, Spring Boot &amp; React</p>
+                <p className="text-ink font-medium text-sm font-display">{personal.name}</p>
+                <p className="text-ink-muted text-xs font-mono mt-0.5">
+                  {personal.role} · {personal.company}
+                </p>
               </div>
-              <nav aria-label="Footer">
-                <ul className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
+
+              <nav aria-label="Footer navigation">
+                <ul className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 pl-0 list-none m-0 text-xs font-body text-ink-muted">
                   <li>
-                    <a href="#about" className="text-sm text-slate-400 hover:text-white transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/60 rounded-sm">
+                    <a href="#about" className="hover:text-ink transition-colors">
                       About
                     </a>
                   </li>
                   <li>
-                    <a href="#projects" className="text-sm text-slate-400 hover:text-white transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/60 rounded-sm">
+                    <a href="#java-expertise" className="hover:text-ink transition-colors">
+                      Architecture
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#skills" className="hover:text-ink transition-colors">
+                      Skills
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#experience" className="hover:text-ink transition-colors">
+                      Experience
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#projects" className="hover:text-ink transition-colors">
                       Projects
                     </a>
                   </li>
                   <li>
-                    <a
-                      href={personal.resumeUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-sm text-slate-400 hover:text-white transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/60 rounded-sm"
-                    >
+                    <a href={personal.resumeUrl} target="_blank" rel="noopener noreferrer" className="hover:text-ink transition-colors">
                       Resume
                     </a>
                   </li>
                   <li>
-                    <a
-                      href={personal.github}
-                      target="_blank"
-                      rel="noopener noreferrer me"
-                      className="text-sm text-slate-400 hover:text-white transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/60 rounded-sm"
-                    >
+                    <a href={personal.github} target="_blank" rel="noopener noreferrer me" className="hover:text-ink transition-colors">
                       GitHub
                     </a>
                   </li>
                   <li>
-                    <a
-                      href={personal.linkedin}
-                      target="_blank"
-                      rel="noopener noreferrer me"
-                      className="text-sm text-slate-400 hover:text-white transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/60 rounded-sm"
-                    >
+                    <a href={personal.linkedin} target="_blank" rel="noopener noreferrer me" className="hover:text-ink transition-colors">
                       LinkedIn
                     </a>
                   </li>
@@ -185,9 +165,9 @@ const SinglePagePortfolio = () => {
               </nav>
             </div>
 
-            {/* Copyright */}
-            <p className="text-center text-slate-500 text-[13px] font-medium tracking-wider uppercase" style={{ fontFamily: "'Fira Code', monospace" }}>
-              &copy; {new Date().getFullYear()} {personal.name} · Software Developer · Ahmedabad, India
+            {/* Colophon */}
+            <p className="text-center text-ink-muted/60 text-xs font-mono">
+              &copy; {new Date().getFullYear()} {personal.name} · Java Backend Engineer · Ahmedabad, India
             </p>
           </div>
         </div>

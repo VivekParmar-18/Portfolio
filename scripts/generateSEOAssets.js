@@ -24,7 +24,18 @@ if (!fs.existsSync(buildDir)) {
 // URLs are invalid in sitemaps, so only the root URL is listed.
 const generateSitemap = () => {
   const currentDate = new Date().toISOString().split('T')[0];
-  const images = ['/profile-photo.jpg', '/og-image.png'];
+  const images = [
+    {
+      loc: '/profile-photo.jpg',
+      title: 'Vivek Parmar — Java Backend Engineer (Software Engineer L1)',
+      caption: 'Profile photograph of Vivek Parmar, Java Backend Engineer based in Ahmedabad, India'
+    },
+    {
+      loc: '/og-image.png',
+      title: 'Vivek Parmar Portfolio — Spring Boot, Kafka & Cloud Architecture',
+      caption: 'Engineering portfolio social card of Vivek Parmar'
+    }
+  ];
 
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
@@ -34,7 +45,9 @@ const generateSitemap = () => {
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>${images.map(img => `
     <image:image>
-      <image:loc>${baseUrl}${img}</image:loc>
+      <image:loc>${baseUrl}${img.loc}</image:loc>
+      <image:title>${img.title}</image:title>
+      <image:caption>${img.caption}</image:caption>
     </image:image>`).join('')}
   </url>
 </urlset>
@@ -42,31 +55,112 @@ const generateSitemap = () => {
 
   fs.writeFileSync(path.join(publicDir, 'sitemap.xml'), sitemap);
   fs.writeFileSync(path.join(buildDir, 'sitemap.xml'), sitemap);
-  console.log('✅ Generated sitemap.xml (homepage only)');
+  console.log('✅ Generated sitemap.xml (homepage with rich image metadata)');
 };
 
-// Generate robots.txt
+// Generate robots.txt — explicitly configured for all global search engines, social crawlers, and AI answer engines
 const generateRobotsTxt = () => {
-  const robotsTxt = `User-agent: *
+  const robotsTxt = `# Universal rule for search engines & browsers
+User-agent: *
 Allow: /
 
-# Sitemap
+# Googlebot (Google Search, Google Images, Google Discover)
+User-agent: Googlebot
+Allow: /
+User-agent: Googlebot-Image
+Allow: /
+
+# Bingbot (Microsoft Bing, Yahoo, DuckDuckGo, Copilot)
+User-agent: Bingbot
+Allow: /
+User-agent: msnbot
+Allow: /
+
+# Applebot (Apple Siri, Spotlight, Safari suggestions)
+User-agent: Applebot
+Allow: /
+
+# DuckDuckBot (DuckDuckGo Search)
+User-agent: DuckDuckBot
+Allow: /
+
+# Baiduspider (Baidu Search)
+User-agent: Baiduspider
+Allow: /
+
+# YandexBot (Yandex Search)
+User-agent: YandexBot
+Allow: /
+
+# Yahoo (Yahoo Slurp)
+User-agent: Slurp
+Allow: /
+
+# Social Preview Crawlers (LinkedIn, Twitter/X, Facebook, WhatsApp, Telegram, Discord, Slack)
+User-agent: Twitterbot
+Allow: /
+User-agent: facebookexternalhit
+Allow: /
+User-agent: LinkedInBot
+Allow: /
+User-agent: WhatsApp
+Allow: /
+User-agent: TelegramBot
+Allow: /
+User-agent: Discordbot
+Allow: /
+User-agent: Slackbot
+Allow: /
+User-agent: SkypeUriPreview
+Allow: /
+
+# AI Answer Engines & LLM Search Bots (ChatGPT, Claude, Perplexity, Gemini, Cohere, Meta, Amazon)
+User-agent: GPTBot
+Allow: /
+User-agent: OAI-SearchBot
+Allow: /
+User-agent: ChatGPT-User
+Allow: /
+User-agent: ClaudeBot
+Allow: /
+User-agent: anthropic-ai
+Allow: /
+User-agent: Claude-Web
+Allow: /
+User-agent: PerplexityBot
+Allow: /
+User-agent: Google-Extended
+Allow: /
+User-agent: cohere-ai
+Allow: /
+User-agent: meta-externalagent
+Allow: /
+User-agent: Amazonbot
+Allow: /
+User-agent: Bytespider
+Allow: /
+
+# Sitemap & Host specifications
 Sitemap: ${baseUrl}/sitemap.xml
+Host: ${baseUrl}
 `;
 
   // Write to both public and dist directories
   fs.writeFileSync(path.join(publicDir, 'robots.txt'), robotsTxt);
   fs.writeFileSync(path.join(buildDir, 'robots.txt'), robotsTxt);
   
-  console.log('✅ Generated robots.txt');
+  console.log('✅ Generated robots.txt (optimized for all search engines & AI bots)');
 };
 
-// Generate security.txt (optional)
+// Generate security.txt according to RFC 9116
 const generateSecurityTxt = () => {
   const securityTxt = `Contact: mailto:vivek18parmar@gmail.com
 Expires: ${new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString()}
 Preferred-Languages: en
-Canonical: ${baseUrl}/.well-known/security.txt`;
+Canonical: ${baseUrl}/.well-known/security.txt
+Policy: ${baseUrl}/#contact
+Hiring: ${baseUrl}/#about
+`;
 
   const wellKnownDir = path.join(publicDir, '.well-known');
   const wellKnownBuildDir = path.join(buildDir, '.well-known');
@@ -81,7 +175,7 @@ Canonical: ${baseUrl}/.well-known/security.txt`;
   fs.writeFileSync(path.join(wellKnownDir, 'security.txt'), securityTxt);
   fs.writeFileSync(path.join(wellKnownBuildDir, 'security.txt'), securityTxt);
   
-  console.log('✅ Generated security.txt');
+  console.log('✅ Generated security.txt (RFC 9116)');
 };
 
 // Main execution

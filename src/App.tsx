@@ -3,8 +3,6 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { initializeLazyLoading } from './utils/lazyAnimationLoader';
 import { animationCleanupRegistry } from './utils/animationOptimization';
 import SinglePagePortfolio from './pages/SinglePagePortfolio';
-import { ReadingProgress } from './components/ReadingProgress/ReadingProgress';
-
 function App() {
   useEffect(() => {
     // Initialize performance-aware lazy loading for animations
@@ -19,9 +17,6 @@ function App() {
   return (
     <Router>
       <div className="App">
-        {/* Core UI Overlays */}
-        <ReadingProgress />
-
         {/* Navigation & Content */}
         <Routes>
           {/* All routes render the same SPA — hash links handle sections */}

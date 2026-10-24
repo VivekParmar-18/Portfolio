@@ -1,81 +1,50 @@
-import { motion } from 'framer-motion';
-import { FiCalendar, FiServer, FiFileText, FiUsers, FiTrendingUp } from 'react-icons/fi';
-import type { IconType } from 'react-icons';
-import AnimatedCounter from '../AnimatedCounter/AnimatedCounter';
 import { statisticsData } from '../../data/statisticsData';
-
-const EASE = [0.22, 1, 0.36, 1] as const;
-
-// Component-side icon mapping keeps the data layer presentation-free.
-const statIcons: Record<string, IconType> = {
-  experience: FiCalendar,
-  apis: FiServer,
-  orders: FiFileText,
-  organizations: FiUsers,
-};
+import AnimatedCounter from '../AnimatedCounter/AnimatedCounter';
 
 const Statistics = () => {
   return (
-    <div className="max-w-6xl mx-auto px-4">
-      <motion.h3
-        className="text-2xl font-bold text-white text-center mb-12"
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: EASE }}
-        viewport={{ once: true, margin: '-80px' }}
-      >
-        By the Numbers
-      </motion.h3>
+    <div className="max-w-6xl mx-auto">
+      <div className="flex items-center justify-between pb-3 border-b border-rule mb-8">
+        <h3 className="text-sm font-medium text-ink font-body">
+          Production scale & measured metrics
+        </h3>
+        <span className="text-xs text-console-cool font-mono">
+          verified engineering telemetry
+        </span>
+      </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-8">
-        {statisticsData.map((stat, index) => {
-          const Icon = statIcons[stat.id] ?? FiTrendingUp;
-          return (
-            <motion.div
-              key={stat.id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{
-                opacity: 1,
-                y: 0,
-                transition: {
-                  duration: 0.6,
-                  delay: index * 0.08,
-                  ease: EASE
-                }
-              }}
-              viewport={{ once: true, margin: '-80px' }}
-              whileHover={{
-                y: -4,
-                transition: { duration: 0.25, ease: EASE }
-              }}
-              className="text-center p-6 bg-white/[0.02] rounded-3xl border border-white/[0.05] hover:border-blue-500/30 transition-all duration-300 group"
-            >
-              {/* Icon */}
-              <div
-                className="w-10 h-10 mb-4 mx-auto rounded-xl bg-blue-500/10 text-blue-400 flex items-center justify-center group-hover:bg-blue-500/20 transition-colors"
-                aria-hidden="true"
-              >
-                <Icon size={18} />
-              </div>
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+        {statisticsData.map((stat, index) => (
+          <div
+            key={stat.id}
+            className="p-4 rounded bg-paper-3 border border-rule transition-colors hover:border-console-accent/40 flex flex-col justify-between"
+          >
+            <span className="text-[10px] font-mono text-ink-muted mb-2 block">
+              0{index + 1}
+            </span>
 
-              {/* Animated Counter */}
-              <div className="text-3xl sm:text-4xl font-bold text-white mb-2 font-mono" style={{ fontVariantNumeric: 'tabular-nums' }}>
-                <AnimatedCounter
-                  end={stat.value}
-                  duration={2.5}
-                  suffix={stat.suffix}
-                  prefix={stat.prefix}
-                  decimals={stat.decimals}
-                />
-              </div>
+            <div className="reading text-2xl md:text-3xl text-ink font-mono mb-2">
+              <AnimatedCounter
+                end={stat.value}
+                duration={2}
+                suffix={stat.suffix}
+                prefix={stat.prefix}
+                decimals={stat.decimals}
+              />
+            </div>
 
-              {/* Label */}
-              <p className="text-slate-500 text-xs uppercase tracking-widest font-bold group-hover:text-blue-400/80 transition-colors">
+            <div>
+              <p className="text-xs font-medium text-ink-2 font-body mb-1">
                 {stat.label}
               </p>
-            </motion.div>
-          );
-        })}
+              {stat.subtext && (
+                <p className="text-[11px] text-ink-muted font-body leading-snug">
+                  {stat.subtext}
+                </p>
+              )}
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );

@@ -33,16 +33,16 @@ const ScrollToTop = () => {
   return (
     <button
       onClick={scrollToTop}
-      className={`fixed bottom-6 right-6 md:bottom-8 md:right-8 z-30 flex items-center justify-center bg-blue-500 hover:bg-blue-600 text-white rounded-full shadow-lg touch-manipulation focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950 ${
+      className={`fixed bottom-6 right-6 md:bottom-8 md:right-8 z-30 flex items-center justify-center bg-console-accent hover:brightness-110 text-paper-3 rounded-full shadow-lg border border-white/10 touch-manipulation focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-console-accent focus-visible:ring-offset-2 focus-visible:ring-offset-paper ${
         isVisible ? 'opacity-100' : 'opacity-0 pointer-events-none'
       }`}
       style={{
-        width: 48, // 44px+ touch target
-        height: 48,
-        transform: isVisible ? 'translate3d(0, 0, 0) scale(1)' : 'translate3d(0, 64px, 0) scale(0.8)',
-        transition: `all 0.3s ${lightEasing}`, // Faster transition
-        willChange: isVisible ? 'auto' : 'transform, opacity', // Dynamic will-change
-        backfaceVisibility: 'hidden' // GPU optimization
+        width: 44,
+        height: 44,
+        transform: isVisible ? 'translate3d(0, 0, 0) scale(1)' : 'translate3d(0, 48px, 0) scale(0.85)',
+        transition: 'opacity 200ms var(--ease-brand), transform 200ms var(--ease-brand)',
+        willChange: isVisible ? 'auto' : 'transform, opacity',
+        backfaceVisibility: 'hidden'
       }}
       aria-label="Back to top"
     >

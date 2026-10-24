@@ -1,190 +1,188 @@
-import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { personal } from '../../data/personalData';
 import { FiGithub, FiLinkedin, FiMail, FiMapPin, FiBriefcase, FiTarget, FiSearch, FiZap, FiUsers, FiBookOpen } from 'react-icons/fi';
 import Statistics from '../Statistics/Statistics';
 
-const EASE = [0.22, 1, 0.36, 1] as const;
-
 const traits = [
-  { title: 'Problem Solving', desc: 'Tracking production-critical issues across Dev, Stage, and Prod until the root cause is fixed — not just patched.', icon: FiSearch },
-  { title: 'Code Quality', desc: 'Changes go through SonarQube quality gates and JUnit/Mockito tests before they ship.', icon: FiZap },
-  { title: 'Collaboration', desc: 'Received the Team Motivator Award at Techforce Infotech for collaboration, ownership, and delivery.', icon: FiUsers },
-  { title: 'Continuous Learning', desc: 'Currently preparing for the AWS Certified Developer – Associate certification.', icon: FiBookOpen },
+  {
+    title: 'Root-cause debugging',
+    desc: 'Tracking production-critical issues across Dev, Stage, and Prod until the architectural root cause is resolved, not just patched.',
+    icon: FiSearch
+  },
+  {
+    title: 'Code quality & testing',
+    desc: 'Changes are gated through SonarQube quality gates and verified with JUnit, Mockito, and Playwright test harnesses before merging.',
+    icon: FiZap
+  },
+  {
+    title: 'Cross-functional delivery',
+    desc: 'Recipient of the Team Motivator Award at Techforce Infotech for proactive collaboration, technical ownership, and reliable releases.',
+    icon: FiUsers
+  },
+  {
+    title: 'Continuous depth',
+    desc: 'Certified across Anthropic MCP, Claude Code in Action, JetBrains Java Foundations, and Building AI Agents; preparing for AWS Developer Associate.',
+    icon: FiBookOpen
+  },
 ];
 
 const About = () => {
-  const [ref, inView] = useInView({ threshold: 0.2, triggerOnce: true });
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.08,
-        delayChildren: 0.1
-      }
-    }
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6, ease: EASE }
-    }
-  };
+  const [ref] = useInView({ threshold: 0.1, triggerOnce: true });
 
   return (
-    <section id="about" className="py-24 md:py-32 2xl:py-40 relative overflow-hidden" ref={ref}>
-      <div className="glow-mesh opacity-50" />
+    <section id="about" className="pt-12 md:pt-16 pb-20 md:pb-24 relative overflow-hidden" ref={ref}>
+      <div className="glow-mesh" />
 
-      <div className="max-w-6xl mx-auto px-6 relative z-10">
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate={inView ? "visible" : "hidden"}
-          className="space-y-24"
-        >
-          {/* Header */}
-          <motion.div variants={itemVariants} className="text-center">
-            <span className="flex items-center justify-center gap-3 mb-5">
-              <span className="w-6 h-px bg-blue-500/40" aria-hidden="true" />
-              <span className="text-[11px] tracking-[0.25em] uppercase text-blue-400" style={{ fontFamily: "'Fira Code', monospace" }}>
-                About
-              </span>
-              <span className="w-6 h-px bg-blue-500/40" aria-hidden="true" />
-            </span>
-            <h2 className="text-4xl md:text-5xl font-bold text-white tracking-tight mb-8 max-w-3xl mx-auto" style={{ fontFamily: 'var(--font-display)' }}>
-              Shipping healthcare software that has to work
-            </h2>
-          </motion.div>
+      <div className="container relative z-10 space-y-20">
+        {/* Section Heading */}
+        <div className="max-w-3xl">
+          <p className="text-xs text-console-cool font-mono mb-2">engineering profile</p>
+          <h2 className="text-3xl md:text-4xl font-medium text-ink tracking-tight mb-4">
+            Reliable backend software engineered for production
+          </h2>
+          <p className="text-ink-muted text-base leading-relaxed">
+            From regulated healthcare order platforms to high-concurrency recruitment search pipelines: engineering clean APIs, event streaming, and resilient cloud infrastructure.
+          </p>
+        </div>
 
-          {/* Main Layout: Story + Profile Card */}
-          <motion.div variants={containerVariants} className="grid lg:grid-cols-12 gap-12 items-start" role="main">
-            {/* Biography (7 cols) */}
-            <motion.article variants={itemVariants} className="lg:col-span-7 space-y-8" aria-labelledby="about-story-title">
-              <div className="space-y-6">
-                <h3 id="about-story-title" className="text-2xl font-bold text-white flex items-center gap-3">
-                  <span className="h-[1px] w-8 bg-blue-500/50" />
-                  My Story
-                </h3>
-                <p className="text-slate-400 text-lg leading-relaxed font-light">
-                  I build the backend of an enterprise US healthcare order and patient management platform at <span className="text-white font-medium underline decoration-blue-500/50 underline-offset-4">{personal.company}</span> — 40+ REST APIs in <span className="text-blue-400 font-medium">Java 17</span> and <span className="text-emerald-400 font-medium">Spring Boot</span> covering orders, invoices, payments, documents, and notifications, serving 100+ practices, agencies, and manufacturers.
-                </p>
-                <p className="text-slate-400 text-lg leading-relaxed font-light">
-                  I care about software that holds up in production: JWT authentication and role-based access control around secure patient data workflows, code quality gated through SonarQube, tests with JUnit and Mockito, and hands-on resolution of production-critical issues across Dev, Stage, and Prod on AWS.
-                </p>
-                <p className="text-slate-400 text-lg leading-relaxed font-light">
-                  Right now I'm preparing for the AWS Certified Developer – Associate certification and going deeper into distributed systems — schedulers, distributed job locking, and real-time WebSocket notifications.
-                </p>
-              </div>
+        {/* Narrative & Profile Grid */}
+        <div className="grid lg:grid-cols-12 gap-8 items-start">
+          {/* Biography: 7 cols */}
+          <article className="lg:col-span-7 space-y-6">
+            <h3 className="text-lg font-medium text-ink font-display pb-2 border-b border-rule">
+              Background & engineering focus
+            </h3>
 
-              {/* Social Buttons */}
-              <div className="flex flex-wrap gap-4 pt-4" aria-label="Social connections">
-                {[
-                  { icon: FiGithub, href: personal.github, label: 'Explore Code' },
-                  { icon: FiLinkedin, href: personal.linkedin, label: 'Professional' },
-                  { icon: FiMail, href: `mailto:${personal.email}`, label: 'Get in Touch' },
-                ].map(({ icon: Icon, href, label }) => (
-                  <a key={label} href={href} target="_blank" rel="noopener noreferrer"
-                    className="group flex items-center gap-2 px-5 py-2.5 rounded-xl text-slate-400 hover:text-white transition-all bg-white/[0.03] border border-white/[0.06] hover:border-blue-500/40 hover:bg-blue-500/5 text-sm font-medium"
-                    aria-label={label}>
-                    <Icon className="group-hover:scale-110 transition-transform" aria-hidden="true" /> {label}
-                  </a>
-                ))}
-              </div>
-            </motion.article>
+            <p className="text-ink-2 text-sm md:text-base leading-relaxed font-body">
+              I build and scale backend services and APIs at <span className="text-ink font-medium">{personal.company}</span> across enterprise healthcare and recruitment domains. My work spans Java 17 and Java 21, Spring Boot, Apache Kafka event streaming, PostgreSQL/MySQL query optimization, and Redis caching.
+            </p>
 
-            {/* Profile Side (5 cols) */}
-            <motion.aside variants={itemVariants} className="lg:col-span-5 space-y-6" aria-label="Profile Card">
-              {/* Profile Card */}
-              <div className="relative group">
-                <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-3xl opacity-20 group-hover:opacity-40 transition-opacity blur" />
-              <div className="glass-card relative p-8 border-white/5 space-y-6 overflow-hidden">
-                 {/* Abstract Pattern overlay */}
-                 <div className="absolute top-0 right-0 opacity-10 pointer-events-none" aria-hidden="true">
-                   <svg width="100" height="100" viewBox="0 0 100 100" fill="none" stroke="currentColor">
-                     <circle cx="50" cy="50" r="40" strokeWidth="1" strokeDasharray="4 4" />
-                     <circle cx="50" cy="50" r="25" strokeWidth="1" />
-                   </svg>
-                 </div>
+            <p className="text-ink-muted text-sm md:text-base leading-relaxed font-body">
+              On the healthcare platform, I design and maintain 40+ REST APIs managing orders, invoices, payments, dynamic commissions, and audit trails serving 100+ practices and agencies with 99.9% uptime on AWS. On the KabilHire ATS platform, I reworked the candidate search pipeline to eliminate N+1 queries, introduced keyset pagination, and cut API requests by 64% and payload by 60%.
+            </p>
 
-                <div className="flex items-center gap-6">
-                  <div className="w-20 h-20 rounded-2xl overflow-hidden ring-2 ring-blue-500/20 shadow-xl shadow-blue-500/10">
-                    <img src={personal.profileImage} alt={personal.name} width={80} height={80} className="w-full h-full object-cover"
-                      onError={(e) => {
-                        (e.target as HTMLImageElement).style.display = 'none';
-                      }}
-                    />
-                  </div>
-                  <div>
-                    <h4 className="text-2xl font-bold text-white mb-1" style={{ fontFamily: 'var(--font-display)' }}>{personal.name}</h4>
-                    <div className="flex items-center gap-2 text-blue-400 text-xs font-mono font-bold uppercase tracking-wider" aria-label="Status: Open to opportunities">
-                      <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" aria-hidden="true" />
-                      Open to opportunities
-                    </div>
-                  </div>
-                </div>
+            <p className="text-ink-muted text-sm md:text-base leading-relaxed font-body">
+              Promoted to Software Engineer L1 in January 2026, recipient of the Team Motivator Award, and actively building AI tooling like the open-source Skillroom agent skill on GitHub.
+            </p>
 
-                {/* Info List */}
-                <div className="space-y-4" aria-label="Profile Details">
-                  {[
-                    { icon: FiBriefcase, label: 'Role', value: 'Software Developer' },
-                    { icon: FiMapPin, label: 'Location', value: personal.location },
-                    { icon: FiTarget, label: 'Focus', value: 'Healthcare backend systems' },
-                  ].map((item) => (
-                    <div key={item.label} className="flex items-center gap-4 p-4 rounded-2xl bg-white/[0.02] border border-white/[0.05] hover:bg-white/[0.04] transition-colors">
-                      <div className="w-12 h-12 rounded-xl bg-blue-500/5 border border-blue-500/10 flex items-center justify-center text-blue-400" aria-hidden="true">
-                        <item.icon size={20} />
-                      </div>
-                      <div>
-                        <p className="text-[10px] text-slate-500 uppercase tracking-[0.2em] font-bold">{item.label}</p>
-                        <p className="text-slate-200 text-sm font-semibold">{item.value}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-              </div>
-            </motion.aside>
-          </motion.div>
-
-          {/* Statistics Section Integration */}
-          <motion.div variants={itemVariants} className="pt-12 border-t border-white/[0.05]" aria-label="Professional Career Statistics">
-            <Statistics />
-          </motion.div>
-
-          {/* Traits: The Philosophy */}
-          <motion.article variants={containerVariants} className="space-y-12" aria-labelledby="core-principles-title">
-            <motion.div variants={itemVariants} className="max-w-2xl">
-              <h3 id="core-principles-title" className="text-3xl font-bold text-white mb-4">How I work</h3>
-              <p className="text-slate-400 leading-relaxed font-light">
-                The habits behind the work — how I solve problems, keep quality high, and keep learning.
-              </p>
-            </motion.div>
-
-            <motion.div variants={containerVariants} className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6" aria-label="Core work philosophy traits">
-              {traits.map((t) => (
-                <motion.div
-                  key={t.title}
-                  variants={itemVariants}
-                  whileHover={{ y: -4, transition: { duration: 0.25, ease: EASE } }}
-                  className="glass-card group p-8 border-white/5 hover:border-blue-500/30 transition-all duration-300 relative overflow-hidden"
-                  role="group"
-                  aria-labelledby={`trait-title-${t.title}`}
+            {/* Social connection buttons */}
+            <div className="flex flex-wrap gap-2.5 pt-2" aria-label="Social connections">
+              {[
+                { icon: FiGithub, href: personal.github, label: 'GitHub' },
+                { icon: FiLinkedin, href: personal.linkedin, label: 'LinkedIn' },
+                { icon: FiMail, href: `mailto:${personal.email}`, label: 'Email' },
+              ].map(({ icon: Icon, href, label }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn text-xs"
+                  aria-label={label}
                 >
-                  <div className="w-10 h-10 mb-6 rounded-xl bg-blue-500/10 text-blue-400 flex items-center justify-center group-hover:bg-blue-500/20 transition-colors" aria-hidden="true">
-                    <t.icon size={18} />
-                  </div>
-                  <h4 id={`trait-title-${t.title}`} className="text-white font-bold mb-4 text-xl leading-tight" style={{ fontFamily: 'var(--font-display)' }}>{t.title}</h4>
-                  <p className="text-slate-500 text-sm leading-relaxed group-hover:text-slate-400 transition-colors">{t.desc}</p>
-                </motion.div>
+                  <Icon size={14} aria-hidden="true" />
+                  <span>{label}</span>
+                </a>
               ))}
-            </motion.div>
-          </motion.article>
-        </motion.div>
+            </div>
+          </article>
+
+          {/* Profile Card: 5 cols */}
+          <aside className="lg:col-span-5 console-panel p-6 border border-rule space-y-6" aria-label="Profile card">
+            <div className="flex items-center gap-4 pb-4 border-b border-rule">
+              <div className="w-16 h-16 rounded-full overflow-hidden border border-rule flex-shrink-0 bg-paper-3">
+                <img
+                  src={personal.profileImage}
+                  alt={personal.name}
+                  width={64}
+                  height={64}
+                  className="w-full h-full object-cover"
+                  onError={(e) => {
+                    (e.target as HTMLImageElement).style.display = 'none';
+                  }}
+                />
+              </div>
+              <div className="min-w-0">
+                <h4 className="text-lg font-medium text-ink font-display truncate">
+                  {personal.name}
+                </h4>
+                <p className="text-xs text-console-accent font-mono mb-1 truncate">
+                  {personal.role}
+                </p>
+                <div className="flex items-center gap-1.5 text-xs text-console-ok font-body">
+                  <span className="w-1.5 h-1.5 rounded-full bg-console-ok" aria-hidden="true" />
+                  <span>Available for engineering roles</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Quick telemetry details */}
+            <dl className="space-y-3 m-0 text-xs font-mono">
+              {[
+                { icon: FiBriefcase, label: 'Domain', value: 'Backend Engineering & Distributed Systems' },
+                { icon: FiMapPin, label: 'Location', value: personal.location },
+                { icon: FiTarget, label: 'Core focus', value: 'Java 21/17, Kafka, Redis, Query Tuning, AWS' },
+              ].map((item) => {
+                const Icon = item.icon;
+                return (
+                  <div key={item.label} className="p-3 rounded bg-paper-3 border border-rule">
+                    <dt className="text-ink-muted text-[10px] font-body mb-0.5 flex items-center gap-1.5">
+                      <Icon size={12} className="text-console-cool" aria-hidden="true" />
+                      <span>{item.label}</span>
+                    </dt>
+                    <dd className="text-ink-2 font-medium m-0 truncate">
+                      {item.value}
+                    </dd>
+                  </div>
+                );
+              })}
+            </dl>
+          </aside>
+        </div>
+
+        {/* Career Statistics */}
+        <div className="pt-8 border-t border-rule" aria-label="Professional metrics">
+          <Statistics />
+        </div>
+
+        {/* Engineering Philosophy & Habits */}
+        <div className="space-y-6 pt-4">
+          <div className="max-w-2xl">
+            <h3 className="text-lg font-medium text-ink font-display mb-1.5">
+              Engineering discipline & production habits
+            </h3>
+            <p className="text-xs md:text-sm text-ink-muted font-body">
+              How I approach distributed systems, code quality gating, and team ownership.
+            </p>
+          </div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4" aria-label="Core engineering habits">
+            {traits.map((t, idx) => {
+              const Icon = t.icon;
+              return (
+                <div
+                  key={t.title}
+                  className="console-panel p-5 border border-rule flex flex-col justify-between"
+                >
+                  <div>
+                    <div className="flex items-center justify-between mb-3">
+                      <div className="p-2 rounded bg-paper-3 text-console-accent" aria-hidden="true">
+                        <Icon size={16} />
+                      </div>
+                      <span className="text-[10px] font-mono text-ink-muted">0{idx + 1}</span>
+                    </div>
+                    <h4 className="text-sm font-medium text-ink font-body mb-2">
+                      {t.title}
+                    </h4>
+                    <p className="text-xs text-ink-muted leading-relaxed font-body">
+                      {t.desc}
+                    </p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
       </div>
     </section>
   );

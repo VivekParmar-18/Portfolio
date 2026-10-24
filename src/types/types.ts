@@ -30,12 +30,26 @@ export interface Technology {
   icon: string; // Logo/icon path, no proficiency levels
 }
 
+export interface ExperienceProject {
+  title: string;
+  stack: string;
+  highlights: string[];
+}
+
+export interface ExperienceRole {
+  title: string;
+  period: string;
+}
+
 export interface WorkExperience {
   company: string;
   position: string;
   duration: string;
+  location?: string;
+  roles?: ExperienceRole[];
   description: string;
   achievements: string[];
+  projects?: ExperienceProject[];
   technologies: string[];
 }
 
