@@ -1,17 +1,24 @@
 import { useState, useEffect, useRef } from 'react';
 import { HiMenu, HiX } from 'react-icons/hi';
+import { FiSearch } from 'react-icons/fi';
 import { useResponsive } from '../../hooks/useResponsive';
 import { useSwipeGesture } from '../../hooks/useSwipeGesture';
 import { personal } from '../../data/personalData';
 
+interface NavigationProps {
+  className?: string;
+  onOpenPalette?: () => void;
+}
+
 const navItems = [
-  { id: 'about',          label: 'About' },
-  { id: 'java-expertise', label: 'Architecture' },
-  { id: 'skills',         label: 'Skills' },
-  { id: 'experience',     label: 'Experience' },
-  { id: 'projects',       label: 'Projects' },
-  { id: 'education',      label: 'Credentials' },
-  { id: 'contact',        label: 'Contact' },
+  { id: 'about',                  label: 'About' },
+  { id: 'architecture-simulator', label: 'Simulator', badge: 'Live' },
+  { id: 'java-expertise',         label: 'Architecture' },
+  { id: 'query-tuner',            label: 'Query Tuner', badge: '-64%' },
+  { id: 'skills',                 label: 'Skills' },
+  { id: 'projects',               label: 'Projects' },
+  { id: 'experience',             label: 'Experience' },
+  { id: 'contact',                label: 'Contact' },
 ];
 
 const scrollTo = (id: string) => {
@@ -32,7 +39,7 @@ const scrollTo = (id: string) => {
   });
 };
 
-const Navigation = ({ className = '' }: { className?: string }) => {
+const Navigation = ({ className = '', onOpenPalette }: NavigationProps) => {
   const [isScrolled,        setIsScrolled]        = useState(false);
   const [activeSection,     setActiveSection]      = useState('hero');
   const [isMobileMenuOpen,  setIsMobileMenuOpen]   = useState(false);
@@ -118,15 +125,33 @@ const Navigation = ({ className = '' }: { className?: string }) => {
                   onClick={() => scrollTo(item.id)}
                   aria-label={`Scroll to ${item.label}`}
                   aria-current={activeSection === item.id ? 'true' : undefined}
-                  className={`px-3 py-1 rounded-full text-xs font-body transition-colors ${
+                  className={`px-3 py-1 rounded-full text-xs font-body transition-colors flex items-center gap-1.5 ${
                     activeSection === item.id
                       ? 'bg-paper-3 text-console-accent border border-rule-2 font-medium'
                       : 'text-ink-muted hover:text-ink'
                   }`}
                 >
-                  {item.label}
+                  <span>{item.label}</span>
+                  {item.badge && (
+                    <span className="text-[9px] px-1.5 py-0.2 rounded font-mono bg-paper text-console-ok border border-rule">
+                      {item.badge}
+                    </span>
+                  )}
                 </button>
               ))}
+
+              {/* Command Palette Trigger Button */}
+              {onOpenPalette && (
+                <button
+                  type="button"
+                  onClick={onOpenPalette}
+                  aria-label="Open command palette (Ctrl+K)"
+                  className="ml-1 pl-2.5 pr-2 py-1 rounded-full text-[11px] font-mono text-ink-muted hover:text-ink hover:bg-paper-3 transition-colors border-l border-rule flex items-center gap-1.5"
+                >
+                  <FiSearch className="w-3 h-3 text-console-accent" aria-hidden="true" />
+                  <kbd className="px-1.5 py-0.5 rounded bg-paper-3 text-[10px] text-ink-muted border border-rule">⌘K</kbd>
+                </button>
+              )}
             </div>
           </nav>
         </div>
@@ -169,19 +194,37 @@ const Navigation = ({ className = '' }: { className?: string }) => {
             </div>
 
             <nav className="flex-1 overflow-y-auto space-y-1" aria-label="Mobile navigation links">
+              {onOpenPalette && (
+                <button
+                  type="button"
+                  onClick={() => { setIsMobileMenuOpen(false); onOpenPalette(); }}
+                  className="w-full text-left px-3 py-2.5 rounded text-xs font-mono bg-paper-3 text-console-accent border border-rule flex items-center justify-between mb-2"
+                >
+                  <span className="flex items-center gap-2">
+                    <FiSearch className="w-3.5 h-3.5" aria-hidden="true" />
+                    <span>Command Palette</span>
+                  </span>
+                  <kbd className="px-1.5 py-0.5 rounded bg-paper text-[10px] text-ink-muted border border-rule">⌘K</kbd>
+                </button>
+              )}
               {navItems.map((item) => (
                 <button
                   key={item.id}
                   type="button"
                   onClick={() => { scrollTo(item.id); setIsMobileMenuOpen(false); }}
                   aria-current={activeSection === item.id ? 'true' : undefined}
-                  className={`w-full text-left px-3 py-2.5 rounded text-xs font-body transition-colors ${
+                  className={`w-full text-left px-3 py-2.5 rounded text-xs font-body transition-colors flex items-center justify-between ${
                     activeSection === item.id
                       ? 'bg-paper-3 text-console-accent border border-rule-2 font-medium'
                       : 'text-ink-muted hover:text-ink'
                   }`}
                 >
-                  {item.label}
+                  <span>{item.label}</span>
+                  {item.badge && (
+                    <span className="text-[9px] px-1.5 py-0.2 rounded font-mono bg-paper text-console-ok border border-rule">
+                      {item.badge}
+                    </span>
+                  )}
                 </button>
               ))}
             </nav>

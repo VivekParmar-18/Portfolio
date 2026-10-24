@@ -153,7 +153,7 @@ const Hero = () => {
             </div>
 
             {/* Actions */}
-            <div className="flex flex-wrap items-center gap-4">
+            <div className="flex flex-wrap items-center gap-3">
               <button
                 type="button"
                 onClick={handleDownloadCV}
@@ -162,7 +162,7 @@ const Hero = () => {
                 className="btn btn--primary px-6 py-3 font-medium select-none"
               >
                 <FiDownload size={16} aria-hidden="true" />
-                <span>{isDownloading ? 'Downloading...' : 'Download resume'}</span>
+                <span>{isDownloading ? 'Downloading…' : 'Download resume'}</span>
               </button>
 
               <button
@@ -173,6 +173,23 @@ const Hero = () => {
               >
                 <FiMail size={16} aria-hidden="true" />
                 <span>Get in touch</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => {
+                  const el = document.getElementById('architecture-simulator');
+                  if (el) {
+                    const currentScrollY = window.pageYOffset || document.documentElement.scrollTop;
+                    const targetY = Math.max(0, el.getBoundingClientRect().top + currentScrollY - 76);
+                    window.scrollTo({ top: targetY, behavior: 'smooth' });
+                  }
+                }}
+                aria-label="Launch systems simulator"
+                className="btn px-4 py-3 font-mono text-xs select-none border-console-accent/40 text-console-accent hover:bg-console-accent/10"
+              >
+                <span className="w-2 h-2 rounded-full bg-console-accent animate-pulse" aria-hidden="true" />
+                <span>Live Simulator</span>
               </button>
             </div>
           </div>

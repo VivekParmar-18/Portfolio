@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import {
   Navigation,
   Hero,
@@ -9,16 +9,20 @@ import {
   ScrollToTop,
 } from '../components';
 import About from '../components/About/About';
+import SystemsSimulator from '../components/SystemsSimulator/SystemsSimulator';
 import JavaExpertise from '../components/JavaExpertise/JavaExpertise';
+import QueryTuner from '../components/QueryTuner/QueryTuner';
 import Experience from '../components/Experience/Experience';
 import Projects from '../components/Projects/Projects';
 import Education from '../components/Education/Education';
+import CommandPalette from '../components/CommandPalette/CommandPalette';
 import { contactMethods } from '../data/contactData';
 import { personal } from '../data/personalData';
 import { useSEO } from '../hooks/useSEO';
 
 const SinglePagePortfolio = () => {
   const { updateSEO } = useSEO();
+  const [isPaletteOpen, setIsPaletteOpen] = useState(false);
 
   useEffect(() => {
     updateSEO({
@@ -27,10 +31,17 @@ const SinglePagePortfolio = () => {
     });
   }, [updateSEO]);
 
+  useEffect(() => {
+    const handleToggle = () => setIsPaletteOpen((prev) => !prev);
+    window.addEventListener('toggle-command-palette', handleToggle);
+    return () => window.removeEventListener('toggle-command-palette', handleToggle);
+  }, []);
+
   return (
     <div className="min-h-screen bg-paper text-ink relative" style={{ overflowX: 'clip' }}>
       <BackgroundElements />
-      <Navigation />
+      <CommandPalette isOpen={isPaletteOpen} onClose={() => setIsPaletteOpen(false)} />
+      <Navigation onOpenPalette={() => setIsPaletteOpen(true)} />
 
       {/* Hero */}
       <Hero />
@@ -38,17 +49,23 @@ const SinglePagePortfolio = () => {
       {/* About & Narrative */}
       <About />
 
+      {/* Interactive Systems Simulator (Kafka & Redis Event Stream) */}
+      <SystemsSimulator />
+
       {/* Java Expertise & Systems Architecture */}
       <JavaExpertise />
+
+      {/* Interactive Query Tuner & N+1 Solver */}
+      <QueryTuner />
 
       {/* Skills & Domains */}
       <Skills />
 
-      {/* Work Experience & Timeline */}
-      <Experience />
-
       {/* Featured Projects & Catalog */}
       <Projects />
+
+      {/* Work Experience & Timeline */}
+      <Experience />
 
       {/* Credentials, Education & Honors */}
       <Education />
@@ -127,8 +144,18 @@ const SinglePagePortfolio = () => {
                     </a>
                   </li>
                   <li>
+                    <a href="#architecture-simulator" className="hover:text-ink transition-colors text-console-accent">
+                      Simulator
+                    </a>
+                  </li>
+                  <li>
                     <a href="#java-expertise" className="hover:text-ink transition-colors">
                       Architecture
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#query-tuner" className="hover:text-ink transition-colors text-console-ok">
+                      Query Tuner
                     </a>
                   </li>
                   <li>
