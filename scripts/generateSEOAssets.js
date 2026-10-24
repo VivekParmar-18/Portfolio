@@ -20,6 +20,14 @@ if (!fs.existsSync(buildDir)) {
   fs.mkdirSync(buildDir, { recursive: true });
 }
 
+const escapeXml = (unsafe = '') =>
+  String(unsafe)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&apos;');
+
 // Generate sitemap.xml — homepage only. This is a single-page app: hash-fragment
 // URLs are invalid in sitemaps, so only the root URL is listed.
 const generateSitemap = () => {
@@ -32,7 +40,7 @@ const generateSitemap = () => {
     },
     {
       loc: '/og-image.png',
-      title: 'Vivek Parmar Portfolio — Spring Boot, Kafka & Cloud Architecture',
+      title: 'Vivek Parmar Portfolio — Spring Boot, Kafka and Cloud Architecture',
       caption: 'Engineering portfolio social card of Vivek Parmar'
     }
   ];
@@ -40,14 +48,14 @@ const generateSitemap = () => {
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
-    <loc>${baseUrl}/</loc>
-    <lastmod>${currentDate}</lastmod>
+    <loc>${escapeXml(`${baseUrl}/`)}</loc>
+    <lastmod>${escapeXml(currentDate)}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>${images.map(img => `
     <image:image>
-      <image:loc>${baseUrl}${img.loc}</image:loc>
-      <image:title>${img.title}</image:title>
-      <image:caption>${img.caption}</image:caption>
+      <image:loc>${escapeXml(`${baseUrl}${img.loc}`)}</image:loc>
+      <image:title>${escapeXml(img.title)}</image:title>
+      <image:caption>${escapeXml(img.caption)}</image:caption>
     </image:image>`).join('')}
   </url>
 </urlset>
