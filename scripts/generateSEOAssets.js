@@ -35,12 +35,12 @@ const generateSitemap = () => {
   const images = [
     {
       loc: '/profile-photo.jpg',
-      title: 'Vivek Parmar — Java Backend Engineer (Software Engineer L1)',
+      title: 'Vivek Parmar - Java Backend Engineer (Software Engineer L1)',
       caption: 'Profile photograph of Vivek Parmar, Java Backend Engineer based in Ahmedabad, India'
     },
     {
       loc: '/og-image.png',
-      title: 'Vivek Parmar Portfolio — Spring Boot, Kafka and Cloud Architecture',
+      title: 'Vivek Parmar Portfolio - Spring Boot, Kafka and Cloud Architecture',
       caption: 'Engineering portfolio social card of Vivek Parmar'
     }
   ];
