@@ -14,7 +14,6 @@ const navItems = [
   { id: 'about',                  label: 'About' },
   { id: 'architecture-simulator', label: 'Simulator', badge: 'Live' },
   { id: 'java-expertise',         label: 'Architecture' },
-  { id: 'query-tuner',            label: 'Query Tuner', badge: '-64%' },
   { id: 'skills',                 label: 'Skills' },
   { id: 'projects',               label: 'Projects' },
   { id: 'experience',             label: 'Experience' },

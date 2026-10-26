@@ -26,76 +26,76 @@ export const QueryTuner: React.FC = () => {
         </div>
 
         {/* Mode Selector */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+        <div className="flex flex-col gap-3.5 mb-6">
           {/* Tab buttons */}
-          <div className="flex gap-2" role="tablist">
+          <div className="flex items-center gap-1.5 sm:gap-2 overflow-x-auto pb-1 max-w-full scrollbar-none" role="tablist">
             <button
               type="button"
               role="tab"
               aria-selected={activeTab === 'java'}
               onClick={() => setActiveTab('java')}
-              className={`flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-mono transition-colors border ${
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono transition-colors border flex-shrink-0 active:scale-[0.98] ${
                 activeTab === 'java'
                   ? 'bg-paper-2 text-console-accent border-console-accent/40 font-medium'
                   : 'bg-paper text-ink-muted border-rule hover:text-ink'
               }`}
             >
               <FiCode aria-hidden="true" />
-              <span>Spring Data JPA / Keyset</span>
+              <span>Keyset JPA</span>
             </button>
             <button
               type="button"
               role="tab"
               aria-selected={activeTab === 'sql'}
               onClick={() => setActiveTab('sql')}
-              className={`flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-mono transition-colors border ${
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono transition-colors border flex-shrink-0 active:scale-[0.98] ${
                 activeTab === 'sql'
                   ? 'bg-paper-2 text-console-accent border-console-accent/40 font-medium'
                   : 'bg-paper text-ink-muted border-rule hover:text-ink'
               }`}
             >
               <FiDatabase aria-hidden="true" />
-              <span>PostgreSQL EXPLAIN Plan</span>
+              <span>EXPLAIN Plan</span>
             </button>
             <button
               type="button"
               role="tab"
               aria-selected={activeTab === 'metrics'}
               onClick={() => setActiveTab('metrics')}
-              className={`flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-mono transition-colors border ${
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono transition-colors border flex-shrink-0 active:scale-[0.98] ${
                 activeTab === 'metrics'
                   ? 'bg-paper-2 text-console-accent border-console-accent/40 font-medium'
                   : 'bg-paper text-ink-muted border-rule hover:text-ink'
               }`}
             >
               <FiZap aria-hidden="true" />
-              <span>Network &amp; Payload Ledger</span>
+              <span>Payload Ledger</span>
             </button>
           </div>
 
           {/* Before vs After Switcher */}
-          <div className="flex items-center p-1 rounded-lg bg-paper border border-rule self-start sm:self-auto">
+          <div className="inline-flex items-center p-1 rounded-lg bg-paper border border-rule self-start max-w-full overflow-x-auto scrollbar-none">
             <button
               type="button"
               onClick={() => setViewMode('before')}
-              className={`px-3 py-1 text-xs font-mono rounded transition-colors ${
+              className={`px-2.5 sm:px-3 py-1 text-xs font-mono rounded transition-colors whitespace-nowrap active:scale-[0.98] ${
                 viewMode === 'before'
                   ? 'bg-console-bad/20 text-console-bad font-medium'
                   : 'text-ink-muted hover:text-ink'
               }`}
             >
-              Before: Naive N+1
+              <span>Before (N+1)</span>
             </button>
             <button
               type="button"
               onClick={() => setViewMode('after')}
-              className={`px-3 py-1 text-xs font-mono rounded transition-colors ${
+              className={`px-2.5 sm:px-3 py-1 text-xs font-mono rounded transition-colors whitespace-nowrap active:scale-[0.98] ${
                 viewMode === 'after'
                   ? 'bg-console-ok/20 text-console-ok font-medium'
                   : 'text-ink-muted hover:text-ink'
               }`}
             >
-              After: Vivek&apos;s Solution (-64%)
+              <span>After (-64%)</span>
             </button>
           </div>
         </div>

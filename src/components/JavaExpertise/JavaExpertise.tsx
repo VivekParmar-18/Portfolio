@@ -138,7 +138,7 @@ const JavaExpertise = () => {
 
         {/* ── Feature 1: The Production Query Optimization Diff Ledger ── */}
         <div className="mb-16">
-          <div className="flex items-center justify-between pb-3 border-b border-rule mb-4">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 pb-3 border-b border-rule mb-4">
             <h3 className="text-sm font-medium text-ink font-body">
               Production benchmark: KabilHire ATS query & network optimization
             </h3>
@@ -150,7 +150,7 @@ const JavaExpertise = () => {
           <div className="console-panel overflow-hidden border border-rule">
             <div className="grid grid-cols-1 md:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-rule">
               {optimizationDiffs.map((diff, i) => (
-                <div key={diff.category} className="p-4 flex flex-col justify-between bg-paper-2">
+                <div key={diff.category} className="p-4 flex flex-col justify-between bg-paper-2 min-w-0">
                   <div>
                     <span className="text-[11px] text-ink-muted font-mono block mb-2">
                       0{i + 1} · {diff.category}
@@ -158,17 +158,17 @@ const JavaExpertise = () => {
                     <div className="space-y-2 mb-4">
                       <div className="p-2 rounded bg-paper-3 border border-rule text-xs">
                         <span className="text-console-bad font-mono text-[10px] block mb-0.5">before</span>
-                        <p className="text-ink-muted text-[11px] leading-snug">{diff.before}</p>
+                        <p className="text-ink-muted text-[11px] leading-snug break-words">{diff.before}</p>
                       </div>
                       <div className="p-2 rounded bg-paper-3 border border-rule text-xs">
                         <span className="text-console-ok font-mono text-[10px] block mb-0.5">optimized</span>
-                        <p className="text-ink text-[11px] leading-snug font-medium">{diff.after}</p>
+                        <p className="text-ink text-[11px] leading-snug font-medium break-words">{diff.after}</p>
                       </div>
                     </div>
                   </div>
-                  <div className="pt-2 border-t border-rule flex items-center justify-between">
+                  <div className="pt-2 border-t border-rule flex items-center justify-between gap-2">
                     <span className="text-[10px] text-ink-muted font-body">Outcome</span>
-                    <span className="text-xs text-console-accent font-mono font-medium">{diff.result}</span>
+                    <span className="text-xs text-console-accent font-mono font-medium truncate">{diff.result}</span>
                   </div>
                 </div>
               ))}
@@ -179,7 +179,7 @@ const JavaExpertise = () => {
         {/* ── Feature 2: Interactive Architecture Inspector ── */}
         <div className="grid lg:grid-cols-12 gap-6 items-start">
           {/* Layer Selector tabs: 4 cols */}
-          <div className="lg:col-span-4 flex flex-col gap-2" role="tablist" aria-label="Architecture layers">
+          <div className="lg:col-span-4 flex flex-col gap-2 min-w-0" role="tablist" aria-label="Architecture layers">
             {architectureLayers.map((layer, index) => {
               const Icon = layer.icon;
               const isSelected = activeLayerIndex === index;
@@ -192,14 +192,14 @@ const JavaExpertise = () => {
                   aria-selected={isSelected}
                   aria-controls={`arch-panel-${layer.id}`}
                   onClick={() => setActiveLayerIndex(index)}
-                  className={`w-full text-left p-4 rounded border transition-colors flex items-start gap-3.5 ${
+                  className={`w-full text-left p-3.5 sm:p-4 rounded border transition-colors flex items-start gap-3 active:scale-[0.98] ${
                     isSelected
                       ? 'bg-paper-2 border-rule-2 text-ink'
                       : 'bg-paper-3 border-rule text-ink-muted hover:text-ink hover:border-rule-2'
                   }`}
                 >
                   <div
-                    className={`p-2 rounded ${
+                    className={`p-2 rounded flex-shrink-0 ${
                       isSelected ? 'bg-paper-3 text-console-accent' : 'bg-paper-2 text-ink-muted'
                     }`}
                     aria-hidden="true"
@@ -219,17 +219,17 @@ const JavaExpertise = () => {
 
           {/* Detailed Inspector Display: 8 cols */}
           <div
-            className="lg:col-span-8 console-panel p-6 md:p-8 border border-rule"
+            className="lg:col-span-8 console-panel p-4 sm:p-6 md:p-8 border border-rule min-w-0 w-full"
             role="tabpanel"
             id={`arch-panel-${activeLayer.id}`}
             aria-labelledby={`arch-tab-${activeLayer.id}`}
           >
-            <div className="flex items-center justify-between pb-4 border-b border-rule mb-6">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 pb-4 border-b border-rule mb-6">
               <div className="flex items-center gap-2 text-xs font-mono text-console-cool">
                 <FiLayers size={14} aria-hidden="true" />
                 <span>layer: {activeLayer.id}</span>
               </div>
-              <span className="text-xs text-ink-muted font-mono">{activeLayer.tech}</span>
+              <span className="text-xs text-ink-muted font-mono truncate">{activeLayer.tech}</span>
             </div>
 
             <h3 className="text-xl md:text-2xl font-medium text-ink mb-3 font-display">
@@ -244,17 +244,17 @@ const JavaExpertise = () => {
               {activeLayer.details.map((detail, idx) => (
                 <div key={idx} className="flex items-start gap-3 text-xs md:text-sm text-ink-muted">
                   <span className="mt-1 w-1.5 h-1.5 rounded-full bg-console-accent flex-shrink-0" aria-hidden="true" />
-                  <span className="leading-relaxed">{detail}</span>
+                  <span className="leading-relaxed break-words">{detail}</span>
                 </div>
               ))}
             </div>
 
             {/* Metrics cards */}
-            <div className="grid grid-cols-3 gap-3 pt-4 border-t border-rule">
+            <div className="grid grid-cols-3 gap-2 sm:gap-3 pt-4 border-t border-rule">
               {activeLayer.metrics.map((m) => (
-                <div key={m.label} className="p-3 rounded bg-paper-3 border border-rule">
+                <div key={m.label} className="p-2.5 sm:p-3 rounded bg-paper-3 border border-rule min-w-0">
                   <p className="text-[10px] text-ink-muted font-body mb-0.5 truncate">{m.label}</p>
-                  <p className="reading text-base md:text-lg text-ink font-mono">{m.value}</p>
+                  <p className="reading text-base md:text-lg text-ink font-mono truncate">{m.value}</p>
                 </div>
               ))}
             </div>

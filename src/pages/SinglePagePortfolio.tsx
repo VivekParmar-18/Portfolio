@@ -11,7 +11,6 @@ import {
 import About from '../components/About/About';
 import SystemsSimulator from '../components/SystemsSimulator/SystemsSimulator';
 import JavaExpertise from '../components/JavaExpertise/JavaExpertise';
-import QueryTuner from '../components/QueryTuner/QueryTuner';
 import Experience from '../components/Experience/Experience';
 import Projects from '../components/Projects/Projects';
 import Education from '../components/Education/Education';
@@ -54,9 +53,6 @@ const SinglePagePortfolio = () => {
 
       {/* Java Expertise & Systems Architecture */}
       <JavaExpertise />
-
-      {/* Interactive Query Tuner & N+1 Solver */}
-      <QueryTuner />
 
       {/* Skills & Domains */}
       <Skills />
