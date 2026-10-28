@@ -10,29 +10,29 @@
   --container: 1360px; --gutter: 48px; --gap-columns: 28px; --section-gap-s: 80px; --section-gap: 112px; --section-gap-l: 144px;
   --z-base: 1; --z-raised: 10; --z-dropdown: 100; --z-sticky: 200; --z-sticky-nav: 300; --z-modal: 400; --z-toast: 500; --z-tooltip: 600;
 
-  /* Refined High-End Modern Palette */
-  --color-paper: oklch(14% 0.015 255);      /* Deep obsidian ground #080b11 */
-  --color-paper-2: oklch(18% 0.020 255);    /* Elevated panel surface #0e1422 */
-  --color-paper-3: oklch(12% 0.012 255);    /* Deep inset surface #070a10 */
-  --color-ink: oklch(98% 0.005 255);        /* Pure high-contrast white #f8fafc */
-  --color-ink-2: oklch(86% 0.012 255);      /* Crisp secondary text #e2e8f0 */
-  --color-muted: oklch(70% 0.018 255);      /* Highly readable slate #94a3b8 */
-  --color-rule: rgba(255, 255, 255, 0.08);       /* Subtle hairline border */
-  --color-rule-2: rgba(255, 255, 255, 0.16);     /* Active/hover border highlight */
+  /* Pure Neutral Obsidian Palette — 100% Zero Blue Tint */
+  --color-paper: #000000;                   /* Pure obsidian black ground */
+  --color-paper-2: #090909;                 /* Elevated panel surface */
+  --color-paper-3: #040404;                 /* Deep inset surface */
+  --color-ink: #f4f1ee;                     /* Pure high-contrast white */
+  --color-ink-2: #d1d1d1;                   /* Crisp secondary text */
+  --color-muted: #757575;                   /* Highly readable neutral grey */
+  --color-rule: rgba(255, 255, 255, 0.08);  /* Subtle hairline border */
+  --color-rule-2: rgba(255, 255, 255, 0.16);/* Active/hover border highlight */
 
-  /* Vibrant Accents */
-  --color-accent: oklch(78% 0.16 220);      /* Electric Sky / Cyan #38bdf8 */
-  --color-accent-ink: oklch(14% 0.04 225);  /* Deep contrast text for buttons */
-  --color-accent-soft: oklch(24% 0.06 220); /* Subtle cyan tint */
-  --color-focus: oklch(78% 0.16 220);       /* Instant focus ring */
+  /* Vibrant Accents — Source Coral Red (#ff4c24) */
+  --color-accent: #ff4c24;                  /* Vibrant Coral Red */
+  --color-accent-ink: #000000;              /* Deep contrast text for buttons */
+  --color-accent-soft: rgba(255, 76, 36, 0.15); /* Soft coral tint */
+  --color-focus: #ff4c24;                   /* Coral focus ring */
 
-  --color-cool: oklch(82% 0.12 210);        /* Ice Blue for telemetry #7dd3fc */
-  --color-cool-soft: oklch(24% 0.05 210);   /* Soft ice blue tint */
+  --color-cool: #f4f1ee;                    /* Neutral crisp white */
+  --color-cool-soft: rgba(255, 255, 255, 0.05); /* Soft white tint */
 
-  --color-ok: oklch(76% 0.18 155);          /* Luminous Emerald for verified status #10b981 */
-  --color-ok-soft: oklch(24% 0.05 155);     /* Soft emerald tint */
-  --color-bad: oklch(70% 0.19 25);          /* Coral Red for before/errors */
-  --color-bad-soft: oklch(24% 0.05 25);     /* Soft coral tint */
+  --color-ok: #10b981;                      /* Luminous Emerald for verified status */
+  --color-ok-soft: rgba(16, 185, 129, 0.15);/* Soft emerald tint */
+  --color-bad: #ff4c24;                     /* Coral Red for before/errors */
+  --color-bad-soft: rgba(255, 76, 36, 0.15);/* Soft coral tint */
 
   --font-display: "Host Grotesk", ui-sans-serif, system-ui, sans-serif;
   --font-body: var(--font-display);

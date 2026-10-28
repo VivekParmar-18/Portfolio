@@ -15,6 +15,7 @@ import Experience from '../components/Experience/Experience';
 import Projects from '../components/Projects/Projects';
 import Education from '../components/Education/Education';
 import CommandPalette from '../components/CommandPalette/CommandPalette';
+import EditorialPortfolio from '../components/EditorialPortfolio';
 import { contactMethods } from '../data/contactData';
 import { personal } from '../data/personalData';
 import { useSEO } from '../hooks/useSEO';
@@ -22,6 +23,7 @@ import { useSEO } from '../hooks/useSEO';
 const SinglePagePortfolio = () => {
   const { updateSEO } = useSEO();
   const [isPaletteOpen, setIsPaletteOpen] = useState(false);
+  const [isEditorialMode, setIsEditorialMode] = useState(true);
 
   useEffect(() => {
     updateSEO({
@@ -36,8 +38,23 @@ const SinglePagePortfolio = () => {
     return () => window.removeEventListener('toggle-command-palette', handleToggle);
   }, []);
 
+  if (isEditorialMode) {
+    return <EditorialPortfolio />;
+  }
+
   return (
     <div className="min-h-screen bg-paper text-ink relative" style={{ overflowX: 'clip' }}>
+      {/* Layout Switcher Pill */}
+      <div className="fixed bottom-6 left-6 z-[60]">
+        <button
+          onClick={() => setIsEditorialMode(true)}
+          className="flex items-center gap-2 px-3.5 py-2 rounded-full bg-paper-2 border border-rule hover:border-console-accent text-xs font-mono text-ink shadow-2xl transition-all"
+          title="Switch to Editorial Dark Framer View"
+        >
+          <span className="w-2 h-2 rounded-full bg-console-accent" />
+          <span>Switch to Editorial View</span>
+        </button>
+      </div>
       <BackgroundElements />
       <CommandPalette isOpen={isPaletteOpen} onClose={() => setIsPaletteOpen(false)} />
       <Navigation onOpenPalette={() => setIsPaletteOpen(true)} />
