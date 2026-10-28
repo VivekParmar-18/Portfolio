@@ -139,9 +139,9 @@ export const EditorialPortfolio: React.FC = () => {
         {/* ── Layer 2 (z-20): 3D Honeycomb & Honey Bee Video in Foreground (Apple Lock Screen Subject) ── */}
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-20">
           <DepthVideoCanvas
-            poster="https://framerusercontent.com/images/eQfsj6FtX7tBqiu4GJ7cpozzHY.webp?width=1080&height=1350"
+            poster="/assets/hero-poster.webp"
             className="w-[360px] sm:w-[460px] md:w-[540px] max-h-[75vh] object-contain scale-105 pointer-events-none"
-            src="https://framerusercontent.com/assets/FNCjudcX594YYVfA1Gvkck3ANo8.webm"
+            src="/assets/hero-bg.webm"
           />
         </div>
 
@@ -206,7 +206,7 @@ export const EditorialPortfolio: React.FC = () => {
         {/* Source Site 3D Web Background with Red Glow */}
         <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
           <img
-            src="https://framerusercontent.com/images/VQ8hBdTRatVLjaRMhY9KcKUKnk.png?scale-down-to=1024&width=3022"
+            src="/assets/web-mesh.png"
             alt="3D Web Background"
             className="absolute top-1/2 -right-24 md:right-0 -translate-y-1/2 w-[850px] md:w-[1100px] max-w-none opacity-20 object-contain select-none"
           />
@@ -277,7 +277,7 @@ export const EditorialPortfolio: React.FC = () => {
           <div>
             <div className="inline-flex items-center gap-2.5 px-3 py-1 rounded-full border border-white/10 bg-white/[0.02] mb-4">
               <img
-                src="https://framerusercontent.com/images/v1zYnyaDEEd6BWdeIiFTZe7Zps.gif?width=331&height=347"
+                src="/assets/avatar-journey.gif"
                 alt="Avatar GIF"
                 className="w-4 h-4 rounded-full object-cover"
               />
@@ -358,7 +358,7 @@ export const EditorialPortfolio: React.FC = () => {
           >
             <div className="h-64 overflow-hidden relative">
               <img
-                src="https://framerusercontent.com/images/eorpvQ9TMWlQSExoUJ6RbUkDhw.jpg?scale-down-to=1024&width=1855"
+                src="/assets/project-ats.jpg"
                 alt="KabilHire Enterprise ATS"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               />
@@ -403,7 +403,7 @@ export const EditorialPortfolio: React.FC = () => {
           >
             <div className="h-64 overflow-hidden relative">
               <img
-                src="https://framerusercontent.com/images/u7vQBJKJoCxpNVGjab1tQX5Xj4.jpg?scale-down-to=1024&width=1920"
+                src="/assets/project-healthcare.jpg"
                 alt="Healthcare Management System"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               />
@@ -441,7 +441,7 @@ export const EditorialPortfolio: React.FC = () => {
         {/* Honey Drip Decorative Divider from Source */}
         <div className="mt-20 overflow-hidden pointer-events-none opacity-30 select-none">
           <img
-            src="https://framerusercontent.com/images/Mq8MwyDOkPQvD9ZYmyZxDUMoWD8.png?scale-down-to=1024&width=3024"
+            src="/assets/space-drip.png"
             alt="Drip divider"
             className="w-full max-h-16 object-cover"
           />
@@ -575,7 +575,7 @@ export const EditorialPortfolio: React.FC = () => {
                 muted
                 playsInline
                 className="w-full h-full object-cover scale-105"
-                src="https://framerusercontent.com/assets/mP4XoxHZn0eDX7MlZ1LegFJJqE.webm"
+                src="/assets/curiosity-fluid.webm"
               />
               <div className="absolute inset-0 bg-radial from-transparent via-transparent to-black/40 pointer-events-none" />
             </div>
@@ -604,7 +604,7 @@ export const EditorialPortfolio: React.FC = () => {
         {/* Source Site Footer SVG Texture */}
         <div className="absolute inset-0 pointer-events-none opacity-15 overflow-hidden select-none">
           <img
-            src="https://framerusercontent.com/images/T0Ab4mdmdy7oFfhEj2LGmu0VrFs.svg?scale-down-to=1024&width=1652"
+            src="/assets/footer-texture.svg"
             alt="Footer Texture"
             className="w-full h-full object-cover"
           />

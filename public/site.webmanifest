@@ -1,19 +1,24 @@
 {
   "id": "/",
-  "name": "Vivek Parmar Portfolio",
+  "name": "Vivek Parmar — Java Backend Engineer",
   "short_name": "Vivek",
-  "description": "Vivek Parmar — Java Backend Engineer (Software Engineer L1). Spring Boot, Kafka streaming, Redis caching, and AWS cloud architecture.",
+  "description": "Vivek Parmar — Java Backend Engineer (Software Engineer L1). High-throughput Spring Boot backends, Kafka streaming, Redis caching, and AWS cloud architecture.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
-  "background_color": "#080b11",
-  "theme_color": "#080b11",
+  "background_color": "#050505",
+  "theme_color": "#050505",
   "orientation": "portrait-primary",
   "icons": [
     {
       "src": "/favicon.ico",
       "sizes": "48x48 32x32 16x16",
       "type": "image/x-icon"
+    },
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
     },
     {
       "src": "/favicon-16x16.png",

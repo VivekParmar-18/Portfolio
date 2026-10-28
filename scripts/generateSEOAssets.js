@@ -42,6 +42,11 @@ const generateSitemap = () => {
       loc: '/og-image.png',
       title: 'Vivek Parmar Portfolio - Spring Boot, Kafka and Cloud Architecture',
       caption: 'Engineering portfolio social card of Vivek Parmar'
+    },
+    {
+      loc: '/banner.png',
+      title: 'Vivek Parmar Portfolio Banner - Java Backend Engineer',
+      caption: 'Brand and engineering portfolio banner of Vivek Parmar'
     }
   ];
 

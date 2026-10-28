@@ -26,6 +26,9 @@ const preloadCriticalImages = (): Promise<void[]> => {
     '/profile-photo.jpg',
     '/icons/java.svg',
     '/icons/spring.svg',
+    '/icons/kafka.svg',
+    '/icons/postgresql.svg',
+    '/icons/redis.svg',
     '/icons/react.svg',
     '/icons/mysql.svg'
   ];
@@ -48,10 +51,8 @@ preloadCriticalImages().then(() => {
     <StrictMode>
       <App />
     </StrictMode>,
-  );
+  )
   
   // Hide loader after React mounts
-  requestAnimationFrame(() => {
-    hideInitialLoader();
-  });
+  hideInitialLoader();
 });

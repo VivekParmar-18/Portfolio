@@ -1,0 +1,148 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 640" width="1280" height="640">
+  <defs>
+    <!-- Dark Radial Gradient -->
+    <radialGradient id="bgGlow" cx="20%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#140704" stop-opacity="0.8" />
+      <stop offset="60%" stop-color="#050505" stop-opacity="1" />
+      <stop offset="100%" stop-color="#020202" stop-opacity="1" />
+    </radialGradient>
+
+    <!-- Vibrant Coral Accent Gradient -->
+    <linearGradient id="coralGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff7350" />
+      <stop offset="100%" stop-color="#ff4c24" />
+    </linearGradient>
+
+    <!-- Card Background Gradient -->
+    <linearGradient id="cardGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#121212" stop-opacity="0.9" />
+      <stop offset="100%" stop-color="#080808" stop-opacity="0.95" />
+    </linearGradient>
+
+    <!-- Subtle Glow Filter -->
+    <filter id="softGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="12" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <style>
+    .mono { font-family: 'Host Grotesk', 'Atkinson Hyperlegible Mono', 'Consolas', monospace; }
+    .sans { font-family: 'Host Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+    .coral { fill: #ff4c24; }
+    .coral-stroke { stroke: #ff4c24; }
+    .text-dim { fill: rgba(244, 241, 238, 0.45); }
+    .text-white { fill: #f4f1ee; }
+  </style>
+
+  <!-- Canvas Background -->
+  <rect width="1280" height="640" fill="url(#bgGlow)" />
+
+  <!-- Subtle Precision Grid Pattern -->
+  <g stroke="rgba(255, 255, 255, 0.04)" stroke-width="1">
+    <line x1="80" y1="0" x2="80" y2="640" />
+    <line x1="240" y1="0" x2="240" y2="640" />
+    <line x1="400" y1="0" x2="400" y2="640" />
+    <line x1="560" y1="0" x2="560" y2="640" />
+    <line x1="720" y1="0" x2="720" y2="640" />
+    <line x1="880" y1="0" x2="880" y2="640" />
+    <line x1="1040" y1="0" x2="1040" y2="640" />
+    <line x1="1200" y1="0" x2="1200" y2="640" />
+
+    <line x1="0" y1="80" x2="1280" y2="80" />
+    <line x1="0" y1="200" x2="1280" y2="200" />
+    <line x1="0" y1="340" x2="1280" y2="340" />
+    <line x1="0" y1="480" x2="1280" y2="480" />
+    <line x1="0" y1="580" x2="1280" y2="580" />
+  </g>
+
+  <!-- Architectural Outer Border Frame -->
+  <rect x="40" y="40" width="1200" height="560" fill="none" stroke="rgba(255, 255, 255, 0.08)" stroke-width="1" />
+
+  <!-- Architectural Corner Crosshairs -->
+  <!-- Top-Left -->
+  <path d="M40 60 L40 40 L60 40" fill="none" stroke="#ff4c24" stroke-width="2.5" />
+  <!-- Top-Right -->
+  <path d="M1240 60 L1240 40 L1220 40" fill="none" stroke="#ff4c24" stroke-width="2.5" />
+  <!-- Bottom-Left -->
+  <path d="M40 580 L40 600 L60 600" fill="none" stroke="#ff4c24" stroke-width="2.5" />
+  <!-- Bottom-Right -->
+  <path d="M1240 580 L1240 600 L1220 600" fill="none" stroke="#ff4c24" stroke-width="2.5" />
+
+  <!-- Top Header Telemetry Bar -->
+  <g transform="translate(70, 75)">
+    <!-- Glowing Status Indicator -->
+    <circle cx="5" cy="5" r="5" fill="#ff4c24" filter="url(#softGlow)" />
+    <circle cx="5" cy="5" r="3" fill="#ffffff" />
+    
+    <text x="25" y="9" class="mono text-white" font-size="12" font-weight="600" letter-spacing="2">
+      VIVEK PARMAR  //  SOFTWARE ENGINEER L1  //  AHMEDABAD
+    </text>
+
+    <text x="1140" y="9" text-anchor="end" class="mono text-dim" font-size="11" letter-spacing="1.5">
+      [ RESILIENT DISTRIBUTED BACKENDS ]
+    </text>
+  </g>
+
+  <!-- Main Hero Typography -->
+  <g transform="translate(70, 160)">
+    <text x="0" y="50" class="sans text-white" font-size="62" font-weight="700" letter-spacing="-1.5">
+      Build at the frontier.
+    </text>
+
+    <!-- Subhead with Coral Accent -->
+    <text x="2" y="105" class="sans coral" font-size="28" font-weight="600" letter-spacing="-0.5">
+      Java Backend Engineer &amp; Distributed Systems Specialist
+    </text>
+
+    <!-- Narrative Description -->
+    <text x="2" y="145" class="sans text-dim" font-size="17" line-height="26">
+      Production Spring Boot 3 backends, Apache Kafka event ingestion, Redis distributed caching,
+    </text>
+    <text x="2" y="172" class="sans text-dim" font-size="17">
+      and PostgreSQL query tuning across enterprise healthcare portals and high-scale ATS platforms on AWS.
+    </text>
+  </g>
+
+  <!-- Telemetry Metrics Cards -->
+  <g transform="translate(70, 375)">
+    <!-- Metric 1 -->
+    <g transform="translate(0, 0)">
+      <rect width="345" height="115" rx="6" fill="url(#cardGrad)" stroke="rgba(255,255,255,0.08)" stroke-width="1" />
+      <rect width="4" height="115" rx="2" fill="#ff4c24" />
+      <text x="25" y="48" class="sans text-white" font-size="34" font-weight="700">2+ Years</text>
+      <text x="25" y="82" class="mono text-dim" font-size="11" letter-spacing="1.5" font-weight="600">PRODUCTION EXPERIENCE</text>
+      <text x="25" y="98" class="mono text-dim" font-size="10" opacity="0.6">Techforce Infotech · L1 Engineer</text>
+    </g>
+
+    <!-- Metric 2 -->
+    <g transform="translate(375, 0)">
+      <rect width="345" height="115" rx="6" fill="url(#cardGrad)" stroke="rgba(255,255,255,0.08)" stroke-width="1" />
+      <rect width="4" height="115" rx="2" fill="#ff4c24" />
+      <text x="25" y="48" class="sans text-white" font-size="34" font-weight="700">-74% DB Load</text>
+      <text x="25" y="82" class="mono text-dim" font-size="11" letter-spacing="1.5" font-weight="600">QUERY OPTIMIZATION</text>
+      <text x="25" y="98" class="mono text-dim" font-size="10" opacity="0.6">Eliminated N+1 scans &amp; tuned cursors</text>
+    </g>
+
+    <!-- Metric 3 -->
+    <g transform="translate(750, 0)">
+      <rect width="345" height="115" rx="6" fill="url(#cardGrad)" stroke="rgba(255,255,255,0.08)" stroke-width="1" />
+      <rect width="4" height="115" rx="2" fill="#ff4c24" />
+      <text x="25" y="48" class="sans text-white" font-size="34" font-weight="700">99.9% Uptime</text>
+      <text x="25" y="82" class="mono text-dim" font-size="11" letter-spacing="1.5" font-weight="600">KAFKA EVENT STREAMS</text>
+      <text x="25" y="98" class="mono text-dim" font-size="10" opacity="0.6">-64% peak latency on AWS</text>
+    </g>
+  </g>
+
+  <!-- Bottom Coordinates & Core Tags -->
+  <g transform="translate(70, 555)">
+    <text x="0" y="0" class="mono text-dim" font-size="12" letter-spacing="2">
+      JAVA 21  ·  SPRING BOOT  ·  KAFKA  ·  REDIS  ·  AWS  ·  POSTGRESQL  ·  DOCKER
+    </text>
+
+    <text x="1140" y="0" text-anchor="end" class="mono coral" font-size="14" font-weight="700" letter-spacing="1">
+      vivekparmar.is-a.dev
+    </text>
+  </g>
+</svg>
+

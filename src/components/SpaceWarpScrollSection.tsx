@@ -184,7 +184,7 @@ export const SpaceWarpScrollSection: React.FC = () => {
             muted
             playsInline
             className="w-full h-full object-cover opacity-80"
-            src="https://framerusercontent.com/assets/yLuVmQngCSXfd0UdaLuBOt4SabU.webm"
+            src="/assets/before-after-video.webm"
           />
           <div className="absolute inset-0 bg-radial from-transparent via-black/40 to-black/90 pointer-events-none" />
         </motion.div>
