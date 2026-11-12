@@ -94,7 +94,7 @@ export const updateMetaTags = (data: Partial<SEOData>) => {
   setMeta('[name="twitter:card"]', d.twitterCard);
   setMeta('[name="twitter:title"]', d.title);
   setMeta('[name="twitter:description"]', d.description);
-  setMeta('[name="twitter:image"]', d.image);
+  setMeta('[name="twitter:image"]', `${personal.domain}/og-card.png`);
   setMeta('[name="twitter:image:alt"]', `${personal.name} — Java & Spring Boot Backend Engineer Portfolio`);
 };
 

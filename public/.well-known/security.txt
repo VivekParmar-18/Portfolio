@@ -1,5 +1,5 @@
 Contact: mailto:vivek18parmar@gmail.com
-Expires: 2027-10-28T07:16:40.162Z
+Expires: 2027-11-12T12:38:38.249Z
 Preferred-Languages: en
 Canonical: https://vivekparmar.is-a.dev/.well-known/security.txt
 Policy: https://vivekparmar.is-a.dev/#contact

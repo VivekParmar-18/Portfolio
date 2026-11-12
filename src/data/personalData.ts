@@ -18,7 +18,7 @@ export const personal = {
   domain: (import.meta.env.VITE_SITE_URL || "https://vivekparmar.is-a.dev").replace(/\/$/, ""),
   resumeUrl: "/Vivek_Parmar_Resume.pdf",
   profileImage: "/profile-photo.jpg",
-  ogImage: "/og-image.png",
+  ogImage: "/preview-card.png",
   about: {
     text: "I build and scale production backend systems at Techforce Infotech across enterprise healthcare and recruitment platforms. My day-to-day work spans Java 17/21, Spring Boot, Apache Kafka event streaming, PostgreSQL/MySQL query tuning, Redis caching, and AWS cloud infrastructure.\n\nI care deeply about production reliability and quantifiable performance: eliminating N+1 query bottlenecks, shifting to keyset cursor pagination, bounding broker timeouts, securing sensitive workflows with JWT and role-based access control, and automating tests with JUnit, Mockito, and Playwright harnesses.\n\nPromoted to Software Engineer L1 in January 2026, recipient of the Team Motivator Award, and actively certified across modern AI agents, MCP, and Java enterprise ecosystems.",
   },

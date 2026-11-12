@@ -34,19 +34,19 @@ const generateSitemap = () => {
   const currentDate = new Date().toISOString().split('T')[0];
   const images = [
     {
-      loc: '/profile-photo.jpg',
-      title: 'Vivek Parmar - Java Backend Engineer (Software Engineer L1)',
-      caption: 'Profile photograph of Vivek Parmar, Java Backend Engineer based in Ahmedabad, India'
+      loc: '/preview-card.png',
+      title: 'Vivek Parmar - Java Backend Engineer and Distributed Systems Specialist',
+      caption: 'Editorial brand identity card and search preview card of Vivek Parmar, Java Backend Engineer'
     },
     {
-      loc: '/og-image.png',
+      loc: '/og-card.png',
       title: 'Vivek Parmar Portfolio - Spring Boot, Kafka and Cloud Architecture',
-      caption: 'Engineering portfolio social card of Vivek Parmar'
+      caption: 'Engineering portfolio social preview card of Vivek Parmar'
     },
     {
-      loc: '/banner.png',
-      title: 'Vivek Parmar Portfolio Banner - Java Backend Engineer',
-      caption: 'Brand and engineering portfolio banner of Vivek Parmar'
+      loc: '/profile-photo.jpg',
+      title: 'Vivek Parmar - Java Backend Engineer Profile Photograph',
+      caption: 'Professional profile photograph of Vivek Parmar based in Ahmedabad, India'
     }
   ];
 

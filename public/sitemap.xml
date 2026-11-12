@@ -2,23 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://vivekparmar.is-a.dev/</loc>
-    <lastmod>2026-10-28</lastmod>
+    <lastmod>2026-11-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <image:image>
-      <image:loc>https://vivekparmar.is-a.dev/profile-photo.jpg</image:loc>
-      <image:title>Vivek Parmar - Java Backend Engineer (Software Engineer L1)</image:title>
-      <image:caption>Profile photograph of Vivek Parmar, Java Backend Engineer based in Ahmedabad, India</image:caption>
+      <image:loc>https://vivekparmar.is-a.dev/preview-card.png</image:loc>
+      <image:title>Vivek Parmar - Java Backend Engineer and Distributed Systems Specialist</image:title>
+      <image:caption>Editorial brand identity card and search preview card of Vivek Parmar, Java Backend Engineer</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://vivekparmar.is-a.dev/og-image.png</image:loc>
+      <image:loc>https://vivekparmar.is-a.dev/og-card.png</image:loc>
       <image:title>Vivek Parmar Portfolio - Spring Boot, Kafka and Cloud Architecture</image:title>
-      <image:caption>Engineering portfolio social card of Vivek Parmar</image:caption>
+      <image:caption>Engineering portfolio social preview card of Vivek Parmar</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://vivekparmar.is-a.dev/banner.png</image:loc>
-      <image:title>Vivek Parmar Portfolio Banner - Java Backend Engineer</image:title>
-      <image:caption>Brand and engineering portfolio banner of Vivek Parmar</image:caption>
+      <image:loc>https://vivekparmar.is-a.dev/profile-photo.jpg</image:loc>
+      <image:title>Vivek Parmar - Java Backend Engineer Profile Photograph</image:title>
+      <image:caption>Professional profile photograph of Vivek Parmar based in Ahmedabad, India</image:caption>
     </image:image>
   </url>
 </urlset>
